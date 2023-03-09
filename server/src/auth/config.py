@@ -9,6 +9,7 @@ class JWTSettings(BaseSettings):
     SECRET_KEY: str
     ALGORITHM: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    REFRESH_TOKEN_EXPIRE_MINUTES: int = 60*24*7
     
     class Config:
         env_file = ".env"

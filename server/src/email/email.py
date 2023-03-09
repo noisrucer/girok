@@ -39,4 +39,4 @@ class EmailSender:
 
 
 email_sender = EmailSender(
-    settings.gmail_sender, settings.gmail_app_password)
+    settings.GMAIL_SENDER, settings.GMAIL_APP_PASSWORD)

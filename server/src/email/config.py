@@ -6,8 +6,8 @@ load_dotenv('.env')
 
 
 class EmailSettings(BaseSettings):
-    gmail_sender: str
-    gmail_app_password: str
+    GMAIL_SENDER: str
+    GMAIL_APP_PASSWORD: str
     
     class Config:
         env_file = ".env"

@@ -13,6 +13,7 @@ import server.src.user.schemas as user_schemas
 
 class UserCreate(user_schemas.UserBase):
     password: str = Field(default=..., min_length=4, max_length=30)
+
     
 class UserCreateOut(user_schemas.UserBase):
     user_id: int

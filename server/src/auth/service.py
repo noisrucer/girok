@@ -16,12 +16,12 @@ def get_user_by_email(db: Session, email: EmailStr):
 
 def get_password_by_email(db: Session, email: EmailStr):
     user = db.query(user_models.User).filter(user_models.User.email == email).first()
-    print(user.password)
     return user.password
 
 
-def verify_valid_hku_email(email: EmailStr):
-    return email.split('@')[-1] == 'connect.hku.hk'
+def get_pending_user_by_email(db: Session, email: EmailStr):
+    user = db.query(user_models.PendingRegistration).filter(user_models.PendingRegistration.email == email).first()
+    return user
 
 
 def authenticate_user(db: Session, email: str, password: str):

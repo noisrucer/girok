@@ -11,3 +11,12 @@ class User(Base):
     email = Column(String(100), primary_key=True, unique=True, nullable=False)
     password = Column(String(100), nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
+    
+    
+class PendingRegistration(Base):
+    __tablename__ = "pending_registration"
+    
+    pending_registration_id = Column(Integer, primary_key=True, autoincrement=True)
+    email = Column(String(100), primary_key=True, unique=True, nullable=False)
+    password = Column(String(100), nullable=False)
+    verification_code = Column(String(100), nullable=False)

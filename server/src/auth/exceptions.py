@@ -13,12 +13,6 @@ class EmailAlreadyExistsException(HTTPException):
         self.detail = f"Email: {email} already exists."
         
     
-class EmailNotValidHKUEmailException(HTTPException):
-    def __init__(self):
-        self.status_code = status.HTTP_400_BAD_REQUEST
-        self.detail = "You must provide a valid HKU email (@connect.hku.hk)"
-    
-    
 class CredentialsException(HTTPException):
     def __init__(self):
         self.status_code = status.HTTP_401_UNAUTHORIZED
@@ -32,3 +26,8 @@ class InvalidEmailOrPasswordException(HTTPException):
         self.detail = "Incorrect email or password"
         self.headers = {"WWW-Authenticate": "Bearer"}
         
+        
+class AlreadyAuthenticationCodeSent(HTTPException):
+    def __init__(self, email: str):
+        self.status_code = status.HTTP_400_BAD_REQUEST
+        self.detail = "The authentication code has already been sent."
