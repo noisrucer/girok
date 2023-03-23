@@ -15,7 +15,7 @@ app = typer.Typer(rich_markup_mode='rich')
 
 cfg = get_config()
 
-@app.command("login")
+@app.command("login", help="[yellow]Login[/yellow] with email and password", rich_help_panel=":lock: [bold yellow1]Authentication Commands[/bold yellow1]")
 def login():
     # Check if the user holds a valid JWT (logged in)
     stored_access_token = auth_utils.get_access_token_from_json(cfg.config_path)
@@ -42,7 +42,7 @@ def login():
     exit(0)
     
 
-@app.command("logout")
+@app.command("logout", help="[red]Logout[/red] from the currently logged-in account", rich_help_panel=":lock: [bold yellow1]Authentication Commands[/bold yellow1]")
 def logout():
     access_token = auth_utils.get_access_token_from_json(cfg.config_path)
     if not auth_utils.is_logged_in(access_token):
@@ -55,7 +55,7 @@ def logout():
     
     
     
-@app.command("register")
+@app.command("register", help="[green]Register[/green] a new account", rich_help_panel=":lock: [bold yellow1]Authentication Commands[/bold yellow1]")
 def register():
     access_token = auth_utils.get_access_token_from_json(cfg.config_path)
     if access_token and auth_utils.is_logged_in(access_token):

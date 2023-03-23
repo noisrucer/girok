@@ -16,7 +16,7 @@ import girok.commands.calendar as calendar_command
 import girok.utils.general as general_utils
 import girok.utils.auth as auth_utils
 
-app = typer.Typer(rich_markup_mode='rich')
+app = typer.Typer(rich_markup_mode='rich', help="Enter [red]girok <command name> --help[/red] to see more detailed of commands!")
 app.registered_commands.extend(auth_command.app.registered_commands)
 app.registered_commands.extend(category_command.app.registered_commands)
 app.registered_commands.extend(task_command.app.registered_commands)
