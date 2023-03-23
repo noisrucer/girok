@@ -1,0 +1,252 @@
+/* :root {
+  --task-color: #a8c1d1;
+  --default-font-color: #8f929b;
+  --calendar-date-color: #c4c7d0;
+  --category-color: #9bdfbb;
+  --border-color: grey;
+  --default-background-color: #171921;
+} */
+
+* {
+  padding: 0;
+  margin: 0;
+  color: #8f929b;
+  background: #171921;
+  overflow: hidden hidden;
+}
+
+Screen {
+  /* background: white; */
+  layers: below above;
+  layer: below;
+}
+
+#app-calendar {
+  layout: horizontal;
+}
+
+#sidebar-container {
+  /* display: none; */
+  height: 100%;
+  width: 2fr;
+  border: solid grey;
+  padding-left: 3;
+  padding-top: 1;
+}
+
+#sidebar-header {
+  /* border: solid grey; */
+  content-align: center middle;
+  /* background: white; */
+}
+
+#sidebar-main-container {
+  layout: vertical;
+  margin-bottom: -10;
+}
+#sidebar {
+  box-sizing: content-box;
+  /* height: 5fr; */
+  height: auto;
+}
+
+#tag-tree {
+  box-sizing: content-box;
+  /* height: 5fr; */
+  height: auto;
+  margin-top: 2;
+}
+
+#calendar-container {
+  height: 100%;
+  width: 10fr;
+  border: solid grey;
+  align: center middle;
+  /* background: white; */
+}
+
+#calendar-container {
+  /* background: red; */
+}
+
+#calendar-header {
+  /* content-align: center middle; */
+  height: 3;
+  /* background: blue; */
+}
+
+#calendar {
+  /* background: yellow; */
+}
+
+#calendar-header-category-container {
+  /* content-align-horizontal: left; */
+  margin-left: 2;
+  width: 1fr;
+}
+
+#calendar-header-category {
+  content-align-horizontal: left;
+}
+
+#calendar-header-date-container {
+  width: 1fr;
+}
+
+#calendar-header-date {
+  content-align-horizontal: center;
+}
+
+#calendar-header-tag-container {
+  /* content-align-horizontal: left; */
+  margin-right: 2;
+  width: 1fr;
+}
+
+#calendar-header-tag {
+  margin-right: 3;
+  content-align-horizontal: right;
+  color: #9bdfbb;
+}
+
+#calendar-header-place-holder {
+  width: 1fr;
+}
+
+#weekday-bar {
+  width: 100%;
+  background: red;
+  margin-left: 2;
+}
+
+.calendar-weekday-name {
+  width: 1fr;
+  content-align-horizontal: center;
+}
+
+#calendar {
+  layout: grid;
+  grid-size: 7 5;
+  grid-columns: 1fr;
+  grid-rows: 1fr;
+  height: 95%;
+  margin-left: 2;
+  padding-top: 0;
+  /* outline: solid grey; */
+  /* background: blue; */
+}
+
+.vertical {
+  width: 1fr;
+  border: solid grey;
+}
+
+.calendar-cell {
+  height: 100%;
+  border-top: grey;
+  /* background: grey; */
+  /* border: grey; */
+}
+
+.weekday-name {
+  content-align: center middle;
+  color: antiquewhite;
+}
+
+.task-item-container {
+  box-sizing: content-box;
+  height: 1;
+  overflow: hidden hidden;
+  width: 95%;
+}
+
+.task-item {
+  /* color: rgb(168, 193, 209); */
+  /* color: #d1cec0; */
+  color: #b9b7ad;
+  /* width: 100%; */
+  height: 1;
+}
+
+#calendar-header-category {
+  color: #9bdfbb;
+}
+
+.focused-cell {
+  background: #222530;
+  /* layer: above; */
+}
+
+/* .pop-up {
+  layer: above;
+  background: red;
+  content-align: center middle;
+}
+
+.task-pop-up-container {
+  layer: above;
+  layout: grid;
+  grid-size: 3 3;
+  grid-columns: 1fr 10fr 1fr;
+  grid-rows: 1fr 10fr 1fr;
+  width: 50%;
+  height: 50%;
+  background: white;
+}
+
+.task-pop-up-table {
+  width: auto;
+  height: auto;
+  background: blue;
+} */
+
+Screen {
+  align: center middle;
+}
+
+.task-pop-up-container {
+  layer: above;
+  width: 90%;
+  height: auto;
+}
+
+.task-pop-up-header-container {
+  layer: above;
+  align: center middle;
+  height: 1;
+}
+
+.task-pop-up-header {
+  layer: above;
+  background: #3e4348;
+  content-align: center bottom;
+  content-align-vertical: bottom;
+  /* color: #f5edd1; */
+}
+
+.task-pop-up-table-container {
+  layer: above;
+  align: center middle;
+  background: #222429;
+  height: auto;
+}
+
+.task-pop-up-table {
+  layer: above;
+  background: #222429;
+  content-align-horizontal: center;
+  width: 90%;
+}
+
+/* :root {
+  --task-color: #a8c1d1;
+  --default-font-color: #8f929b;
+  --calendar-date-color: #c4c7d0;
+  --category-color: #9bdfbb;
+  --border-color: grey;
+  --default-background-color: #171921;
+} */
+
+.calendar-weekday-name {
+  width: 1fr;
+}

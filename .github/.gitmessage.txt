@@ -1,0 +1,23 @@
+################
+# Format: [Type] <Title>
+# Within 50 characters / Clearly indicate the changes / No period at the end
+# ex) [Feat] Add R-CNN Model
+# Write below
+
+# Do not delete the line below
+
+################
+# Write detailed description below
+# Use "-" for multiple lines (72 characters per line)
+
+################
+# Write footer below (issue number related to the current commit)
+# ex) issue #7
+
+################
+# Feat : New Feature
+# Fix : Bug Fix
+# Docs : Modify docs
+# Refact : Refactoring
+# Style : Changes that do not affect code logic
+################
