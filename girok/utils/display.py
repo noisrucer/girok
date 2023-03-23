@@ -49,8 +49,6 @@ def display_category(
         color=constants.TABLE_HEADER_COLOR if highlight_cat != cumul_path else "#B9D66A",
         bold=True
     )
-    # if not top_most:
-    #     style = Style(color=constants.TABLE_TASK_NAME_COLOR, bold=True)
         
     # if top_most:
     circle = Text(constants.CIRCLE_EMOJI + " ", style=Style(color=constants.CIRCLE_COLOR[color]))
@@ -210,6 +208,7 @@ def build_task_table(tasks: list, marked_task_id: int = None, color: str = const
         Column(header="Name", header_style=Style(color=constants.TABLE_HEADER_COLOR), style=Style(color=constants.TABLE_TASK_NAME_COLOR)),
         Column(header="Category", justify="center", header_style=Style(color=constants.TABLE_HEADER_COLOR), style=Style(color=constants.TABLE_TEXT_COLOR)),
         Column(header="Deadline", justify="center", header_style=Style(color=constants.TABLE_HEADER_COLOR), style=Style(color="green")),
+        Column(header="Time", justify="center", header_style=Style(color=constants.TABLE_HEADER_COLOR), style=Style(color=constants.TABLE_TEXT_COLOR)),
         Column(header="Tag", justify="center", header_style=Style(color=constants.TABLE_HEADER_COLOR), style=Style(color=constants.TABLE_TEXT_COLOR)),
         Column(header="Priority", justify="center", header_style=Style(color=constants.TABLE_HEADER_COLOR), style=Style(color=constants.TABLE_TEXT_COLOR)),
         Column(header="Remaining", justify="center", header_style=Style(color=constants.TABLE_HEADER_COLOR), style=Style(color=constants.TABLE_TEXT_COLOR)),
@@ -225,6 +224,14 @@ def build_task_table(tasks: list, marked_task_id: int = None, color: str = const
         
         date = calendar_utils.get_date_obj_from_str_separated_by_T(task['deadline'])
         deadline = f"{date.day} {calendar.month_name[date.month]} {date.year}"
+        h, m, s = str(date.time()).split(":")
+        h = int(h)
+        is_time = task['is_time']
+        afternoon = h >= 12
+        if h > 12:
+            h -= 12
+        time = f"{h}:{m} {'PM' if afternoon else 'AM'}" if is_time else '-'
+        
         remaining_days = task_utils.get_day_offset_between_two_dates(datetime.now(), date)
         day_offset_message = f"{remaining_days} days left" if remaining_days > 0 else f"{abs(remaining_days)} days passed"
         if remaining_days == 0:
@@ -237,6 +244,7 @@ def build_task_table(tasks: list, marked_task_id: int = None, color: str = const
             task_name,
             Text(task['task_category_full_path'] if task['task_category_full_path'] else "None", style=Style(color=color if marked_task_id == task['task_id'] else constants.TABLE_TEXT_COLOR)),
             Text(deadline, style=Style(color=color if marked_task_id == task['task_id'] else constants.TABLE_DEADLINE_COLOR)),
+            Text(time, style=Style(color=color if marked_task_id == task['task_id'] else constants.TABLE_DEADLINE_COLOR)),
             Text(task['tag'] if task['tag'] else '-', style=Style(color=color if marked_task_id == task['task_id'] else constants.TABLE_TEXT_COLOR)),
             Text(str(task['priority']) if task['priority'] else '-', style=Style(color=color if marked_task_id == task['task_id'] else constants.TABLE_TEXT_COLOR)),
             Text(day_offset_message, style=Style(color=color if marked_task_id == task['task_id'] else constants.TABLE_TEXT_COLOR))

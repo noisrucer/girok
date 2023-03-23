@@ -13,7 +13,6 @@ import girok.constants as constants
 cfg = get_config()
 
 def create_task(task_data: dict):
-    print(task_data)
     resp = requests.post(
         cfg.base_url + "/tasks",
         json=task_data,
