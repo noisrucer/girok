@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "girok"
-version = "0.1.3"
-description = "Added display deadline time feature for showtask command"
+version = "0.1.4"
+description = "Changed ctrl-o and ctrl-p command to w and e to avoid reserved key bindings"
 authors = ["Jason Lee <changjin9792@gmail.com>"]
 readme = "README.md"
 
