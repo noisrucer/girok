@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "girok"
-version = "0.1.4"
-description = "Changed ctrl-o and ctrl-p command to w and e to avoid reserved key bindings"
+version = "0.1.5"
+description = "Added --help command"
 authors = ["Jason Lee <changjin9792@gmail.com>"]
 readme = "README.md"
 
