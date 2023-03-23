@@ -41,3 +41,5 @@ def pre_command_callback(ctx: typer.Context):
         print("You're not logged in. Please login with [green]girok login[/green].")
         exit(0)
         
+
+app()
