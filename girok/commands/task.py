@@ -285,8 +285,8 @@ def add_task(
     #     year, month, day = "2000", "01", "01" # meaningless date in case of everyday
 
     full_deadline = f"{year}-{month}-{day} {time if time else '12:00:00'}"
-
     # Color - 만약 카테고리있으면 자동설정 (category 하고 Color 중복설정 불가)
+    color = None
     if cat and cat != "none":
         cat_color = category_api.get_category_color(cat_id)
         if color: # duplicate colors - prioritize default category color
