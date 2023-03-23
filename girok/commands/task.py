@@ -204,34 +204,34 @@ def complete_color():
     return ['A', 'B', 'C']
 
 # Required: name, deadline
-@app.command('addtask')
+@app.command('addtask', help="[yellow]Add[/yellow] a new task", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
 def add_task(
     name: str = typer.Argument(..., help="Task name"),
-    cat: str = typer.Option(None, "-c", "--category", help="Category path - xx/yy/zz..", callback=category_callback),
-    priority: int = typer.Option(None, "-p", "--priority", help="priority", callback=priority_callback),
-    color: str = typer.Option(None, "--color", help="Color"),
-    deadline: str = typer.Option(None, "-d", "--deadline", help="Deadline", callback=full_date_callback),
+    cat: str = typer.Option(None, "-c", "--category", help="[yellow]Category path - xx/yy/zz..[/yellow]", callback=category_callback),
+    priority: int = typer.Option(None, "-p", "--priority", help="[yellow]priority[/yellow]", callback=priority_callback),
+    # color: str = typer.Option(None, "--color", help="[yellow]Color[/yellow]"),
+    deadline: str = typer.Option(None, "-d", "--deadline", help="[yellow]Deadline[/yellow]", callback=full_date_callback),
     # everyday: bool = typer.Option(False, "-e", "--everyday", help="Set task due everyday"),
-    today: bool = typer.Option(None, "--tdy", help="Set deadline to today", callback=add_task_date_exclusivity_callback),
-    tomorrow: bool = typer.Option(None, "--tmr", "--tomorrow", help="Set deadline to tomorrow", callback=add_task_date_exclusivity_callback),
-    this_mon: bool = typer.Option(None, "-t1", "--thismon", help="Set deadline to this Monday", callback=add_task_date_exclusivity_callback),
-    this_tue: bool = typer.Option(None, "-t2", "--thistue", help="Set deadline to this Tuesday", callback=add_task_date_exclusivity_callback),
-    this_wed: bool = typer.Option(None, "-t3", "--thiswed", help="Set deadline to, this Wednesday", callback=add_task_date_exclusivity_callback),
-    this_thu: bool = typer.Option(None, "-t4", "--thisthu", help="Set deadline to this Thursday", callback=add_task_date_exclusivity_callback),
-    this_fri: bool = typer.Option(None, "-t5", "--thisfri", help="Set deadline to this Friday", callback=add_task_date_exclusivity_callback),
-    this_sat: bool = typer.Option(None, "-t6", "--thissat", help="Set deadline to this Saturday", callback=add_task_date_exclusivity_callback),
-    this_sun: bool = typer.Option(None, "-t7", "--thissun", help="Set deadline to this Sunday", callback=add_task_date_exclusivity_callback),
-    next_mon: bool = typer.Option(None, "-n1", "--nextmon", help="Set deadline to next Monday", callback=add_task_date_exclusivity_callback),
-    next_tue: bool = typer.Option(None, "-n2", "--nexttue", help="Set deadline to next Tuesday", callback=add_task_date_exclusivity_callback),
-    next_wed: bool = typer.Option(None, "-n3", "--nextwed", help="Set deadline to next Wednesday", callback=add_task_date_exclusivity_callback),
-    next_thu: bool = typer.Option(None, "-n4", "--nextthu", help="Set deadline to next Thursday", callback=add_task_date_exclusivity_callback),
-    next_fri: bool = typer.Option(None, "-n5", "--nextfri", help="Set deadline to next Friday", callback=add_task_date_exclusivity_callback),
-    next_sat: bool = typer.Option(None, "-n6", "--nextsat", help="Set deadline to next Saturday", callback=add_task_date_exclusivity_callback),
-    next_sun: bool = typer.Option(None, "-n7", "--nextsun", help="Set deadline to next Sunday", callback=add_task_date_exclusivity_callback),
-    after: int = typer.Option(None, "-a", "--after", help="Set deadline to after x days", callback=after_callback),
-    time: str = typer.Option(None, "-t", "--time", help="Deadline time, xx:yy", callback=time_callback),
+    today: bool = typer.Option(None, "--tdy", help="Set deadline to [yellow]today[/yellow]", callback=add_task_date_exclusivity_callback),
+    tomorrow: bool = typer.Option(None, "--tmr", "--tomorrow", help="Set deadline to [yellow]tomorrow[/yellow]", callback=add_task_date_exclusivity_callback),
+    this_mon: bool = typer.Option(None, "-t1", "--thismon", help="Set deadline to this [yellow]Monday[/yellow]", callback=add_task_date_exclusivity_callback),
+    this_tue: bool = typer.Option(None, "-t2", "--thistue", help="Set deadline to this [yellow]Tuesday[/yellow]", callback=add_task_date_exclusivity_callback),
+    this_wed: bool = typer.Option(None, "-t3", "--thiswed", help="Set deadline to, this [yellow]Wednesday[/yellow]", callback=add_task_date_exclusivity_callback),
+    this_thu: bool = typer.Option(None, "-t4", "--thisthu", help="Set deadline to this [yellow]Thursday[/yellow]", callback=add_task_date_exclusivity_callback),
+    this_fri: bool = typer.Option(None, "-t5", "--thisfri", help="Set deadline to this [yellow]Friday[/yellow]", callback=add_task_date_exclusivity_callback),
+    this_sat: bool = typer.Option(None, "-t6", "--thissat", help="Set deadline to this [yellow]Saturday[/yellow]", callback=add_task_date_exclusivity_callback),
+    this_sun: bool = typer.Option(None, "-t7", "--thissun", help="Set deadline to this [yellow]Sunday[/yellow]", callback=add_task_date_exclusivity_callback),
+    next_mon: bool = typer.Option(None, "-n1", "--nextmon", help="Set deadline to next [yellow]Monday[/yellow]", callback=add_task_date_exclusivity_callback),
+    next_tue: bool = typer.Option(None, "-n2", "--nexttue", help="Set deadline to next [yellow]Tuesday[/yellow]", callback=add_task_date_exclusivity_callback),
+    next_wed: bool = typer.Option(None, "-n3", "--nextwed", help="Set deadline to next [yellow]Wednesday[/yellow]", callback=add_task_date_exclusivity_callback),
+    next_thu: bool = typer.Option(None, "-n4", "--nextthu", help="Set deadline to next [yellow]Thursday[/yellow]", callback=add_task_date_exclusivity_callback),
+    next_fri: bool = typer.Option(None, "-n5", "--nextfri", help="Set deadline to next [yellow]Friday[/yellow]", callback=add_task_date_exclusivity_callback),
+    next_sat: bool = typer.Option(None, "-n6", "--nextsat", help="Set deadline to next [yellow]Saturday[/yellow]", callback=add_task_date_exclusivity_callback),
+    next_sun: bool = typer.Option(None, "-n7", "--nextsun", help="Set deadline to next [yellow]Sunday[/yellow]", callback=add_task_date_exclusivity_callback),
+    after: int = typer.Option(None, "-a", "--after", help="Set deadline to [yellow]after x days[/yellow]", callback=after_callback),
+    time: str = typer.Option(None, "-t", "--time", help="Deadline [yellow]time, xx:yy[/yellow]", callback=time_callback),
     # all_day: bool = typer.Option(None, "--allday", help="Set deadline time to all day", callback=all_day_callback),
-    tag: str = typer.Option(None, "--tag", help="Tag"),
+    tag: str = typer.Option(None, "-T", "--tag", help="[yellow]Tag[/yellow]"),
 ):
     # Category
     cat_id = None
@@ -324,38 +324,38 @@ def add_task(
     print(task_tree)
 
 
-@app.command("showtask")
+@app.command("showtask", help="[yellow]View[/yellow] tasks with options", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
 def show_task(
-    cat: str = typer.Option(None, "-c", "--category", help="Category path - xx/yy/zz..", callback=category_callback),
-    exact_day: str = typer.Option(None, "-e", "--exact", help="Exact Deadline", callback=full_date_callback),
-    within_days: int = typer.Option(None, "-d", "--day", help="Show tasks due within the specified days", callback=offset_callback),
-    within_weeks: int = typer.Option(None, "-w", "--week", help="Show tasks due within the specified weeks", callback=offset_callback),
-    within_months: int = typer.Option(None, "-m", "--month", help="Show tasks due within the specified months", callback=offset_callback),
-    today: bool = typer.Option(None, "-t", "--tdy", help="Show tasks due today", callback=show_task_date_exclusivity_callback),
-    within_tomorrow: bool = typer.Option(None, "--tmr", help="Show tasks due today and tomorrow", callback=show_task_date_exclusivity_callback),
-    within_this_week: bool = typer.Option(None, "--tw", "--thisweek", help="Show tasks due within this week", callback=show_task_date_exclusivity_callback),
-    within_next_week: bool = typer.Option(None, "--nw", "--nextweek", help="Show tasks due within next week", callback=show_task_date_exclusivity_callback),
-    within_this_month: bool = typer.Option(None, "--tm", "--thismonth", help="Show tasks due within this month", callback=show_task_date_exclusivity_callback),
-    within_next_month: bool = typer.Option(None, "--nm", "--nextmonth", help="Show tasks due within next month", callback=show_task_date_exclusivity_callback),
-    this_mon: bool = typer.Option(None, "-t1", "--thismon", help="Show tasks due exactly this Monday", callback=show_task_date_exclusivity_callback),
-    this_tue: bool = typer.Option(None, "-t2", "--thistue", help="Show tasks due exactly this Tuesday", callback=show_task_date_exclusivity_callback),
-    this_wed: bool = typer.Option(None, "-t3", "--thiswed", help="Show tasks due exactly this Wednesday", callback=show_task_date_exclusivity_callback),
-    this_thu: bool = typer.Option(None, "-t4", "--thisthu", help="Show tasks due exactly this Thursday", callback=show_task_date_exclusivity_callback),
-    this_fri: bool = typer.Option(None, "-t5", "--thisfri", help="Show tasks due exactly this Friday", callback=show_task_date_exclusivity_callback),
-    this_sat: bool = typer.Option(None, "-t6", "--thissat", help="Show tasks due exactly this Saturday", callback=show_task_date_exclusivity_callback),
-    this_sun: bool = typer.Option(None, "-t7", "--thissun", help="Show tasks due exactly this Sunday", callback=show_task_date_exclusivity_callback),
-    next_mon: bool = typer.Option(None, "-n1", "--nextmon", help="Show tasks due exactly next Monday", callback=show_task_date_exclusivity_callback),
-    next_tue: bool = typer.Option(None, "-n2", "--nexttue", help="Show tasks due exactly next Tuesday", callback=show_task_date_exclusivity_callback),
-    next_wed: bool = typer.Option(None, "-n3", "--nextwed", help="Show tasks due exactly next Wednesday", callback=show_task_date_exclusivity_callback),
-    next_thu: bool = typer.Option(None, "-n4", "--nextthu", help="Show tasks due exactly next Thursday", callback=show_task_date_exclusivity_callback),
-    next_fri: bool = typer.Option(None, "-n5", "--nextfri", help="Show tasks due exactly next Friday", callback=show_task_date_exclusivity_callback),
-    next_sat: bool = typer.Option(None, "-n6", "--nextsat", help="Show tasks due exactly next Saturday", callback=show_task_date_exclusivity_callback),
-    next_sun: bool = typer.Option(None, "-n7", "--nextsun", help="Show tasks due exactly next Sunday", callback=show_task_date_exclusivity_callback),
-    urgent: bool = typer.Option(None, "-u", "--urgent", help="Show urgent tasks (due within 3 days)", callback=show_task_date_exclusivity_callback),
-    priority: str = typer.Option(None, "-p", "--priority", help="Show tasks of the given priority"),
-    tag: str = typer.Option(None, "--tag", help="Show tasks belonging to the given tag"),
-    category_view: bool = typer.Option(None, "--tree", help="Show tasks with tree view"),
-    list_view: bool = typer.Option(None, "--list", help="Show tasks with the list view")
+    cat: str = typer.Option(None, "-c", "--category", help="[yellow]Category path - xx/yy/zz..[/yellow]", callback=category_callback),
+    exact_day: str = typer.Option(None, "-e", "--exact", help="[yellow]Exact Deadline[/yellow]", callback=full_date_callback),
+    within_days: int = typer.Option(None, "-d", "--day", help="Show tasks due [yellow]within the specified days[/yellow]", callback=offset_callback),
+    within_weeks: int = typer.Option(None, "-w", "--week", help="Show tasks due [yellow]within the specified weeks[/yellow]", callback=offset_callback),
+    within_months: int = typer.Option(None, "-m", "--month", help="Show tasks due [yellow]within the specified months[/yellow]", callback=offset_callback),
+    today: bool = typer.Option(None, "-t", "--tdy", help="Show tasks due [yellow]today[/yellow]", callback=show_task_date_exclusivity_callback),
+    within_tomorrow: bool = typer.Option(None, "--tmr", help="Show tasks due [yellow]today and tomorrow[/yellow]", callback=show_task_date_exclusivity_callback),
+    within_this_week: bool = typer.Option(None, "--tw", "--thisweek", help="Show tasks due [yellow]within this week[/yellow]", callback=show_task_date_exclusivity_callback),
+    within_next_week: bool = typer.Option(None, "--nw", "--nextweek", help="Show tasks due [yellow]within next week[/yellow]", callback=show_task_date_exclusivity_callback),
+    within_this_month: bool = typer.Option(None, "--tm", "--thismonth", help="Show tasks due [yellow]within this month[/yellow]", callback=show_task_date_exclusivity_callback),
+    within_next_month: bool = typer.Option(None, "--nm", "--nextmonth", help="Show tasks due [yellow]within next month[/yellow]", callback=show_task_date_exclusivity_callback),
+    this_mon: bool = typer.Option(None, "-t1", "--thismon", help="Show tasks due [yellow]exactly this Monday[/yellow]", callback=show_task_date_exclusivity_callback),
+    this_tue: bool = typer.Option(None, "-t2", "--thistue", help="Show tasks due [yellow]exactly this Tuesday[/yellow]", callback=show_task_date_exclusivity_callback),
+    this_wed: bool = typer.Option(None, "-t3", "--thiswed", help="Show tasks due [yellow]exactly this Wednesday[/yellow]", callback=show_task_date_exclusivity_callback),
+    this_thu: bool = typer.Option(None, "-t4", "--thisthu", help="Show tasks due [yellow]exactly this Thursday[/yellow]", callback=show_task_date_exclusivity_callback),
+    this_fri: bool = typer.Option(None, "-t5", "--thisfri", help="Show tasks due [yellow]exactly this Friday[/yellow]", callback=show_task_date_exclusivity_callback),
+    this_sat: bool = typer.Option(None, "-t6", "--thissat", help="Show tasks due [yellow]exactly this Saturday[/yellow]", callback=show_task_date_exclusivity_callback),
+    this_sun: bool = typer.Option(None, "-t7", "--thissun", help="Show tasks due [yellow]exactly this Sunday[/yellow]", callback=show_task_date_exclusivity_callback),
+    next_mon: bool = typer.Option(None, "-n1", "--nextmon", help="Show tasks due [yellow]exactly next Monday[/yellow]", callback=show_task_date_exclusivity_callback),
+    next_tue: bool = typer.Option(None, "-n2", "--nexttue", help="Show tasks due [yellow]exactly next Tuesday[/yellow]", callback=show_task_date_exclusivity_callback),
+    next_wed: bool = typer.Option(None, "-n3", "--nextwed", help="Show tasks due [yellow]exactly next Wednesday[/yellow]", callback=show_task_date_exclusivity_callback),
+    next_thu: bool = typer.Option(None, "-n4", "--nextthu", help="Show tasks due [yellow]exactly next Thursday[/yellow]", callback=show_task_date_exclusivity_callback),
+    next_fri: bool = typer.Option(None, "-n5", "--nextfri", help="Show tasks due [yellow]exactly next Friday[/yellow]", callback=show_task_date_exclusivity_callback),
+    next_sat: bool = typer.Option(None, "-n6", "--nextsat", help="Show tasks due [yellow]exactly next Saturday[/yellow]", callback=show_task_date_exclusivity_callback),
+    next_sun: bool = typer.Option(None, "-n7", "--nextsun", help="Show tasks due [yellow]exactly next Sunday[/yellow]", callback=show_task_date_exclusivity_callback),
+    urgent: bool = typer.Option(None, "-u", "--urgent", help="Show [yellow]urgent[/yellow] tasks (due within 3 days)", callback=show_task_date_exclusivity_callback),
+    priority: str = typer.Option(None, "-p", "--priority", help="Show tasks of the given [yellow]priority[/yellow]"),
+    tag: str = typer.Option(None, "-T", "--tag", help="Show tasks belonging to the given [yellow]tag[/yellow]"),
+    category_view: bool = typer.Option(None, "--tree", help="Show tasks with [yellow]tree view[/yellow]"),
+    list_view: bool = typer.Option(None, "--list", help="Show tasks with the [yellow]list view - DEFAULT VIEW[/yellow]")
 ):
     if not category_view and not list_view:
         list_view = True
@@ -475,8 +475,8 @@ def show_task(
         display_utils.center_print("Error occurred.", type="title")
 
 
-@app.command("done")
-def remove_task(task_id: int = typer.Argument(..., help="Task ID to be deleted")):
+@app.command("done", help="[red]Delete[/red] a task", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
+def remove_task(task_id: int = typer.Argument(..., help="[yellow]Task ID[/yellow] to be deleted")):
     task_ids_cache = general_utils.read_task_ids_cache(cfg=cfg)
     if str(task_id) not in task_ids_cache:
         display_utils.center_print("Task ID not found.", type="error")
@@ -506,10 +506,10 @@ def remove_task(task_id: int = typer.Argument(..., help="Task ID to be deleted")
         display_utils.center_print(resp.content, type="error")
         
 
-@app.command("chtag")
+@app.command("chtag", help="[green]Change[/green] the tag of a task", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
 def change_tag(
-    task_id: int = typer.Argument(..., help="Task ID"),
-    tag_name: str = typer.Argument(..., help="New tag name")
+    task_id: int = typer.Argument(..., help="[yellow]Task ID[/yellow]"),
+    tag_name: str = typer.Argument(..., help="[yellow]New tag name[/yellow]")
 ):
     task_ids_cache = general_utils.read_task_ids_cache(cfg=cfg)
     target_task_id = task_ids_cache[str(task_id)]
@@ -520,10 +520,10 @@ def change_tag(
     display_utils.display_tasks_by_list(tasks, marked_task_id=target_task_id, color=constants.TABLE_TASK_HIGHLIGHT_COLOR)
 
     
-@app.command("chpri")
+@app.command("chpri", help="[green]Change[/green] the priority of a task (1 ~ 5)", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
 def change_tag(
-    task_id: int = typer.Argument(..., help="Task ID"),
-    priority: int = typer.Argument(..., help="New Priority")
+    task_id: int = typer.Argument(..., help="[yellow]Task ID[/yellow]"),
+    priority: int = typer.Argument(..., help="[yellow]New Priority[/yellow]")
 ):
     task_ids_cache = general_utils.read_task_ids_cache(cfg=cfg)
     target_task_id = task_ids_cache[str(task_id)]
@@ -534,11 +534,11 @@ def change_tag(
     display_utils.display_tasks_by_list(tasks, marked_task_id=target_task_id, color=constants.TABLE_TASK_HIGHLIGHT_COLOR)
 
     
-@app.command("chdate")
+@app.command("chdate", help="[green]Change[/green] the deadline of a task", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
 def change_date(
-    task_id: int = typer.Argument(..., help="Task ID"),
-    deadline: str = typer.Option(None, "-d", "--deadline", help="Deadline", callback=full_date_callback),
-    time: str = typer.Option(None, "-t", "--time", help="Deadline time, xx:yy", callback=time_callback)
+    task_id: int = typer.Argument(..., help="[yellow]Task ID[/yellow]"),
+    deadline: str = typer.Option(None, "-d", "--deadline", help="[yellow]Deadline[/yellow]", callback=full_date_callback),
+    time: str = typer.Option(None, "-t", "--time", help="[yellow]Deadline time, xx:yy[/yellow]", callback=time_callback)
 ):
     year, month, day = None, None, None
     if deadline:
@@ -555,7 +555,7 @@ def change_date(
     display_utils.display_tasks_by_list(tasks, marked_task_id=target_task_id, color=constants.TABLE_TASK_HIGHLIGHT_COLOR)
     
 
-@app.command("showtag")
+@app.command("showtag", help="[yellow]Show[/yellow] all tags", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
 def show_tag():
     resp = task_api.get_tags()
     if resp.status_code == 200:

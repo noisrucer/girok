@@ -36,7 +36,7 @@ def category_callback(ctx: typer.Context, param: typer.CallbackParam, value: str
     return value
 
 
-@app.command("showcat")
+@app.command("showcat", help="[yellow]Show[/yellow] all pre-defined categories", rich_help_panel=":file_folder: [bold yellow1]Category Commands[/bold yellow1]")
 def show_categories():
     cats_dict = category_api.get_categories()
     text = "Task Categories"
@@ -44,10 +44,10 @@ def show_categories():
     display_utils.display_categories(cats_dict)
     
 
-@app.command("addcat")
+@app.command("addcat", help="[yellow]Add[/yellow] a new category", rich_help_panel=":file_folder: [bold yellow1]Category Commands[/bold yellow1]")
 def add_category(
-    cat: str = typer.Argument(..., help="Category path - xx/yy/zz..", callback=category_callback),
-    color: str = typer.Option(None, "-c", "--color", help="Color for category")
+    cat: str = typer.Argument(..., help="[yellow]Category path - xx/yy/zz..[/yellow]", callback=category_callback),
+    color: str = typer.Option(None, "-c", "--color", help="[yellow]Color[/yellow] for category")
 ):
     resp = category_api.add_category(cat, color)
     if resp.status_code == 201:
@@ -61,8 +61,8 @@ def add_category(
         print(resp)
     
     
-@app.command("rmcat")
-def remove_category(cat: str = typer.Argument(..., help="Category path - xx/yy/zz..")):
+@app.command("rmcat", help="[red]Remove[/red] a category", rich_help_panel=":file_folder: [bold yellow1]Category Commands[/bold yellow1]")
+def remove_category(cat: str = typer.Argument(..., help="[yellow]Category path - xx/yy/zz..[/yellow]")):
     confirm_rm = typer.confirm(f"[WARNING] Are you sure to delete '{cat}'?\nAll the subcategories and tasks will also be deleted.")
     if not confirm_rm:
         exit(0)
@@ -79,10 +79,10 @@ def remove_category(cat: str = typer.Argument(..., help="Category path - xx/yy/z
         display_utils.center_print(resp.content, type="error")
         
         
-@app.command("rncat")
+@app.command("rncat", help="[green]Rename[/green] a category", rich_help_panel=":file_folder: [bold yellow1]Category Commands[/bold yellow1]")
 def rename_category(
-    cat: str = typer.Argument(..., help="Category path - xx/yy/zz.."),
-    new_name: str = typer.Argument(..., help="New category name")
+    cat: str = typer.Argument(..., help="[yellow]Category path - xx/yy/zz..[/yellow]"),
+    new_name: str = typer.Argument(..., help="[yellow]New category name[/yellow]")
 ):
     resp = category_api.rename_category(cat, new_name)
     if resp.status_code == 204:
@@ -97,10 +97,10 @@ def rename_category(
         display_utils.center_print(resp.content, type="error")
         
         
-@app.command("mvcat")
+@app.command("mvcat", help="[yellow]Move[/yellow] a category to under category", rich_help_panel=":file_folder: [bold yellow1]Category Commands[/bold yellow1]")
 def move_category(
-    cat: str = typer.Argument(..., help="Category path - xx/yy/zz.."),
-    new_parent_cat: str = typer.Argument(..., help="New supercategory path - xx/yy/")
+    cat: str = typer.Argument(..., help="[yellow]Category path - xx/yy/zz..[/yellow]"),
+    new_parent_cat: str = typer.Argument(..., help="[yellow]New supercategory path - xx/yy/[/yellow]")
 ):
     if new_parent_cat.endswith('/'):
         new_parent_cat = new_parent_cat[:-1]
