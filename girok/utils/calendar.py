@@ -64,6 +64,8 @@ def get_date_obj_from_str_separated_by_T(s: str):
 
 
 def remove_left_arrow(cell):
+    if cell is None:
+        return
     if not cell.children:
         return
     cell_label = cell.children[0]
