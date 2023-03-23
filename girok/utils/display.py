@@ -174,7 +174,7 @@ def display_category_with_tasks(
         if h > 12:
             h -= 12
             
-        time = f" / {h}:{m} {'PM' if afternoon else 'AM'}" if is_time else ''
+        time = f" {h}:{m} {'PM' if afternoon else 'AM'} " if is_time else ' '
         remaining_days = task_utils.get_day_offset_between_two_dates(datetime.now(), deadline)
         day_offset_message = f"{remaining_days} days left" if remaining_days > 0 else f"{abs(remaining_days)} days passed"
         
@@ -187,7 +187,7 @@ def display_category_with_tasks(
             task_id = ""
         task_name = Text(task['name'], style=Style(color=constants.TABLE_TASK_NAME_COLOR  if task['task_id'] != marked_task_id else marked_color, bold=True))
         task_remaining_days = Text(f" [{day_offset_message}]", style=Style(color='#F5F7F2' if task['task_id'] != marked_task_id else marked_color))
-        task_date = Text(f" - {year}/{month}/{day} {weekday_name}", style=Style(color="white" if task['task_id'] != marked_task_id else marked_color))
+        task_date = Text(f" - {year}/{month}/{day}{time}{weekday_name}", style=Style(color="white" if task['task_id'] != marked_task_id else marked_color))
         node_name = Text.assemble(task_id, task_name, task_remaining_days, task_date, style=Style(strike=True if task['task_id'] == marked_task_id and marked_color == constants.TABLE_TASK_DELETED_COLOR else False))
              
         tree.add(node_name)
