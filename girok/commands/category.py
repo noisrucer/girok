@@ -116,9 +116,3 @@ def move_category(
     else:
         display_utils.center_print(resp.content, type="error")
     
-
-@app.command("open")
-def open_girok():
-    webbrowser.open("https://github.com")
-    
-    

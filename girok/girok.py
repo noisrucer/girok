@@ -23,11 +23,6 @@ app.registered_commands.extend(task_command.app.registered_commands)
 app.registered_commands.extend(calendar_command.app.registered_commands)
 cfg = get_config()
     
-@app.command()
-def test():
-    print("test")
-
-
 @app.callback()
 def pre_command_callback(ctx: typer.Context):
     # Setting up app dir and config file if they don't exist
