@@ -239,7 +239,7 @@ girok addtask <task name> [One of deadline date options] [-c | --category <categ
 
 It looks quite complicated but don't worry! Let's go through some rules.
 
-#### `addtask` rules
+#### 5.1.1 `addtask` rules
 
 1. `<task name>` (Argument / **Required**) - If the task name has no space you can omit double quotes `""`. If it does, enclose the task name by double quotes `""`
 2. `<One of date options>` (Option / **required**) - You must specify a **deadline "date"** of a task. There're many ways to add a deadline. Note that **ONLY ONE DATE OPTION** is allowed.
@@ -263,14 +263,64 @@ It looks quite complicated but don't worry! Let's go through some rules.
    - You must provide the full time format in **24 hour scale** such as `07:23` or `21:59`.
 4. `-c | --category <category full path>` (Option / **Optional**) - Your tasks might belong to a specific category you have previously defined.
    - Provide the **full category path**.
-   - For example, if your task belongs to `Career/Resume`, then enter `girok addtask "dummy task" --tmr -c Career/Resume`.
+   - For example, if your task belongs to `Career/Resume`, then enter `girok addtask "dummy task 1" --tmr -c Career/Resume`.
    - If you specify a category, then the task color will be automatically linked to that category's color.
    - If no category is provided, the task will belong to `No Category` category.
 5. `-p | --priority <priority (1~5)>` (Option, **Optional**) - You can set the priority of a task so that you can filter out by priority when you query your tasks.
-   - For example, to set the priority of a task as `5`, enter `girok addtask "dummy task" -c Career/Resume -p 5`.
+   - For example, to set the priority of a task as `5`, enter `girok addtask "dummy task 1" -c Career/Resume -p 5`.
 6. `-T | --tag <tag name>` (Option, **Optional**) - You can set the **tag**(or type) of a task such as `assignment` and `meeting`. With tags, you can more efficiently query your tasks with different types.
    - Unlike category, tag doesn't allow nested tags and you don't have to pre-define them.
    - For example, if you want to set the tag of a task as `assignment`, enter `girok addtask "assignment 4" -c HKU/COMP3234 -d 4/24 --tag assignment`
+
+In summary, keep the following rules in mind.
+
+1. Always provide **task name** and **one of date options**.
+2. Although not required, I think it's better to provide **category** to manage your tasks more effectively.
+3. Other options are up to you!
+
+For example, the following command is a typical command that I use on everyday basis.
+
+```bash
+girok addtask "Implement tag filtering feature" -c Dev/Girok -a 3 -p 5
+```
+
+It looks quite complicated, but you'll get used to it quickly after playing out little bit.
+
+#### 5.1.2 `addtask` demonstration
+
+Now let's play around with `addtask` command.
+
+Recall our category list is
+
+![](images/girok-addtask1.png)
+
+In the demonstration, I will add several tasks and show how it works.
+
+Let's add a task named `go over resume again` whose category is `Career/Resume` and I will do it by `next thursday`. This is a quite important task, so I will assign the `priority` of `5`.
+
+```bash
+girok addtask "go over resume again" -c Career/Resume -n4 -p 5
+```
+
+![](images/girok-addtask2.png)
+
+When adding it, you will see the same category tree with tasks attached to the belonged category. (Priority is now shown by default. You can see the priority with `girok showtask` command we'll talk about very soon).
+
+Now I'll add another task named `Midterm exam` with the category `HKU/COMP3234` and the deadline is `4/18 09:30`. Hmm.. I think I have plenty of time so I will not provide the priority. However, I will assign the tag `exam`.
+
+```bash
+girok addtask "Midterm exam" -c HKU/COMP3234 -d 4/18 -t 09:30 --tag exam
+```
+
+![](images/girok-addtask3.png)
+
+Lastly, I'll add a task named `Hangout with Jason` and the appointment date is `tomorrow`. This time, I will not provide any option.
+
+```bash
+girok addtask "Hangout with Jason" --tmr
+```
+
+![](images/girok-addtask4.png)
 
 ## 6. Calendar Commands
 
