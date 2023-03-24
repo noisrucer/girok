@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "girok"
-version = "0.1.6"
-description = "Fixed addtask error"
+version = "0.1.7"
+description = "Fixed `w` command error"
 authors = ["Jason Lee <changjin9792@gmail.com>"]
 readme = "README.md"
 
