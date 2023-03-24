@@ -215,6 +215,8 @@ git addcat Career/Dummy
 
 Now, let's delete it with the following command.
 
+**[WARNING]** If you delete a category, **all its sub-categories and tasks will be DELETED**. I'll consider add an option for users to preserve all the orphan tasks in the future.
+
 ```bash
 girok rmcat Career/Dummy
 ```
