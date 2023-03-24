@@ -16,7 +16,7 @@ contents
    6. Uninstall
    7. Contributions
 
-<h1 align="center">✏️ Girok - The most powerful terminal task manager</h1>
+<h1 align="center">✏️ Girok - The most powerful CLI task manager</h1>
 
 ### Who said you cannot have a beautiful UI on terminal?
 
@@ -31,7 +31,7 @@ Girok is running on AWS server so you can **login from any device in the world**
 # 📖 Table of Contents
 
 - [🚀 Installation](#-Installation)
-- [🔥 Get Started !](#-get-started)
+- [🔥 Get Started](#-get-started)
 - [📝 Use cases](#-use-cases)
 - [🤖 Major updates plan](#-major-updates-plan)
 - [🚒 Troubleshooting](#-troubleshooting)
