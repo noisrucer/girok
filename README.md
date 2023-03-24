@@ -1,21 +1,3 @@
-contents
-
-1. Girok Intro
-2. Version Info
-3. Table of contents
-   1. Installation
-   2. Commands
-      1. `--help`
-      2. Auth
-      3. Category
-      4. Task
-      5. Calendar
-   3. Use cases
-   4. Major Updates Plan
-   5. Troubleshooting
-   6. Uninstall
-   7. Contributions
-
 <h1 align="center">✏️ Girok - The most powerful CLI task manager</h1>
 
 <h3 align="center"> Who said you cannot have a beautiful UI on terminal?</h4>
@@ -24,9 +6,15 @@ Girok is a **powerful terminal-based task manager** which provides a multitude o
 
 Girok is running on AWS server so you can **login from any device in the world**!
 
-# 📀 Version `0.1.6` is released now!
+# 🤖 Version `0.1.6` is released now!
 
 ### Upgrade with `pip install girok --upgrade`
+
+# 💡 Future Updates (coming soon)
+
+1. 💻 📱 **Web** and **app** which share all the data with CLI.
+2. 🔨 Task operations in the calendar view
+3. ⏰ **Girok Slack Bot** notification feature for tasks - set an alarm in 5 seconds!
 
 # 📖 Table of Contents
 
@@ -38,9 +26,7 @@ Girok is running on AWS server so you can **login from any device in the world**
   - [4. Category commands](#category-commands)
   - [5. Task Commands](#task-commands)
   - [6. Calendar Commands](#calendar-commands)
-- [📝 Use cases](#-use-cases)
-- [🤖 Major updates plan](#-major-updates-plan)
-- [🚒 Troubleshooting](#-troubleshooting)
+- [🚒 Report Bugs](#-report-bugs)
 - [😭 Uninstall](#-uninstall)
 - [💌 Contributions](#-contributions)
 
@@ -585,12 +571,20 @@ Lastly, let's press `f` to close the sidebar to have make the calendar bigger.
 
 Great job! Now, it's time to explore all the features of **Girok** on your own!!
 
-# 📝 Use Cases
+# 🚒 Report Bugs
 
-# 🤖 Major updates plan
+The first version of **Girok** was released just a couple days ago so you might encounter some bugs and errors.
 
-# 🚒 Troubleshooting
+If so, I'd greatly appreciate if you report them as raising `issues` then I will respond and update as soon as possible!!
 
 # 😭 Uninstall
 
-# 💌 Contributions
+I'm sorry that there's no way to uninstall this package.
+
+Just kidding. Enter `pip uninstall girok` in your terminal. Bye..😢
+
+# 💌 Contribuute to the project
+
+If you have any new features that would make your life easier, please don't hesitate to raise issues.
+
+If you wish to contribute to the project as a programmer, drop pull requests and I will review each of them carefully!
