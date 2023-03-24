@@ -15,9 +15,7 @@ contents
    5. Troubleshooting
    6. Contributions
 
-<font color="yellow">hello world</font>
-
-# <font color="pink" >Girok</font>
+# ✏️ Girok
 
 Who said you cannot have a beautiful UI on terminal?
 
@@ -25,6 +23,8 @@ Girok is a **powerful terminal-based task manager** which provides a multitude o
 
 Girok is running on AWS server so you can **login from any device in the world**!
 
-# <font color="pink">Version `0.1.6` is released now!</font>
+# 📀 Version `0.1.6` is released now!
 
-## Upgrade with `pip install girok --upgrade`
+### Upgrade with `pip install girok --upgrade`
+
+# 📖 Table of Contents
