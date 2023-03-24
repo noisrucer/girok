@@ -24,7 +24,19 @@ Girok is running on AWS server so you can **login from any device in the world**
   - [2. Register](#register)
   - [3. Login / Logout](#login-and-logout)
   - [4. Category commands](#category-commands)
+    - [4.1 `showcat`](#showcat-command)
+    - [4.2 `addcat`](#addcat-command)
+    - [4.3 `mvcat`](#mvcat-command)
+    - [4.4 `rmcat`](#rmcat-command)
+    - [4.5 `rncat`](#rncat-command)
   - [5. Task Commands](#task-commands)
+    - [5.1 `addtask`](#addtask-command)
+    - [5.2 `showtask`](#showtask-command)
+    - [5.3 `done`](#done-comand)
+    - [5.4 `chdate`](#chdate-command)
+    - [5.5 `chpri`](#chpri-command)
+    - [5.6 `chtag`](#chtag-command)
+    - [5.7 `showtag`](#showtag-command)
   - [6. Calendar Commands](#calendar-commands)
 - [🚒 Report Bugs](#-report-bugs)
 - [😭 Uninstall](#-uninstall)
@@ -55,7 +67,7 @@ Now, let's dive into Girok!
 
 # 🔥 Get Started
 
-## 1. Help command
+## 1. Help command <a name="help-command"></a>
 
 In order to see **all the commands** of **Girok**, enter `girok --help` in your terminal.
 
@@ -330,7 +342,7 @@ Girok provides powerful commands to effectively query your schedule with many di
 
 #### 5.2.1 View options
 
-You can typer `girok showtask` command with no parameter. The default view of the command is **list view**.
+You can type `girok showtask` command with no parameter. The default view of the command is **list view**.
 
 Note that I've added some more tasks to make the visualization rich.
 
@@ -583,7 +595,7 @@ I'm sorry that there's no way to uninstall this package.
 
 Just kidding. Enter `pip uninstall girok` in your terminal. Bye..😢
 
-# 💌 Contribuute to the project
+# 💌 Contribute to the project
 
 If you have any new features that would make your life easier, please don't hesitate to raise issues.
 
