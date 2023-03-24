@@ -215,7 +215,7 @@ git addcat Career/Dummy
 
 Now, let's delete it with the following command.
 
-**[WARNING]** If you delete a category, **all its sub-categories and tasks will be DELETED**. I'll consider add an option for users to preserve all the orphan tasks in the future.
+**[WARNING]** If you delete a category, **all its sub-categories and tasks will be DELETED**. I'll consider adding an option for users to preserve all the orphan tasks in the future. Please let me know in the issue if you need this feature!
 
 ```bash
 girok rmcat Career/Dummy
@@ -228,6 +228,49 @@ Then, you'll be asked to confirm the deletion. Enter `y`.
 Great job! Now let's move on to the task commands.
 
 ## 5. Task commands
+
+**Girok** provides powerful task scheduling operations. You can perform different operations that would've taken in other schedulers like Notion and Google Calendar in less than 10 seconds (If you get used to the commands).
+
+### 5.1 `addtask` command
+
+```bash
+girok addtask <task name> [One of deadline date options] [-c | --category <category path>] [-p | --priority <priority>] [-t | --time <deadline time>] [-T | --tag <tag name>]
+```
+
+It looks quite complicated but don't worry! Let's go through some rules.
+
+#### `addtask` rules
+
+1. `<task name>` (Argument / **Required**) - If the task name has no space you can omit double quotes `""`. If it does, enclose the task name by double quotes `""`
+2. `<One of date options>` (Option / **required**) - You must specify a **deadline "date"** of a task. There're many ways to add a deadline. Note that **ONLY ONE DATE OPTION** is allowed.
+   - `-d <yyyy/mm/dd | mm/dd>`
+     - Specify an exact date delimited by `/`. You can enter the full date in the form of `yyyy/mm/dd`. Or, you can omit the year like `mm/dd` then the deadline year will be set to the current year.
+     - You don't have to enter the exact form filled with `0`s. If the month is May, then just enter `5/23` or `05/23`.
+   - `-t1 ~ -t7 | --thismon ~ --thissun`
+     - Sometimes, you're not aware of the exact date. If the date is some weekday of this week, you can just pass `-t{1-7}` referrting to this monday to this sunday (monday indexed as `0`).
+     - For example, if the deadline is this friday, enter `girok addtask "dummy" -t5`
+   - `-n1 ~ -n7 | --nextmon ~ --nextsun`
+     - Similar to the above but referring to **next week**.
+   - `-a <# days>`
+     - Sometimes, you process the deadline in your mind like "it's due 5 days later".
+     - In this case, pass the number of days a task is due after.
+     - For example, if the deadline is 5 days later, enter `girok addtask "dummy" -a 5`
+   - `--tdy`
+     - Set the deadline to today.
+   - `--tmr`
+     - Set the deadline to tomorrow.
+3. `-t | --time <hh:mm>` (Option, **Optional**) - You can also set the specific deadline time.
+   - You must provide the full time format in **24 hour scale** such as `07:23` or `21:59`.
+4. `-c | --category <category full path>` (Option / **Optional**) - Your tasks might belong to a specific category you have previously defined.
+   - Provide the **full category path**.
+   - For example, if your task belongs to `Career/Resume`, then enter `girok addtask "dummy task" --tmr -c Career/Resume`.
+   - If you specify a category, then the task color will be automatically linked to that category's color.
+   - If no category is provided, the task will belong to `No Category` category.
+5. `-p | --priority <priority (1~5)>` (Option, **Optional**) - You can set the priority of a task so that you can filter out by priority when you query your tasks.
+   - For example, to set the priority of a task as `5`, enter `girok addtask "dummy task" -c Career/Resume -p 5`.
+6. `-T | --tag <tag name>` (Option, **Optional**) - You can set the **tag**(or type) of a task such as `assignment` and `meeting`. With tags, you can more efficiently query your tasks with different types.
+   - Unlike category, tag doesn't allow nested tags and you don't have to pre-define them.
+   - For example, if you want to set the tag of a task as `assignment`, enter `girok addtask "assignment 4" -c HKU/COMP3234 -d 4/24 --tag assignment`
 
 ## 6. Calendar Commands
 
