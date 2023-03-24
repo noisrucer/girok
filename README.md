@@ -20,12 +20,24 @@ Girok is running on AWS server so you can **login from any device in the world**
 
 - [🚀 Installation](#-Installation)
 - [🔥 Get Started](#-get-started)
-  - [1. help command](#help-command)
+  - [1. help command](#helpcommand)
   - [2. Register](#register)
-  - [3. Login / Logout](#login-and-logout)
-  - [4. Category commands](#category-commands)
-  - [5. Task Commands](#task-commands)
-  - [6. Calendar Commands](#calendar-commands)
+  - [3. Login / Logout](#loginandlogout)
+  - [4. Category commands](#categorycommands)
+    - [4.1. `showcat`](#showcatcommand)
+    - [4.2. `addcat`](#addcatcommand)
+    - [4.3. `mvcat`](#mvcatcommand)
+    - [4.4. `rmcat`](#rmcatcommand)
+    - [4.5. `rncat`](#rncatcommand)
+  - [5. Task Commands](#taskcommands)
+    - [5.1. `addtask`](#addtaskcommand)
+    - [5.2. `showtask`](#showtaskcommand)
+    - [5.3. `done`](#donecommand)
+    - [5.4. `chdate`](#chdatecommand)
+    - [5.5. `chpri`](#chpricommand)
+    - [5.6. `chtag`](#chtagcommand)
+    - [5.7. `showtag`](#showtagcommand)
+  - [6. Calendar Commands](#calendarcommands)
 - [🚒 Report Bugs](#-report-bugs)
 - [😭 Uninstall](#-uninstall)
 - [💌 Contributions](#-contributions)
@@ -55,7 +67,7 @@ Now, let's dive into Girok!
 
 # 🔥 Get Started
 
-## 1. Help command
+## 1. Help command <a name="helpcommand"></a>
 
 In order to see **all the commands** of **Girok**, enter `girok --help` in your terminal.
 
@@ -77,7 +89,7 @@ then you'll see the following help message
 
 ![](images/girok-command-help.png)
 
-## 2. Register
+## 2. Register <a name="register"></a>
 
 To register a new account enter the following in your terminal.
 
@@ -89,7 +101,7 @@ girok register
 
 Congratulations! Now let's go ahead and login to our account.
 
-## 3. Login and Logout
+## 3. Login and Logout <a name="loginandlogout"></a>
 
 In order to login with your registered account, enter the following command.
 
@@ -101,7 +113,7 @@ girok login
 
 Now you're ready to use all the features.
 
-## 4. Category Commands
+## 4. Category Commands <a name="categorycommands"></a>
 
 You can pre-define **categories** such as `School`, `Life` and `Career` with automatically assigned category color.
 
@@ -109,7 +121,7 @@ Girok supports **infinite recursive subcategories**. All the subcategories will 
 
 Later on, you can link tasks to these categories.
 
-### 4.1 `showcat` command
+### 4.1 `showcat` command <a name="showcatcommand"></a>
 
 In order to see all the categories you have created, enter the following command.
 
@@ -121,7 +133,7 @@ girok showcat
 
 ![](images/girok-addcat3.png)
 
-### 4.2 `addcat` command
+### 4.2 `addcat` command <a name="addcatcommand"></a>
 
 `addtask` command takes a single argument `category full path`.
 
@@ -155,7 +167,7 @@ Then, you'll see `Resume` is created under `Career`.
 
 In this way, you can create as many categories and sub-categories as you want!
 
-### 4.3 `mvcat` command
+### 4.3 `mvcat` command <a name="mvcatcommand"></a>
 
 Now you might want to move a category under another category.
 
@@ -181,7 +193,7 @@ girok mvcat Dev/Network/Career /
 
 ![](images/girok-addcat5.png)
 
-### 4.4 `rmcat` command
+### 4.4 `rmcat` command <a name="rmcatcommand"></a>
 
 Of course, you want to delete a category. In that case, enter the following command.
 
@@ -211,7 +223,7 @@ Then, you'll be asked to confirm the deletion. Enter `y`.
 
 ![](images/girok-rmcat1.png)
 
-### 4.5 `rncat` command
+### 4.5 `rncat` command <a name="rncatcommand"></a>
 
 To rename an existing category,
 
@@ -221,11 +233,11 @@ girok rncat <category path> <new name>
 
 Great job! Now let's move on to the task commands.
 
-## 5. Task commands
+## 5. Task commands <a name="taskcommands"></a>
 
 **Girok** provides powerful task scheduling operations. You can perform different operations that would've taken in other schedulers like Notion and Google Calendar in less than 10 seconds (If you get used to the commands).
 
-### 5.1 `addtask` command
+### 5.1 `addtask` command <a name="addtaskcommand"></a>
 
 ```bash
 girok addtask <task name> [One of deadline date options] [-c | --category <category path>] [-p | --priority <priority>] [-t | --time <deadline time>] [-T | --tag <tag name>]
@@ -320,7 +332,7 @@ girok addtask "Hangout with Jason" --tmr
 
 Notice that the newly added task is highlighted with green color.
 
-### 5.2 `showtask` command.
+### 5.2 `showtask` command. <a name="showtaskcommand"></a>
 
 ```bash
 girok showtask [--tree] Deadline date options] [-c | --category <category path>] [-p | --priority <priority>] [-T | --tag <tag name>]
@@ -330,7 +342,7 @@ Girok provides powerful commands to effectively query your schedule with many di
 
 #### 5.2.1 View options
 
-You can typer `girok showtask` command with no parameter. The default view of the command is **list view**.
+You can type `girok showtask` command with no parameter. The default view of the command is **list view**.
 
 Note that I've added some more tasks to make the visualization rich.
 
@@ -434,7 +446,7 @@ girok showtask -p 5 --tree
 girok showtask [-T | --tag <tag name>]
 ```
 
-### 5.3 `done` command
+### 5.3 `done` command <a name="donecommand"></a>
 
 To complete(delete) a task, provide the `done` command followed by the task ID.
 
@@ -458,7 +470,7 @@ girok done 5
 
 Notice that the task is now striked out.
 
-### 5.4 `chdate` command
+### 5.4 `chdate` command <a name="chdatecommand"></a>
 
 To change the date of an existing task, enter the following command.
 
@@ -466,7 +478,7 @@ To change the date of an existing task, enter the following command.
 girok chdate <taskID> <yyyy/mm/dd | mm/dd>
 ```
 
-### 5.5 `chpri` command
+### 5.5 `chpri` command <a name="chpricommand"></a>
 
 To change the priority of an existing task, enter the following command.
 
@@ -474,7 +486,7 @@ To change the priority of an existing task, enter the following command.
 girok chpri <taskID> <priority (1~5)>
 ```
 
-### 5.6 `chtag` command
+### 5.6 `chtag` command <a name="chtagcommand"></a>
 
 To change the tag of an existing task, enter the following command.
 
@@ -482,7 +494,7 @@ To change the tag of an existing task, enter the following command.
 girok chtag <taskID> <tag name>
 ```
 
-### 5.7 `showtag` command
+### 5.7 `showtag` command <a name="showtagcommand"></a>
 
 To view all the tags you have created so far, enter the following command.
 
@@ -490,7 +502,7 @@ To view all the tags you have created so far, enter the following command.
 girok showtag
 ```
 
-## 6. Calendar Commands
+## 6. Calendar Commands <a name="calendarcommands"></a>
 
 The beauty of **Girok** is the **beautiful and responsive full calendar GUI**.
 
@@ -583,7 +595,7 @@ I'm sorry that there's no way to uninstall this package.
 
 Just kidding. Enter `pip uninstall girok` in your terminal. Bye..😢
 
-# 💌 Contribuute to the project
+# 💌 Contribute to the project
 
 If you have any new features that would make your life easier, please don't hesitate to raise issues.
 
