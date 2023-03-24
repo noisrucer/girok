@@ -22,7 +22,7 @@ Girok is running on AWS server so you can **login from any device in the world**
 - [🔥 Get Started](#-get-started)
   - [1. help command](#helpcommand)
   - [2. Register](#register)
-  - [3. Login / Logout](#logi-andlogout)
+  - [3. Login / Logout](#loginandlogout)
   - [4. Category commands](#categorycommands)
     - [4.1. `showcat`](#showcatcommand)
     - [4.2. `addcat`](#addcatcommand)
