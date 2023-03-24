@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "girok"
-version = "0.1.5"
-description = "Added --help command"
+version = "0.1.6"
+description = "Fixed addtask error"
 authors = ["Jason Lee <changjin9792@gmail.com>"]
 readme = "README.md"
 
