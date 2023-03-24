@@ -72,7 +72,8 @@ def remove_left_arrow(cell):
     cell_label_text = cell_label.render()
     style = cell_label_text.style
     if str(cell_label_text).endswith(" " + constants.LEFT_ARROW_EMOJI):
-        style = cell_label_text.spans[0].style
+        if cell_label_text.spans:
+            style = cell_label_text.spans[0].style
         
     if str(cell_label_text).endswith(" " + constants.LEFT_ARROW_EMOJI):
         new_label_text = Text(str(cell_label_text)[:2], style=style)
