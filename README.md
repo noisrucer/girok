@@ -113,7 +113,7 @@ girok login
 
 Now you're ready to use all the features.
 
-## 4. Category Commands <a name="categorycommand"></a>
+## 4. Category Commands <a name="categorycommands"></a>
 
 You can pre-define **categories** such as `School`, `Life` and `Career` with automatically assigned category color.
 
