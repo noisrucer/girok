@@ -13,7 +13,8 @@ contents
    3. Use cases
    4. Major Updates Plan
    5. Troubleshooting
-   6. Contributions
+   6. Uninstall
+   7. Contributions
 
 <h1 align="center">✏️ Girok - The most powerful terminal task manager</h1>
 
@@ -30,20 +31,23 @@ Girok is running on AWS server so you can **login from any device in the world**
 # 📖 Table of Contents
 
 - [🚀 Installation](#-Installation)
-- [Get Started !](#get-started)
-- [Use cases](#use-cases)
-- [Major updates plan](#major-updates-plan)
-- [Troubleshooting](#troubleshooting)
-- [Contributions](#contributions)
+- [🔥 Get Started !](#-get-started)
+- [📝 Use cases](#-use-cases)
+- [🤖 Major updates plan](#-major-updates-plan)
+- [🚒 Troubleshooting](#-troubleshooting)
+- [😭 Uninstall](#-uninstall)
+- [💌 Contributions](#-contributions)
 
 # 🚀 Installation
 
-# Get started
+# 🔥 Get Started
 
-# Use Cases
+# 📝 Use Cases
 
-# Major updates plan
+# 🤖 Major updates plan
 
-# Troubleshooting
+# 🚒 Troubleshooting
 
-# Contributions
+# 😭 Uninstall
+
+# 💌 Contributions
