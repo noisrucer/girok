@@ -225,6 +225,14 @@ Then, you'll be asked to confirm the deletion. Enter `y`.
 
 ![](images/girok-rmcat1.png)
 
+### 4.5 `rncat` command
+
+To rename an existing category,
+
+```bash
+girok rncat <category path> <new name>
+```
+
 Great job! Now let's move on to the task commands.
 
 ## 5. Task commands
@@ -247,7 +255,7 @@ It looks quite complicated but don't worry! Let's go through some rules.
      - Specify an exact date delimited by `/`. You can enter the full date in the form of `yyyy/mm/dd`. Or, you can omit the year like `mm/dd` then the deadline year will be set to the current year.
      - You don't have to enter the exact form filled with `0`s. If the month is May, then just enter `5/23` or `05/23`.
    - `-t1 ~ -t7 | --thismon ~ --thissun`
-     - Sometimes, you're not aware of the exact date. If the date is some weekday of this week, you can just pass `-t{1-7}` referrting to this monday to this sunday (monday indexed as `0`).
+     - Sometimes, you're not aware of the exact date. If the date is some weekday of this week, you can just pass `-t{1-7}` referrting to this monday to this sunday (monday indexed as `1`).
      - For example, if the deadline is this friday, enter `girok addtask "dummy" -t5`
    - `-n1 ~ -n7 | --nextmon ~ --nextsun`
      - Similar to the above but referring to **next week**.
@@ -334,7 +342,137 @@ girok showtask [--tree] Deadline date options] [-c | --category <category path>]
 
 Girok provides powerful commands to effectively query your schedule with many different options. You can filter tasks by category, priority, deadline, and tag.
 
-#### View options
+#### 5.2.1 View options
+
+You can typer `girok showtask` command with no parameter. The default view of the command is **list view**.
+
+Note that I've added some more tasks to make the visualization rich.
+
+```bash
+girok showtask
+```
+
+![](images/girok-showtask1.png)
+
+By default, all tasks will be shown in a nice table format.
+
+If you want to view your tasks in a categorized manner, then provide `--tree` flag.
+
+```bash
+girok showtask --tree
+```
+
+![](images/girok-showtask2.png)
+
+#### 5.2.2 Filter by category
+
+To query tasks under a specific category, use the following command,
+
+```bash
+girok showtask -c <category path>
+```
+
+For example, to query tasks only for the `HKU` category. Enter the following command.
+
+```bash
+girok showtask -c HKU
+```
+
+or
+
+```bash
+girok showtask -c HKU --tree # tree view
+```
+
+![](images/girok-showtask5.png)
+
+#### 5.2.3 Filter by date options
+
+You can query your tasks filtering by many different date options. Notice that all the options for `showtask` command are **OPTIONAL**.
+
+1. `-e | --exact <yyyy/mm/dd | mm/dd>`
+   - To view tasks due to a specific day, provide the exact date after the flag
+2. `-d | --day <# days>`
+   - To view tasks due **within `n` days**, provide the number of days `n` after the flag
+3. `-w | --week <# days>`
+   - To view tasks due **within `n` weeks**, provide the number of weeks `n` after the flag
+4. `-m | --month <# days>`
+   - To view tasks due **within `n` months**, provide the number of months `n` after the flag
+5. `--tdy`
+   - To view tasks due today.
+6. `--tmr`
+   - To view tasks due within tomorrow (today && tomorrow)
+7. `--tw`, `--nw`
+   - To view tasks due within this week and next week, respectively
+8. `--tm`, `--nm`
+   - To view tasks due within this month and next month, respectively
+9. `-t1 ~ -t7 | --thismon ~ --thissun`
+   - To view tasks due **exactly** the weekday of this week
+   - Monday is indexed as `1`
+10. `-n1 ~ -n7 | --nextmon ~ --nextsun`
+
+- To view tasks due **exactly** the weekday of next week
+- Monday is indexed as `1`
+
+11. `-u | --urgent`
+
+- To view urgent tasks that are within `3 days` by default
+
+#### 5.2.4 Filter by priority
+
+```bash
+girok showtask -p <priority (1~5)>
+```
+
+To view tasks with a specific priority, provide `-p` option followed by the priority number between `1` and `5`.
+
+For example, to view tasks with priority 5, enter the following command
+
+```bash
+girok showtask -p 5
+```
+
+![](images/girok-showtask3.png)
+
+To view tasks with priority 5, but with **tree view**, enter the following command.
+
+```bash
+girok showtask -p 5 --tree
+```
+
+![](images/girok-showtask4.png)
+
+#### 5.2.5 Filter by tag
+
+```
+girok showtask [-T | --tag <tag name>]
+```
+
+### 5.3 `done` command
+
+To complete(delete) a task, provide the `done` command followed by the task ID.
+
+```
+girok done <task ID>
+```
+
+**[IMPORTANT]** The **TASK ID** is the IDs you can see when you perform `showtask` operations. Note that the **ONLY the Task IDs of the LATEST showtask operation are valid**. In other words, if you consecutively type `girok showtask` and `girok showtask -p 5` but try to delete a task with the task IDs shown in the table of the first `girok showtask` command, you might delete an unexpected task!!
+
+For example, suppose you enter `girok showtask` command.
+
+![](images/girok-donetask1.png)
+
+If you completed the task `Migrate DB to RDS` under `Dev/Girok` category, provide the task ID at the leftmost column.
+
+```bash
+girok done 5
+```
+
+![](images/girok-donetask2.png)
+
+Notice that the task is now striked out.
+
+### 5.4 `chdate` command
 
 ## 6. Calendar Commands
 
