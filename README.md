@@ -32,12 +32,12 @@ Girok is running on AWS server so you can **login from any device in the world**
 
 - [🚀 Installation](#-Installation)
 - [🔥 Get Started](#-get-started)
-  1. [help command](#help-command)
-  2. [Register](#register)
-  3. [Login / Logout](#login-and-logout)
-  4. [Category commands](#category-commands)
-  5. [Task Commands](#task-commands)
-  6. [Calendar Commands](#calendar-commands)
+  - [1. help command](#help-command)
+  - [2. Register](#register)
+  - [3. Login / Logout](#login-and-logout)
+  - [4. Category commands](#category-commands)
+  - [5. Task Commands](#task-commands)
+  - [6. Calendar Commands](#calendar-commands)
 - [📝 Use cases](#-use-cases)
 - [🤖 Major updates plan](#-major-updates-plan)
 - [🚒 Troubleshooting](#-troubleshooting)
@@ -75,13 +75,13 @@ In order to see **all the commands** of **Girok**, enter `girok --help` in your 
 
 ![](images/girok-help.png)
 
-In order to see the details of each command, enter
+In order to see the details of each command, enter the following in your terminal.
 
 ```
 girok <command> --help
 ```
 
-in your terminal. For example, if you enter
+For example, if you enter
 
 ```
 girok addtask --help
@@ -91,15 +91,39 @@ then you'll see the following help message
 
 ![](images/girok-command-help.png)
 
-## Register
+## 2. Register
 
-## Login and Logout
+To register a new account enter the following in your terminal.
 
-## Category Commands
+```bash
+girok register
+```
 
-## Task commands
+![](images/girok-register.png)
 
-## Calendar Commands
+Congratulations! Now let's go ahead and login to our account.
+
+## 3. Login and Logout
+
+In order to login with your registered account, enter the following command.
+
+```bash
+girok login
+```
+
+![](images/girok-login.png)
+
+Now you're ready to use all the features.
+
+## 4. Category Commands
+
+### 4.1 `showcat` command
+
+###
+
+## 5. Task commands
+
+## 6. Calendar Commands
 
 # 📝 Use Cases
 
