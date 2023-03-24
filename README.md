@@ -314,6 +314,8 @@ girok addtask "Midterm exam" -c HKU/COMP3234 -d 4/18 -t 09:30 --tag exam
 
 ![](images/girok-addtask3.png)
 
+In the tree view, priority and tag are not shown to avoid complexity. Don't worry! You can view all the information when we go into `girok showtask` command.
+
 Lastly, I'll add a task named `Hangout with Jason` and the appointment date is `tomorrow`. This time, I will not provide any option.
 
 ```bash
@@ -321,6 +323,18 @@ girok addtask "Hangout with Jason" --tmr
 ```
 
 ![](images/girok-addtask4.png)
+
+Notice that the newly added task is highlighted with green color.
+
+### 5.2 `showtask` command.
+
+```bash
+girok showtask [--tree] Deadline date options] [-c | --category <category path>] [-p | --priority <priority>] [-T | --tag <tag name>]
+```
+
+Girok provides powerful commands to effectively query your schedule with many different options. You can filter tasks by category, priority, deadline, and tag.
+
+#### View options
 
 ## 6. Calendar Commands
 
