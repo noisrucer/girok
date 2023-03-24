@@ -474,7 +474,116 @@ Notice that the task is now striked out.
 
 ### 5.4 `chdate` command
 
+To change the date of an existing task, enter the following command.
+
+```bash
+girok chdate <taskID> <yyyy/mm/dd | mm/dd>
+```
+
+### 5.5 `chpri` command
+
+To change the priority of an existing task, enter the following command.
+
+```bash
+girok chpri <taskID> <priority (1~5)>
+```
+
+### 5.6 `chtag` command
+
+To change the tag of an existing task, enter the following command.
+
+```bash
+girok chtag <taskID> <tag name>
+```
+
+### 5.7 `showtag` command
+
+To view all the tags you have created so far, enter the following command.
+
+```bash
+girok showtag
+```
+
 ## 6. Calendar Commands
+
+The beauty of **Girok** is the **beautiful and responsive full calendar GUI**.
+
+![](images/girok-cal1.png)
+
+To fire up the calendar, enter the following command
+
+```
+girok cal
+```
+
+Then you'll be prompted to the calendar GUI.
+
+**girokcal** offers a beautiful but minimalistic GUI in which you can move around with (not exactly same but similar) **VIM key bindings**.
+
+Notice that all the categories and tags we have created so far are linked to the **sidebar**.
+
+### 6.1 Moving around calendar
+
+![](images/girok-cal3.png)
+
+Upon `girok cal` command, the starting **"focus"** is the **category tree**.
+
+- Select a category/tag
+  - `o` - select the current category/tag
+- Move inside **category tree** or **tag tree**
+  - `j` - down
+  - `k` - up
+- Move from **category tree** to **tag tree**
+  - `ctrl + j`
+- Move from **tag tree** to \*\_category tree
+  - `ctrl + k`
+- Moving from **category tree** or **tag tree** to **calendar**
+  - `e`
+- Moving from **calendar** to back **sidebar** (to category tree by default)
+  - `w`
+- Move inside the **calendar**
+  - `h` - left
+  - `j` - down
+  - `k` - up
+  - `l` - right
+- Select a **calendar cell** (day) to view details
+  - `o` - select the currently focused calendar cell
+- **Next month**
+  - `i`
+- **Previous month**
+  - `u`
+- **Direct to the current month**
+  - `y`
+- **Toggle side bar**
+  - `f`
+- **Close calendar**
+  - `q`
+
+### 6.2 Calendar Demonstrations
+
+When you click on a category, then the category title will change accordingly at the left-bottom corner of the calendar. All the tasks belonging to the selected category will be shown.
+
+Let's select `HKU` category by pressing alphabet `o` key.
+
+![](images/girok-cal4.png)
+
+Notice that only the tasks with the yellow dots (HKU category color) are shown.
+
+Now let's select `All Categories` and change our focus from the **category tree** to the **tag tree** by pressing `ctrl+j` key. Then, select `exam` tag.
+
+![](images/girok-cal5.png)
+
+Yay! I don't have any exams this month.
+
+But.. do I have exams next month? To check it out, let's press `i` to move to the next month.
+
+![](images/girok-cal6.png)
+
+Lastly, let's press `f` to close the sidebar to have make the calendar bigger.
+
+![](images/girok-cal7.png)
+
+Great job! Now, it's time to explore all the features of **Girok** on your own!!
 
 # 📝 Use Cases
 
