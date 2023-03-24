@@ -223,7 +223,7 @@ Then, you'll be asked to confirm the deletion. Enter `y`.
 
 ![](images/girok-rmcat1.png)
 
-### 4.5 `rncat` command <a name="rncat"></a>
+### 4.5 `rncat` command <a name="rncatcommand"></a>
 
 To rename an existing category,
 
@@ -237,7 +237,7 @@ Great job! Now let's move on to the task commands.
 
 **Girok** provides powerful task scheduling operations. You can perform different operations that would've taken in other schedulers like Notion and Google Calendar in less than 10 seconds (If you get used to the commands).
 
-### 5.1 `addtask` command <a name="addtask"></a>
+### 5.1 `addtask` command <a name="addtaskcommand"></a>
 
 ```bash
 girok addtask <task name> [One of deadline date options] [-c | --category <category path>] [-p | --priority <priority>] [-t | --time <deadline time>] [-T | --tag <tag name>]
