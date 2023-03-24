@@ -15,9 +15,9 @@ contents
    5. Troubleshooting
    6. Contributions
 
-# ✏️ Girok
+<h1 align="center">✏️ Girok - The most powerful terminal task manager</h1>
 
-## Who said you cannot have a beautiful UI on terminal?
+### Who said you cannot have a beautiful UI on terminal?
 
 Girok is a **powerful terminal-based task manager** which provides a multitude of scheduling operations that can be done in less than 10 seconds. It also supports **beautiful calendar GUI** in which you can move around with VIM key bindings.
 
@@ -28,3 +28,22 @@ Girok is running on AWS server so you can **login from any device in the world**
 ### Upgrade with `pip install girok --upgrade`
 
 # 📖 Table of Contents
+
+- [🚀 Installation](#-Installation)
+- [Get Started !](#get-started)
+- [Use cases](#use-cases)
+- [Major updates plan](#major-updates-plan)
+- [Troubleshooting](#troubleshooting)
+- [Contributions](#contributions)
+
+# 🚀 Installation
+
+# Get started
+
+# Use Cases
+
+# Major updates plan
+
+# Troubleshooting
+
+# Contributions
