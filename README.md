@@ -193,7 +193,7 @@ girok mvcat Dev/Network/Career /
 
 ![](images/girok-addcat5.png)
 
-### 4.4 `rmcat` command <a name="rmcat"></a>
+### 4.4 `rmcat` command <a name="rmcatcommand"></a>
 
 Of course, you want to delete a category. In that case, enter the following command.
 
