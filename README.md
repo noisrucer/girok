@@ -34,7 +34,7 @@ Girok is running on AWS server so you can **login from any device in the world**
 
 Girok supports all operating systems including Linux, MacOS, Windows.
 
-However, it works well on linux-based shells such as `bash`, `zsh`, `fish`, `git-bash`, etc.
+However, it works well on Unix-based shells such as `bash`, `zsh`, `fish`, `wsl`, etc.
 
 Some shells like `powershell` might break some UIs.
 
