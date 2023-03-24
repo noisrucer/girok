@@ -117,9 +117,113 @@ Now you're ready to use all the features.
 
 ## 4. Category Commands
 
+You can pre-define **categories** such as `School`, `Life` and `Career` with automatically assigned category color.
+
+Girok supports **infinite recursive subcategories**. All the subcategories will be assigned with the color of its topmost parent category.
+
+Later on, you can link tasks to these categories.
+
 ### 4.1 `showcat` command
 
-###
+In order to see all the categories you have created, enter the following command.
+
+By default, `No Category` category is set (later for tasks which have no category).
+
+```bash
+girok showcat
+```
+
+![](images/girok-addcat3.png)
+
+### 4.2 `addcat` command
+
+`addtask` command takes a single argument `category full path`.
+
+In order to add a new category, enter the following command.
+
+```bash
+girok addcat <target path>
+```
+
+The `<target path>` is the **full path including the new category name**. For example, if you want to add a **topmost category** named `Career`, then enter
+
+```bash
+girok addcat Career
+```
+
+Then, you'll see the category tree with the newly created category being highlighted.
+
+![](images/girok-addcat1.png)
+
+In order to nest a sub-category under a previously defined category, pass the **FULL PATH** starting from the topmost category delimited by `/`, ending with the new category name.
+
+For example, if you want to create a new category named `Resume` under the previously created `Career` category, enter the following command.
+
+```bash
+girok addcat Career/Resume
+```
+
+Then, you'll see `Resume` is created under `Career`.
+
+![](images/girok-addcat2.png)
+
+In this way, you can create as many categories and sub-categories as you want!
+
+### 4.3 `mvcat` command
+
+Now you might want to move a category under another category.
+
+In order to move a `category A` (recursively all its sub-categories) under `category B`, enter the following command.
+
+```bash
+girok mvcat <full path of A> <full path of B>
+```
+
+For example, if you want to move the whole `Career` category under `Dev/Network` (for some weird reason), enter the following command.
+
+```bash
+girok mvcat Career Dev/Network
+```
+
+![](images/girok-addcat4.png)
+
+If you want to move a category to the `root category`, then pass `/` as the second argument. Let's move `Dev/Network/Career` back to the topmost category.
+
+```bash
+girok mvcat Dev/Network/Career /
+```
+
+![](images/girok-addcat5.png)
+
+### 4.4 `rmcat` command
+
+Of course, you want to delete a category. In that case, enter the following command.
+
+```bash
+girok rmcat <full path of category>
+```
+
+Let's add a dummy category named `Dummy` under `Dev` then remove it.
+
+As you already know, enter
+
+```bash
+git addcat Career/Dummy
+```
+
+![](images/girok-addcat6.png)
+
+Now, let's delete it with the following command.
+
+```bash
+girok rmcat Career/Dummy
+```
+
+Then, you'll be asked to confirm the deletion. Enter `y`.
+
+![](images/girok-rmcat1.png)
+
+Great job! Now let's move on to the task commands.
 
 ## 5. Task commands
 
