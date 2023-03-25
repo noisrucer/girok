@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "girok"
-version = "0.1.7"
-description = "Fixed `w` command error"
+version = "0.1.8"
+description = "Integrated email verification - credits to @yeonpark"
 authors = ["Jason Lee <changjin9792@gmail.com>"]
 readme = "README.md"
 
