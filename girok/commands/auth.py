@@ -10,6 +10,7 @@ from girok.config import get_config
 import girok.utils.general as general_utils
 import girok.utils.auth as auth_utils
 import girok.api.auth as auth_api
+import girok.utils.display as display_utils
 
 app = typer.Typer(rich_markup_mode='rich')
 
@@ -35,7 +36,10 @@ def login():
         access_token = general_utils.bytes2dict(resp.content)['access_token']
         general_utils.update_json(cfg.config_path, {"access_token": access_token, "email": email})
         print("You're logged in!")
-        
+    elif resp.status_code == 401:
+        err_msg = general_utils.bytes2dict(resp.content)['detail']
+        display_utils.center_print(err_msg, type="error")
+        exit(0)
     else:
         print("Login failed. Please try again with [green]girok login[/green]")
         exit(0)
@@ -52,7 +56,6 @@ def logout():
     auth_utils.remove_access_token(cfg.config_path)
     print("Successfully logged out")
     exit(0)
-    
     
     
 @app.command("register", help="[green]Register[/green] a new account", rich_help_panel=":lock: [bold yellow1]Authentication Commands[/bold yellow1]")
@@ -73,13 +76,18 @@ def register():
         # register a new account
         register_resp = auth_api.register(email, password)
         if register_resp.status_code == 201:
-            print("Register complete!")
-        else:
-            register_resp_content = general_utils.bytes2dict(register_resp.content)
-            if register_resp.status_code == 400:
-                print(register_resp_content['detail'])
+            verification_code = typer.prompt("Enter the verification code sent to your email")
+            if auth_api.verify_verification_code(email, verification_code): 
+                pass
+            else:
+                exit(0)
+        elif register_resp.status_code == 400:
+            err_msg = general_utils.bytes2dict(register_resp.content)['detail']
+            display_utils.center_print(err_msg, type="error")
             exit(0)
-        
+        else:
+            err_msg = general_utils.bytes2dict(register_resp.content)['detail']
+            display_utils.center_print(str(err_msg), type="error")
         print("Registration successful! Please login by [green]girok login[/green] command")
         exit(0)
     else:
