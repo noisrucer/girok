@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "girok"
-version = "0.1.8"
-description = "Integrated email verification - credits to @yeonpark"
+version = "0.1.9"
+description = "Fixed email verification"
 authors = ["Jason Lee <changjin9792@gmail.com>"]
 readme = "README.md"
 
