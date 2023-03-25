@@ -44,6 +44,8 @@ def build_jwt_header(fpath):
         
 
 def is_logged_in(access_token):
+    if access_token is None:
+        return False
     resp = auth_api.validate_access_token(access_token)
     return True if resp.status_code == 200 else False
         
