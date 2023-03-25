@@ -65,7 +65,7 @@ def register():
         print("You're logged in. Please try after log out.")
         exit(0)
         
-    print(":star: This is your first time to use [yellow]girok[/yellow]! :star:\n")
+    print(":star: Welcome to [yellow]girok[/yellow]! :star:\n")
     is_register = typer.confirm("Do you want to register a new account?")
     if is_register:
         email = typer.prompt("Enter email address")
