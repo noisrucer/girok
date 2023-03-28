@@ -625,3 +625,5 @@ Just kidding. Enter `pip uninstall girok` in your terminal. Bye..😢
 If you have any new features that would make your life easier, please don't hesitate to raise issues.
 
 If you wish to contribute to the project as a programmer, drop pull requests and I will review each of them carefully!
+
+I'm currently looking for a member to join me to build a web/app version of Girok. Drop me an email to changjin9792@gmail.com if you're interested!
