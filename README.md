@@ -10,7 +10,11 @@ Girok is running on AWS server so you can **login from any device in the world**
 
 Girok works fluently with `MacOS` and `Linux` users. It also works with `Windows` but some features and UIs might break.
 
+p.s) Since I launched the project a couple days ago, you might feel a little bit of lag for `showtask` operation, especially when you have many data. I'm working on optimizing the speed to enhance your experience!
+
 # 🤖 Version `0.1.10` is released now!
+
+To see the current version, enter `girok --version`.
 
 ### Upgrade with `pip install girok --upgrade`
 
@@ -42,7 +46,8 @@ Girok works fluently with `MacOS` and `Linux` users. It also works with `Windows
     - [5.4. `chdate`](#chdatecommand)
     - [5.5. `chpri`](#chpricommand)
     - [5.6. `chtag`](#chtagcommand)
-    - [5.7. `showtag`](#showtagcommand)
+    - [5.8. `chname`](#chnamecommand)
+    - [5.9. `showtag`](#showtagcommand)
   - [6. Calendar Commands](#calendarcommands)
 - [🚒 Report Bugs](#-report-bugs)
 - [😭 Uninstall](#-uninstall)
@@ -97,13 +102,15 @@ then you'll see the following help message
 
 ## 2. Register <a name="register"></a>
 
+<p align="center"><img src="girok/resources/girok-register-demo.gif"></img></center>
+
 To register a new account enter the following in your terminal.
 
 ```bash
 girok register
 ```
 
-![](images/girok-register.png)
+Enter the email address and password and check your mail inbox to get the **verification code**.
 
 Congratulations! Now let's go ahead and login to our account.
 
@@ -500,7 +507,15 @@ To change the tag of an existing task, enter the following command.
 girok chtag <taskID> <tag name>
 ```
 
-### 5.7 `showtag` command <a name="showtagcommand"></a>
+### 5.7 `chname` command <a name="chnamecommand>
+
+To change the name of an existing task, enter the following command.
+
+```bash
+girok chname <taskID> <new task name enclosed "">
+```
+
+### 5.8 `showtag` command <a name="showtagcommand"></a>
 
 To view all the tags you have created so far, enter the following command.
 
