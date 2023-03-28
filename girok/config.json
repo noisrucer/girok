@@ -1,5 +1,5 @@
 {
   "app_name": "girok",
   "base_url": "http://girok-server-balancer-1565927748.ap-northeast-1.elb.amazonaws.com",
-  "version": "0.1.10"
+  "version": "0.1.11"
 }
