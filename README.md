@@ -512,7 +512,7 @@ girok chtag <taskID> <tag name>
 To change the name of an existing task, enter the following command.
 
 ```bash
-girok chname <taskID> <new task name enclosed "">
+girok chname <taskID> <new task name enclosed with "">
 ```
 
 ### 5.8 `showtag` command <a name="showtagcommand"></a>
