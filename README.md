@@ -12,7 +12,7 @@ Girok works fluently with `MacOS` and `Linux` users. It also works with `Windows
 
 p.s) Since I launched the project a couple days ago, you might feel a little bit of lag for `showtask` operation, especially when you have many data. I'm working on optimizing the speed to enhance your experience!
 
-# 🤖 Version `0.1.11` is released now!
+# 🤖 Version `0.1.12` is released now!
 
 To see the current version, enter `girok --version`.
 

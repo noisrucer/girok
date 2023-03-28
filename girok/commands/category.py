@@ -51,7 +51,7 @@ def add_category(
 ):
     resp = category_api.add_category(cat, color)
     if resp.status_code == 201:
-        display_utils.center_print("Task added successfully!", type="success")
+        display_utils.center_print("Category added successfully!", type="success")
         cats_dict = category_api.get_categories()
         display_utils.display_categories(cats_dict, highlight_cat=cat)
     elif resp.status_code == 400:
