@@ -20,7 +20,7 @@ To see the current version, enter `girok --version`.
 
 # 💡 Future Updates (coming soon)
 
-1. 💻 📱 **Web** and **app** which share all the data with CLI.
+1. 💻 📱 **Web** and **app** which synchronizing all data with CLI.
 2. 🔨 Task operations in the calendar view
 3. ⏰ **Girok Slack Bot** notification feature for tasks - set an alarm in 5
    seconds!
