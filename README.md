@@ -1,5 +1,7 @@
 <h1 align="center">✏️ Girok - The most powerful CLI task manager</h1>
 
+<p align="center"><img src="girok/resources/girok-demo.gif"></img></center>
+
 <h3 align="center"> Who said you cannot have a beautiful UI on terminal?</h4>
 
 Girok is a **powerful terminal-based task manager** which provides a multitude of scheduling operations that can be done in less than 10 seconds. It also supports **beautiful and responsive calendar GUI** in which you can move around with VIM key bindings.
