@@ -12,7 +12,7 @@ Girok works fluently with `MacOS` and `Linux` users. It also works with `Windows
 
 p.s) Since I launched the project a couple days ago, you might feel a little bit of lag for `showtask` operation, especially when you have many data. I'm working on optimizing the speed to enhance your experience!
 
-If you find it useful, please consider supporting to help the development process!
+If you find it useful, consider supporting to help the development process!
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/changjin97z)
 
