@@ -29,8 +29,8 @@ To see the current version, enter `girok --version`.
 # 📖 Table of Contents
 
 - [🚀 Installation](#-Installation)
-- [🔥 Get Started](#-get-started)
-  - [1. help command](#helpcommand)
+- [🔥 Get Started !](#-get-started)
+  - [🙏 1. help command](#helpcommand)
   - [🔒 2. Register](#register)
   - [🔓 3. Login / Logout](#loginandlogout)
   - [📚 4. Category commands](#categorycommands)
@@ -78,7 +78,7 @@ Now, let's dive into Girok!
 
 # 🔥 Get Started
 
-## 1. Help command <a name="helpcommand"></a>
+## 🙏 1. Help command <a name="helpcommand"></a>
 
 In order to see **all the commands** of **Girok**, enter `girok --help` in your terminal.
 
@@ -507,7 +507,7 @@ To change the tag of an existing task, enter the following command.
 girok chtag <taskID> <tag name>
 ```
 
-### 5.7 `chname` command <a name="chnamecommand>
+### 5.7 `chname` command <a name="chnamecommand">
 
 To change the name of an existing task, enter the following command.
 
