@@ -248,7 +248,7 @@ Great job! Now let's move on to the task commands.
 
 ## 📕 5. Task commands <a name="taskcommands"></a>
 
-**Girok** provides powerful task scheduling operations. You can perform different operations that would've taken in other schedulers like Notion and Google Calendar in less than 10 seconds (If you get used to the commands).
+**Girok** provides powerful task scheduling operations. You can perform different operations that would've taken a long time in other schedulers like Notion and Google Calendar in less than 10 seconds (If you get used to the commands).
 
 ### 5.1 `addtask` command <a name="addtaskcommand"></a>
 
