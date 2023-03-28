@@ -8,7 +8,7 @@ Girok is running on AWS server so you can **login from any device in the world**
 
 Girok works fluently with `MacOS` and `Linux` users. It also works with `Windows` but some features and UIs might break.
 
-<div style="height: 0; padding-bottom: calc(68.73%); position:relative; width: 100%;"><iframe allow="autoplay; gyroscope;" allowfullscreen height="100%" referrerpolicy="strict-origin" src="https://www.kapwing.com/e/6422acc92234a1033c70983d" style="border:0; height:100%; left:0; overflow:hidden; position:absolute; top:0; width:100%" title="Embedded content made on Kapwing" width="100%"></iframe></div><p style="font-size: 12px; text-align: right;">Video edited on <a href="https://www.kapwing.com/video-editor">Kapwing</a></p>
+<div style="height: 0; padding-bottom: calc(68.73%); position:relative; width: 100%;"><iframe allow="autoplay; gyroscope;" allowfullscreen height="100%" referrerpolicy="strict-origin" src="https://www.kapwing.com/e/6422acc92234a1033c70983d?autoplay=true" style="border:0; height:100%; left:0; overflow:hidden; position:absolute; top:0; width:100%" title="Embedded content made on Kapwing" width="100%"></iframe></div><p style="font-size: 12px; text-align: right;">Video edited on <a href="https://www.kapwing.com/video-editor">Kapwing</a></p>
 
 # 🤖 Version `0.1.10` is released now!
 
