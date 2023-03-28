@@ -543,7 +543,7 @@ Notice that all the categories and tags we have created so far are linked to the
 
 ### 6.1 Moving around calendar
 
-![](images/girok-cal3.png)
+![](images/girok-cal8.png)
 
 Upon `girok cal` command, the starting **"focus"** is the **category tree**.
 
