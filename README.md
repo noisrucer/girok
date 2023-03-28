@@ -31,15 +31,15 @@ To see the current version, enter `girok --version`.
 - [🚀 Installation](#-Installation)
 - [🔥 Get Started](#-get-started)
   - [1. help command](#helpcommand)
-  - [2. Register](#register)
-  - [3. Login / Logout](#loginandlogout)
-  - [4. Category commands](#categorycommands)
+  - [🔒 2. Register](#register)
+  - [🔓 3. Login / Logout](#loginandlogout)
+  - [📚 4. Category commands](#categorycommands)
     - [4.1. `showcat`](#showcatcommand)
     - [4.2. `addcat`](#addcatcommand)
     - [4.3. `mvcat`](#mvcatcommand)
     - [4.4. `rmcat`](#rmcatcommand)
     - [4.5. `rncat`](#rncatcommand)
-  - [5. Task Commands](#taskcommands)
+  - [📕 5. Task Commands](#taskcommands)
     - [5.1. `addtask`](#addtaskcommand)
     - [5.2. `showtask`](#showtaskcommand)
     - [5.3. `done`](#donecommand)
@@ -48,7 +48,7 @@ To see the current version, enter `girok --version`.
     - [5.6. `chtag`](#chtagcommand)
     - [5.8. `chname`](#chnamecommand)
     - [5.9. `showtag`](#showtagcommand)
-  - [6. Calendar Commands](#calendarcommands)
+  - [📅 6. Calendar Commands](#calendarcommands)
 - [🚒 Report Bugs](#-report-bugs)
 - [😭 Uninstall](#-uninstall)
 - [💌 Contributions](#-contributions)
@@ -100,7 +100,7 @@ then you'll see the following help message
 
 ![](images/girok-command-help.png)
 
-## 2. Register <a name="register"></a>
+## 🔒 2. Register <a name="register"></a>
 
 <p align="center"><img src="girok/resources/girok-register-demo.gif"></img></center>
 
@@ -114,7 +114,7 @@ Enter the email address and password and check your mail inbox to get the **veri
 
 Congratulations! Now let's go ahead and login to our account.
 
-## 3. Login and Logout <a name="loginandlogout"></a>
+## 🔓 3. Login and Logout <a name="loginandlogout"></a>
 
 In order to login with your registered account, enter the following command.
 
@@ -126,7 +126,7 @@ girok login
 
 Now you're ready to use all the features.
 
-## 4. Category Commands <a name="categorycommands"></a>
+## 📚 4. Category Commands <a name="categorycommands"></a>
 
 You can pre-define **categories** such as `School`, `Life` and `Career` with automatically assigned category color.
 
@@ -246,7 +246,7 @@ girok rncat <category path> <new name>
 
 Great job! Now let's move on to the task commands.
 
-## 5. Task commands <a name="taskcommands"></a>
+## 📕 5. Task commands <a name="taskcommands"></a>
 
 **Girok** provides powerful task scheduling operations. You can perform different operations that would've taken in other schedulers like Notion and Google Calendar in less than 10 seconds (If you get used to the commands).
 
@@ -523,7 +523,7 @@ To view all the tags you have created so far, enter the following command.
 girok showtag
 ```
 
-## 6. Calendar Commands <a name="calendarcommands"></a>
+## 📅 6. Calendar Commands <a name="calendarcommands"></a>
 
 The beauty of **Girok** is the **beautiful and responsive full calendar GUI**.
 
