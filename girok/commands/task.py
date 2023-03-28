@@ -309,9 +309,6 @@ def add_task(
     }
     task_id = task_api.create_task(task_data)
     display_utils.center_print("Task added successfully!", type="success")
-    current_date = task_utils.build_date_info(datetime.now())
-    display_utils.center_print(current_date, type="title")
-    
     tasks_resp = task_api.get_tasks(view="category")
     tasks = general_utils.bytes2dict(tasks_resp.content)['tasks']
     color_dict = category_api.get_color_dict()
