@@ -8,7 +8,7 @@ from textual.widget import Widget
 from textual.messages import Message
 from textual import log
 from textual.reactive import var, reactive
-from textual.pilot import Pilot
+from textual.scroll_view import ScrollView
 from rich.text import Text
 from rich.table import Table
 from rich.style import Style
@@ -23,7 +23,6 @@ from girok.calendar_cli.calendar_app import CalendarApp
 from girok.calendar_cli.calendar_container import CalendarContainer, Calendar
 from girok.calendar_cli.sidebar import CategoryTree, SidebarContainer, TagTree
 import girok.constants as constants
-
 
 class Entry(App):
     CSS_PATH = "./calendar_main.css"
@@ -49,7 +48,6 @@ class Entry(App):
         
     def compose(self):
         yield CalendarApp()
-        # yield Footer()
         
     # Display pop-up box when selecting a cell
     def on_calendar_task_cell_selected(self, event: Calendar.TaskCellSelected):
@@ -109,8 +107,6 @@ class Entry(App):
         self.current_focused = "CategoryTree"
         
         cal = self.query_one(Calendar)
-        
-        # self.pilot.hover(Calendar)
         
         if self.is_pop_up:
             return

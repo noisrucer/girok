@@ -515,10 +515,6 @@ def change_tag(
     target_task_id = task_ids_cache[str(task_id)]
     task_api.change_task_tag(target_task_id, tag_name)
 
-    tasks_resp = task_api.get_tasks(view="list")
-    tasks = general_utils.bytes2dict(tasks_resp.content)['tasks']
-    display_utils.display_tasks_by_list(tasks, marked_task_id=target_task_id, color=constants.TABLE_TASK_HIGHLIGHT_COLOR)
-
     
 @app.command("chpri", help="[green]Change[/green] the priority of a task (1 ~ 5)", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
 def change_tag(
@@ -528,10 +524,6 @@ def change_tag(
     task_ids_cache = general_utils.read_task_ids_cache(cfg=cfg)
     target_task_id = task_ids_cache[str(task_id)]
     task_api.change_task_priority(target_task_id, priority)
-
-    tasks_resp = task_api.get_tasks(view="list")
-    tasks = general_utils.bytes2dict(tasks_resp.content)['tasks']
-    display_utils.display_tasks_by_list(tasks, marked_task_id=target_task_id, color=constants.TABLE_TASK_HIGHLIGHT_COLOR)
 
     
 @app.command("chdate", help="[green]Change[/green] the deadline of a task", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
@@ -544,15 +536,20 @@ def change_date(
     if deadline:
         year, month, day = deadline
     full_deadline = f"{year}-{month}-{day} {time if time else '12:00:00'}"
-    print(full_deadline)
     
     task_ids_cache = general_utils.read_task_ids_cache(cfg=cfg)
     target_task_id = task_ids_cache[str(task_id)]
     task_api.change_task_date(target_task_id, full_deadline)
 
-    tasks_resp = task_api.get_tasks(view="list")
-    tasks = general_utils.bytes2dict(tasks_resp.content)['tasks']
-    display_utils.display_tasks_by_list(tasks, marked_task_id=target_task_id, color=constants.TABLE_TASK_HIGHLIGHT_COLOR)
+    
+@app.command("chname", help="[green]Change[/green] the name of a task", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
+def change_date(
+    task_id: int = typer.Argument(..., help="[yellow]Task ID[/yellow]"),
+    name: str = typer.Argument(..., help="[yellow]New Task Name[/yellow]")
+):  
+    task_ids_cache = general_utils.read_task_ids_cache(cfg=cfg)
+    target_task_id = task_ids_cache[str(task_id)]
+    task_api.change_task_name(target_task_id, name)
     
 
 @app.command("showtag", help="[yellow]Show[/yellow] all tags", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")

@@ -13,6 +13,7 @@ import girok.commands.auth as auth_command
 import girok.commands.category as category_command
 import girok.commands.task as task_command
 import girok.commands.calendar as calendar_command
+import girok.commands.info as info_command
 import girok.utils.general as general_utils
 import girok.utils.auth as auth_utils
 
@@ -21,10 +22,16 @@ app.registered_commands.extend(auth_command.app.registered_commands)
 app.registered_commands.extend(category_command.app.registered_commands)
 app.registered_commands.extend(task_command.app.registered_commands)
 app.registered_commands.extend(calendar_command.app.registered_commands)
+app.registered_commands.extend(info_command.app.registered_commands)
 cfg = get_config()
+
+def version_callback(value: bool):
+    if value:
+        print(f"[yellow]{cfg.version}[/yellow]")
+        raise typer.Exit()
     
 @app.callback()
-def pre_command_callback(ctx: typer.Context):
+def pre_command_callback(ctx: typer.Context, version: bool = typer.Option(None, "--version", callback=version_callback, is_eager=True),):
     # Setting up app dir and config file if they don't exist
     general_utils.config_setup(cfg.app_dir, cfg.config_path)
     if ctx.invoked_subcommand in ['login', 'logout', 'register']:
@@ -40,6 +47,3 @@ def pre_command_callback(ctx: typer.Context):
     else:
         print("You're not logged in. Please login with [green]girok login[/green].")
         exit(0)
-        
-
-app()

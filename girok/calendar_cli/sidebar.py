@@ -36,15 +36,9 @@ class CategoryTree(Tree):
             super().__init__()
     
     def on_mount(self):
-        # Select the topmost node
-        # self.select_node(self.root)
         self.highlighted_node = self.root
         self.selected_node = self.root
-        # calendar_utils.add_highlight(self.selected_node)
         calendar_utils.add_left_arrow_tree(self.highlighted_node)
-        # self.temp_node_selected()
-        # self.select_node(self.selected_node)
-        # self.action_select_cursor()
 
         self.line = 0
         self.cats = category_api.get_categories()
@@ -77,12 +71,9 @@ class CategoryTree(Tree):
         
     def on_tree_node_selected(self, event: Tree.NodeSelected):
         event.stop()
-        # calendar_utils.remove_highlight(self.selected_node)
-        # calendar_utils.add_highlight(event.node)
         full_cat_path = calendar_utils.get_full_path_from_node(event.node)
         self.selected_node = event.node
         self.post_message(self.CategoryChanged(full_cat_path))
-        
         
     def on_tree_node_highlighted(self, event: Tree.NodeHighlighted):
         event.stop()
@@ -169,9 +160,7 @@ class TagTree(Tree):
 
         self.post_message(self.TagChanged(tag))
         event.node.set_label(tag)
-        # calendar_utils.add_highlight(event.node)
         self.selected_node = event.node
-        # self.post_message(self.CustomTestMessage())
         
     def on_tree_node_highlighted(self, event: Tree.NodeHighlighted):
         event.stop()

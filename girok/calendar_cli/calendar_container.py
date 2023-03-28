@@ -166,7 +166,6 @@ class Calendar(Container):
     def on_focus(self):
         x, y = calendar_utils.convert_cell_num_to_coord(self.cur_month_first_day_cell_num)
         target_cell = self.query_one(f"#cell{self.cur_month_first_day_cell_num}")
-        # target_cell.add_class("focused-cell")
         calendar_utils.add_left_arrow(target_cell)
         self.cur_focused_cell_cord = (x, y)
         self.cur_focused_cell = target_cell

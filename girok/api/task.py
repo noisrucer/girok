@@ -97,8 +97,10 @@ def change_task_tag(task_id: int, new_tag_name: str):
         }
     )
     
-    if resp.status_code == 204:
-        display_utils.center_print(f"Successfully renamed [ID: {task_id}] tag to {new_tag_name}.", "black on green")
+    if resp.status_code == 200:
+        task = general_utils.bytes2dict(resp.content)
+        task_name = task['name']
+        display_utils.center_print(f"Successfully changed [{task_name}]'s tag to {new_tag_name}.", type="success")
     elif resp.status_code == 400:
         err_msg = general_utils.bytes2dict(resp.content)['detail']
         display_utils.center_print(err_msg, constants.DISPLAY_TERMINAL_COLOR_ERROR)
@@ -115,8 +117,30 @@ def change_task_priority(task_id: int, new_priority: int):
         }
     )
     
-    if resp.status_code == 204:
-        display_utils.center_print(f"Successfully change [ID: {task_id}] priority to {new_priority}.", "black on green")
+    if resp.status_code == 200:
+        task = general_utils.bytes2dict(resp.content)
+        task_name = task['name']
+        display_utils.center_print(f"Successfully changed [{task_name}]'s priority to {new_priority}.", type="success")
+    elif resp.status_code == 400:
+        err_msg = general_utils.bytes2dict(resp.content)['detail']
+        display_utils.center_print(err_msg, constants.DISPLAY_TERMINAL_COLOR_ERROR)
+    else:
+        display_utils.center_print(resp.content, constants.DISPLAY_TERMINAL_COLOR_ERROR)
+
+        
+def change_task_name(task_id: int, new_name: str):
+    resp = requests.patch(
+        cfg.base_url + f"/tasks/{task_id}/name",
+        headers=auth_utils.build_jwt_header(cfg.config_path),
+        json={
+            "new_name": new_name
+        }
+    )
+    
+    if resp.status_code == 200:
+        task = general_utils.bytes2dict(resp.content)
+        task_name = task['name']
+        display_utils.center_print(f"Successfully changed [{task_name}]'s name to {new_name}.", type="success")
     elif resp.status_code == 400:
         err_msg = general_utils.bytes2dict(resp.content)['detail']
         display_utils.center_print(err_msg, constants.DISPLAY_TERMINAL_COLOR_ERROR)
@@ -133,8 +157,10 @@ def change_task_date(task_id: int, new_date: str):
         }
     )
     
-    if resp.status_code == 204:
-        display_utils.center_print(f"Successfully change [ID: {task_id}] date to {new_date}.", "black on green")
+    if resp.status_code == 200:
+        task = general_utils.bytes2dict(resp.content)
+        task_name = task['name']
+        display_utils.center_print(f"Successfully changed [{task_name}]'s date to {new_date.split()[0]}.", type="success")
     elif resp.status_code == 400:
         err_msg = general_utils.bytes2dict(resp.content)['detail']
         display_utils.center_print(err_msg, constants.DISPLAY_TERMINAL_COLOR_ERROR)
