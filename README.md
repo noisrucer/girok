@@ -96,12 +96,14 @@ Now, let's dive into Girok!
 
 ## 🪟 0. Fancier UI <a name="fancierui"></a>
 
-If you're a mac user (or other device supporting terminal transparency), **dramatically enhance your UI by setting up a (dark theme) background** from a website like Unsplash and **make it to transparent!**
+If you're a mac user (or other device supporting terminal transparency), **dramatically enhance your UI by setting up a (dark theme) background** from a website like Unsplash and **make it transparent!**
 
 My settings are
 
 1. `54 %` transparency
 2. `20 %` opacity
+
+The photo used in the demo: [dark-chinese-door](https://github.com/noisrucer/girok/tree/develop/background-images)
 
 If you're an ITerm 2 user, for some weird reasons, the calendar doesn't apply the transparency. Please let me know if anyone figures this out to make it transparent for ITerm2! Please use the default mac terminal to see the change for the calendar.
 
