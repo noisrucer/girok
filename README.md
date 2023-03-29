@@ -42,6 +42,7 @@ To see the current version, enter `girok --version`.
 
 - [🚀 Installation](#-Installation)
 - [🔥 Get Started !](#-get-started)
+  - [🪟 0. Fancier UI](#fancierui)
   - [🙏 1. help command](#helpcommand)
   - [🔒 2. Register](#register)
   - [🔓 3. Login / Logout](#loginandlogout)
@@ -90,16 +91,16 @@ Now, let's dive into Girok!
 
 # 🔥 Get Started
 
-### Fancier UI
+## 🪟 0. Fancier UI <a name="fancierui"></a>
 
-If you're a mac user, dramatically enhance your UI by **setting up a (dark theme) background** from a website like Unsplash and **make it to transparent!**
+If you're a mac user (or other device supporting terminal transparency), **dramatically enhance your UI by setting up a (dark theme) background** from a website like Unsplash and **make it to transparent!**
 
 My settings are
 
 1. `54 %` transparency
 2. `20 %` opacity
 
-If you're a ITerm 2 user, for some weird reasons, the calendar doesn't apply the transparency. Please let me know if anyone figures this out to make it transparent for ITerm2!
+If you're an ITerm 2 user, for some weird reasons, the calendar doesn't apply the transparency. Please let me know if anyone figures this out to make it transparent for ITerm2!
 
 If you have overflowing icons in the background, it looks bad. To hide the background icons(not deleting), enter the following command
 
