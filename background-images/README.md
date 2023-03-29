@@ -18,3 +18,4 @@ Here is a repository for awesome background images for the **Girok**. You can cr
 4. The statement that it does not breach any copyrights.
 5. **Credits** to the creator of the image if you need one (even if it's from Unsplash, let's respect the creator by giving credits!
 6. Include the source file path (ex. `background-images/dark-chinese-door.jpeg`).
+7. Include the demo file path. (ex. `background-images/dark-chinese-door-demo.png`)
