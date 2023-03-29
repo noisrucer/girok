@@ -17,12 +17,12 @@ import girok.commands.info as info_command
 import girok.utils.general as general_utils
 import girok.utils.auth as auth_utils
 
-app = typer.Typer(rich_markup_mode='rich', help="Enter [red]girok <command name> --help[/red] to see more detailed of commands!")
+app = typer.Typer(rich_markup_mode='rich', help="Enter [red]girok <command name> --help[/red] to see more detailed documentations of commands!")
 app.registered_commands.extend(auth_command.app.registered_commands)
 app.registered_commands.extend(category_command.app.registered_commands)
 app.registered_commands.extend(task_command.app.registered_commands)
 app.registered_commands.extend(calendar_command.app.registered_commands)
-app.registered_commands.extend(info_command.app.registered_commands)
+# app.registered_commands.extend(info_command.app.registered_commands)
 cfg = get_config()
 
 def version_callback(value: bool):

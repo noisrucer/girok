@@ -10,7 +10,7 @@ Girok is running on AWS server so you can **login from any device in the world**
 
 Girok works fluently with `MacOS` and `Linux` users. It also works with `Windows` but some features and UIs might break.
 
-p.s) Since I launched the project a couple days ago, you might feel a little bit of lag for `showtask` operation, especially when you have many data. I'm working on optimizing the speed to enhance your experience!
+p.s) Since I launched the project a couple days ago, you might feel a little bit of lag for `showtask` and `cal` commands, especially when you have many data. I'm working on optimizing the speed to enhance your experience!
 
 If you find it useful, consider supporting to help the development process! As I'm running the server with my own expense now, your help will make the service much more stable and fast!
 
@@ -22,9 +22,17 @@ To see the current version, enter `girok --version`.
 
 ### Upgrade with `pip install girok --upgrade`
 
+# Currently in Development
+
+1. `guest mode` so that you don't have to register for an account and synchronize later if you want.
+
+- Many people asked me why there is no `guest mode`. The reason was that my initial motivation was to support **Web** as well as **app** so that you can access your data anywhere in the world. However, since the development for web/app is under process, I'll make `guest mode` feature as soon as possible.
+
+2. `End-to-end encryption` with private key-pair even for your categories & tasks.
+
 # 💡 Future Updates (coming soon)
 
-1. 💻 📱 **Web** and **app** which synchronizing all data with CLI.
+1. 💻 📱 **Web** and **app** synchronizing all data with CLI.
 2. 🔨 Task operations in the calendar view
 3. ⏰ **Girok Slack Bot** notification feature for tasks - set an alarm in 5
    seconds!
@@ -622,8 +630,8 @@ Just kidding. Enter `pip uninstall girok` in your terminal. Bye..😢
 
 # 💌 Contribute to the project
 
-If you have any new features that would make your life easier, please don't hesitate to raise issues.
+- If you have any new features that would make your life easier, please don't hesitate to raise issues.
 
-If you wish to contribute to the project as a programmer, drop pull requests and I will review each of them carefully!
+- If you wish to contribute to the project as a programmer, please first **open an issue** with the `feature` tag (title prefixed with `[Feat] description`) describing your suggested features. After getting approval from the maintainer, you can drop pull requests and I will review each of them carefully.
 
-I'm currently looking for a member to join me to build a web/app version of Girok. Drop me an email to changjin9792@gmail.com if you're interested!
+- p.s) I'm currently looking for team members to join me to build a web/app version of Girok. Also, if you're a strong Python programmer, you can join me scale it up to build a more robust "Girok"! Drop me an email to changjin9792@gmail.com if you're interested.
