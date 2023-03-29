@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "girok"
-version = "0.1.12"
+version = "0.1.13"
 description = "Email verification feature"
 authors = ["Jason Lee <changjin9792@gmail.com>"]
 readme = "README.md"

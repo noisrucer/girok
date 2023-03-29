@@ -94,15 +94,15 @@ def register():
             if not success:
                 display_utils.center_print("Verification failed. Please register again.", type="error")
                 exit(0)
-            
         elif register_resp.status_code == 400:
             err_msg = general_utils.bytes2dict(register_resp.content)['detail']
             display_utils.center_print(err_msg, type="error")
             exit(0)
         else:
-            err_msg = general_utils.bytes2dict(register_resp.content)['detail']
+            err_msg = general_utils.bytes2dict(register_resp.content)['detail'][0]['msg']
             display_utils.center_print(str(err_msg), type="error")
-        
+            exit(0)
+            
         display_utils.register_welcome()
         exit(0)
     else:

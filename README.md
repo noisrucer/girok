@@ -18,7 +18,7 @@ If you find it useful, consider supporting to help the development process! As I
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/changjin97z)
 
-# 🤖 Version `0.1.12` is released now!
+# 🤖 Version `0.1.13` is released now!
 
 To see the current version, enter `girok --version`.
 
