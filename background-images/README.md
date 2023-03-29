@@ -1,6 +1,6 @@
 # Girok Background Images Archive
 
-1. `IG: @nush22.jpeg`
+1. Dark chinese door `IG: @nush22.jpeg`
 
 - Transparency: `54%`
 - blur: `20%`
