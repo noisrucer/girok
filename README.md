@@ -102,7 +102,7 @@ My settings are
 
 If you're an ITerm 2 user, for some weird reasons, the calendar doesn't apply the transparency. Please let me know if anyone figures this out to make it transparent for ITerm2! Please use the default mac terminal to see the change for the calendar.
 
-If you have overflowing icons in the background, it looks bad. To hide the background icons(not deleting), enter the following command
+If you have overflowing icons in the background, it looks bad. To hide the background icons(not deleting), enter the following command.
 
 ```bash
 defaults write com.apple.finder CreateDesktop -bool false
@@ -117,6 +117,8 @@ defaults write com.apple.finder CreateDesktop -bool true; killall Finder
 ```
 
 As I just found out about this transparency (and I'm lazy), I'll leave the below demonstrations as before. I'll update later.. :)
+
+p.s) Please upload images great for backgrounds in the issue (make sure to keep the copyrights) so that other people can see!
 
 ## 🙏 1. Help command <a name="helpcommand"></a>
 
