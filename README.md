@@ -4,6 +4,8 @@
 
 <p align="center"><img src="girok/resources/girok-demo-transparent.gif"></img></center>
 
+(p.s. No one said it to me)
+
 **Girok**, which means "to record" in Korean, is a **powerful terminal-based task manager** which provides a multitude of scheduling operations that can be done in less than 10 seconds. It also supports **beautiful and responsive calendar GUI** in which you can move around with VIM key bindings.
 
 Girok is running on AWS server so you can **login from any device in the world**!
