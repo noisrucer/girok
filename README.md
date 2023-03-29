@@ -96,7 +96,7 @@ Now, let's dive into Girok!
 
 ## 🪟 0. Fancier UI <a name="fancierui"></a>
 
-If you're a mac user (or other device supporting terminal transparency), **dramatically enhance your UI by setting up a (dark theme) background** from a website like Unsplash and **make it transparent!**
+If you're a mac user (or other device supporting terminal transparency), **dramatically enhance your UI by setting up a (dark theme) background for your mac desktop** and **make it transparent!**
 
 My settings are
 
