@@ -22,7 +22,7 @@ To see the current version, enter `girok --version`.
 
 ### Upgrade with `pip install girok --upgrade`
 
-# Currently in Development
+# ⚒️ Currently in Development
 
 1. `guest mode` so that you don't have to register for an account and synchronize later if you want.
 
