@@ -100,7 +100,7 @@ My settings are
 1. `54 %` transparency
 2. `20 %` opacity
 
-If you're an ITerm 2 user, for some weird reasons, the calendar doesn't apply the transparency. Please let me know if anyone figures this out to make it transparent for ITerm2!
+If you're an ITerm 2 user, for some weird reasons, the calendar doesn't apply the transparency. Please let me know if anyone figures this out to make it transparent for ITerm2! Please use the default mac terminal to see the change for the calendar.
 
 If you have overflowing icons in the background, it looks bad. To hide the background icons(not deleting), enter the following command
 
