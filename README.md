@@ -2,7 +2,7 @@
 
 <h3 align="center"> Who said you cannot have a beautiful UI on terminal?</h4>
 
-<p align="center"><img src="girok/resources/girok-demo.gif"></img></center>
+<p align="center"><img src="girok/resources/girok-demo-transparent.gif"></img></center>
 
 **Girok**, which means "to record" in Korean, is a **powerful terminal-based task manager** which provides a multitude of scheduling operations that can be done in less than 10 seconds. It also supports **beautiful and responsive calendar GUI** in which you can move around with VIM key bindings.
 
@@ -89,6 +89,33 @@ girok --help
 Now, let's dive into Girok!
 
 # 🔥 Get Started
+
+### Fancier UI
+
+If you're a mac user, dramatically enhance your UI by **setting up a (dark theme) background** from a website like Unsplash and **make it to transparent!**
+
+My settings are
+
+1. `54 %` transparency
+2. `20 %` opacity
+
+If you're a ITerm 2 user, for some weird reasons, the calendar doesn't apply the transparency. Please let me know if anyone figures this out to make it transparent for ITerm2!
+
+If you have overflowing icons in the background, it looks bad. To hide the background icons(not deleting), enter the following command
+
+```bash
+defaults write com.apple.finder CreateDesktop -bool false
+
+killall Finder
+```
+
+To get back the icons, enter
+
+```bash
+defaults write com.apple.finder CreateDesktop -bool true; killall Finder
+```
+
+As I just found out about this transparency (and I'm lazy), I'll leave the below demonstrations as before. I'll update later.. :)
 
 ## 🙏 1. Help command <a name="helpcommand"></a>
 
