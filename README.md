@@ -18,7 +18,10 @@ If you find it useful, consider supporting to help the development process! As I
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/changjin97z)
 
-# 🤖 Version `0.1.13` is released now!
+# 🤖 Version `0.1.14` is released now!
+
+1. `-y/--yes` option - don't show confirmation message
+2. Extended deadline options for `chdate` command - fully compatible with `addtask` command.
 
 To see the current version, enter `girok --version`.
 
@@ -514,8 +517,10 @@ girok showtask [-T | --tag <tag name>]
 
 To complete(delete) a task, provide the `done` command followed by the task ID.
 
+Optionally, you can pass `-y` or `--yes` flag if you don't want to see the confirmation message.
+
 ```
-girok done <task ID>
+girok done <task ID> [-y | --yes]
 ```
 
 **[IMPORTANT]** The **TASK ID** is the IDs you can see when you perform `showtask` operations. Note that the **ONLY the Task IDs of the LATEST showtask operation are valid**. In other words, if you consecutively type `girok showtask` and `girok showtask -p 5` but try to delete a task with the task IDs shown in the table of the first `girok showtask` command, you might delete an unexpected task!!
@@ -539,8 +544,10 @@ Notice that the task is now striked out.
 To change the date of an existing task, enter the following command.
 
 ```bash
-girok chdate <taskID> <yyyy/mm/dd | mm/dd>
+girok chdate <taskID> <Deadline options>
 ```
+
+The deadline option group is the same as `addtask` command.
 
 ### 5.5 `chpri` command <a name="chpricommand"></a>
 

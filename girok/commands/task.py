@@ -76,11 +76,24 @@ def TaskViewMutuallyExclusiveGroup(size=2):
         return value
     return callback
 
+    
+def ChangeTaskDateMutuallyExclusiveGroup(size=2):
+    group = set()
+    def callback(ctx: typer.Context, param: typer.CallbackParam, value: str):
+        # Add cli option to group if it was called with a value
+        if value is not None and param.name not in group:
+            group.add(param.name)
+        if len(group) > size - 1:
+            raise typer.BadParameter(f"{param.name} is mutually exclusive with {group.pop()}")
+        return value
+    return callback
+
 
 add_task_date_exclusivity_callback = AddTaskDateMutuallyExclusiveGroup()
 time_exclusivity_callback = TimeMutuallyExclusiveGroup()
 show_task_date_exclusivity_callback = ShowTaskDateMutuallyExclusiveGroup()
 task_view_exclusivity_callback = TaskViewMutuallyExclusiveGroup()
+change_task_date_exclusivity_callback = ChangeTaskDateMutuallyExclusiveGroup()
 
 ###################################################################################
 
@@ -117,6 +130,8 @@ def full_date_callback(ctx: typer.Context, param: typer.CallbackParam, value: st
         add_task_date_exclusivity_callback(ctx, param, value)
     elif command_name == "showtask":
         show_task_date_exclusivity_callback(ctx, param, value)
+    elif command_name == "chdate":
+        change_task_date_exclusivity_callback(ctx, param, value)
 
     if value is None:
         return None
@@ -173,7 +188,11 @@ def all_day_callback(ctx: typer.Context, param: typer.CallbackParam, value: bool
 
 
 def after_callback(ctx: typer.Context, param: typer.CallbackParam, value: int):
-    add_task_date_exclusivity_callback(ctx, param, value)
+    command_name = ctx.command.name
+    if command_name == 'addtask':
+        add_task_date_exclusivity_callback(ctx, param, value)
+    elif command_name == 'chdate':
+        change_task_date_exclusivity_callback(ctx, param, value)
     if value is None:
         return None
 
@@ -473,7 +492,10 @@ def show_task(
 
 
 @app.command("done", help="[red]Delete[/red] a task", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
-def remove_task(task_id: int = typer.Argument(..., help="[yellow]Task ID[/yellow] to be deleted")):
+def remove_task(
+    task_id: int = typer.Argument(..., help="[yellow]Task ID[/yellow] to be deleted"),
+    force: bool = typer.Option(False, '-y', '--yes', help="Don't show the confirmation message")
+    ):
     task_ids_cache = general_utils.read_task_ids_cache(cfg=cfg)
     if str(task_id) not in task_ids_cache:
         display_utils.center_print("Task ID not found.", type="error")
@@ -485,9 +507,10 @@ def remove_task(task_id: int = typer.Argument(..., help="[yellow]Task ID[/yellow
     
     tasks_resp = task_api.get_tasks()
     tasks = general_utils.bytes2dict(tasks_resp.content)['tasks']
-    done_confirm = typer.confirm(f"Are you sure to delete task [{target_task_name}]?")
-    if not done_confirm:
-        exit(0)
+    if not force:
+        done_confirm = typer.confirm(f"Are you sure to delete task [{target_task_name}]?")
+        if not done_confirm:
+            exit(0)
     resp = task_api.remove_task(target_task_id)
     
     if resp.status_code == 204:
@@ -527,13 +550,65 @@ def change_tag(
 def change_date(
     task_id: int = typer.Argument(..., help="[yellow]Task ID[/yellow]"),
     deadline: str = typer.Option(None, "-d", "--deadline", help="[yellow]Deadline[/yellow]", callback=full_date_callback),
-    time: str = typer.Option(None, "-t", "--time", help="[yellow]Deadline time, xx:yy[/yellow]", callback=time_callback)
+    today: bool = typer.Option(None, "--tdy", help="Set deadline to [yellow]today[/yellow]", callback=change_task_date_exclusivity_callback),
+    tomorrow: bool = typer.Option(None, "--tmr", "--tomorrow", help="Set deadline to [yellow]tomorrow[/yellow]", callback=change_task_date_exclusivity_callback),
+    this_mon: bool = typer.Option(None, "-t1", "--thismon", help="Set deadline to this [yellow]Monday[/yellow]", callback=change_task_date_exclusivity_callback),
+    this_tue: bool = typer.Option(None, "-t2", "--thistue", help="Set deadline to this [yellow]Tuesday[/yellow]", callback=change_task_date_exclusivity_callback),
+    this_wed: bool = typer.Option(None, "-t3", "--thiswed", help="Set deadline to, this [yellow]Wednesday[/yellow]", callback=change_task_date_exclusivity_callback),
+    this_thu: bool = typer.Option(None, "-t4", "--thisthu", help="Set deadline to this [yellow]Thursday[/yellow]", callback=change_task_date_exclusivity_callback),
+    this_fri: bool = typer.Option(None, "-t5", "--thisfri", help="Set deadline to this [yellow]Friday[/yellow]", callback=change_task_date_exclusivity_callback),
+    this_sat: bool = typer.Option(None, "-t6", "--thissat", help="Set deadline to this [yellow]Saturday[/yellow]", callback=change_task_date_exclusivity_callback),
+    this_sun: bool = typer.Option(None, "-t7", "--thissun", help="Set deadline to this [yellow]Sunday[/yellow]", callback=change_task_date_exclusivity_callback),
+    next_mon: bool = typer.Option(None, "-n1", "--nextmon", help="Set deadline to next [yellow]Monday[/yellow]", callback=change_task_date_exclusivity_callback),
+    next_tue: bool = typer.Option(None, "-n2", "--nexttue", help="Set deadline to next [yellow]Tuesday[/yellow]", callback=change_task_date_exclusivity_callback),
+    next_wed: bool = typer.Option(None, "-n3", "--nextwed", help="Set deadline to next [yellow]Wednesday[/yellow]", callback=change_task_date_exclusivity_callback),
+    next_thu: bool = typer.Option(None, "-n4", "--nextthu", help="Set deadline to next [yellow]Thursday[/yellow]", callback=change_task_date_exclusivity_callback),
+    next_fri: bool = typer.Option(None, "-n5", "--nextfri", help="Set deadline to next [yellow]Friday[/yellow]", callback=change_task_date_exclusivity_callback),
+    next_sat: bool = typer.Option(None, "-n6", "--nextsat", help="Set deadline to next [yellow]Saturday[/yellow]", callback=change_task_date_exclusivity_callback),
+    next_sun: bool = typer.Option(None, "-n7", "--nextsun", help="Set deadline to next [yellow]Sunday[/yellow]", callback=change_task_date_exclusivity_callback),
+    after: int = typer.Option(None, "-a", "--after", help="Set deadline to [yellow]after x days[/yellow]", callback=after_callback),
+    time: str = typer.Option(None, "-t", "--time", help="Deadline [yellow]time, xx:yy[/yellow]", callback=time_callback),
 ):
+    # Deadline
+    this_week_group = [this_mon, this_tue, this_wed, this_thu, this_fri, this_sat, this_sun]
+    next_week_group = [next_mon, next_tue, next_wed, next_thu, next_fri, next_sat, next_sun]
+
+    if not any(this_week_group + next_week_group + [deadline, today, tomorrow, after]):
+        raise typer.BadParameter("At least one of deadline options is required.")
+    
     year, month, day = None, None, None
     if deadline:
         year, month, day = deadline
+
+    if today:
+        year, month, day = task_utils.get_date_from_shortcut(True, datetime.now().weekday())
+
+    if tomorrow:
+        is_this_week = True
+        weekday_num = datetime.now().weekday() + 1
+        if weekday_num == 6:
+            is_this_week = False
+            weekday_num = 0
+        year, month, day = task_utils.get_date_from_shortcut(is_this_week, weekday_num)
+
+    if after:
+        year, month, day = task_utils.get_date_from_offset(after)
+
+    if any(this_week_group):
+        this_week_day_num = [idx for idx, val in enumerate(this_week_group) if val][0]
+        year, month, day = task_utils.get_date_from_shortcut(
+            this_week=True,
+            weekday_num=this_week_day_num
+        )
+
+    if any(next_week_group):
+        this_week_day_num = [idx for idx, val in enumerate(next_week_group) if val][0]
+        year, month, day = task_utils.get_date_from_shortcut(
+            this_week=False,
+            weekday_num=this_week_day_num
+        )
+
     full_deadline = f"{year}-{month}-{day} {time if time else '12:00:00'}"
-    
     task_ids_cache = general_utils.read_task_ids_cache(cfg=cfg)
     target_task_id = task_ids_cache[str(task_id)]
     task_api.change_task_date(target_task_id, full_deadline)

@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "girok"
-version = "0.1.13"
-description = "Email verification feature"
+version = "0.1.14"
+description = "Deadline options for chdate command. --yes option for done command"
 authors = ["Jason Lee <changjin9792@gmail.com>"]
 readme = "README.md"
 
