@@ -228,9 +228,7 @@ def add_task(
     name: str = typer.Argument(..., help="Task name"),
     cat: str = typer.Option(None, "-c", "--category", help="[yellow]Category path - xx/yy/zz..[/yellow]", callback=category_callback),
     priority: int = typer.Option(None, "-p", "--priority", help="[yellow]priority[/yellow]", callback=priority_callback),
-    # color: str = typer.Option(None, "--color", help="[yellow]Color[/yellow]"),
     deadline: str = typer.Option(None, "-d", "--deadline", help="[yellow]Deadline[/yellow]", callback=full_date_callback),
-    # everyday: bool = typer.Option(False, "-e", "--everyday", help="Set task due everyday"),
     today: bool = typer.Option(None, "--tdy", help="Set deadline to [yellow]today[/yellow]", callback=add_task_date_exclusivity_callback),
     tomorrow: bool = typer.Option(None, "--tmr", "--tomorrow", help="Set deadline to [yellow]tomorrow[/yellow]", callback=add_task_date_exclusivity_callback),
     this_mon: bool = typer.Option(None, "-t1", "--thismon", help="Set deadline to this [yellow]Monday[/yellow]", callback=add_task_date_exclusivity_callback),
@@ -249,7 +247,6 @@ def add_task(
     next_sun: bool = typer.Option(None, "-n7", "--nextsun", help="Set deadline to next [yellow]Sunday[/yellow]", callback=add_task_date_exclusivity_callback),
     after: int = typer.Option(None, "-a", "--after", help="Set deadline to [yellow]after x days[/yellow]", callback=after_callback),
     time: str = typer.Option(None, "-t", "--time", help="Deadline [yellow]time, xx:yy[/yellow]", callback=time_callback),
-    # all_day: bool = typer.Option(None, "--allday", help="Set deadline time to all day", callback=all_day_callback),
     tag: str = typer.Option(None, "-T", "--tag", help="[yellow]Tag[/yellow]"),
 ):
     # Category
