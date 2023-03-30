@@ -20,7 +20,7 @@ If you find it useful, consider supporting to help the development process! As I
 
 # 🤖 Version `0.1.14` is released now!
 
-1. `-y/--yes` option - don't show confirmation message
+1. `-y/--yes` option - don't show confirmation message for `done` command.
 2. Extended deadline options for `chdate` command - fully compatible with `addtask` command.
 
 To see the current version, enter `girok --version`.
