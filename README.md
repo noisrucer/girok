@@ -16,7 +16,7 @@ p.s) Since I launched the project a couple days ago, you might feel a little bit
 
 If you find it useful, consider supporting to help the development process! As I'm running the server with my own expense now, your help will make the service much more stable and fast!
 
-If you want to see the server source code, go to [**girokserver**](https://github.com/noisrucer/girokserver)
+If you want to see the server source code, go to [**girokserver**](https://github.com/noisrucer/girokserver).
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/changjin97z)
 
