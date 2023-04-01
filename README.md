@@ -16,6 +16,8 @@ p.s) Since I launched the project a couple days ago, you might feel a little bit
 
 If you find it useful, consider supporting to help the development process! As I'm running the server with my own expense now, your help will make the service much more stable and fast!
 
+[**Server code**](https://github.com/noisrucer/girokserver)
+
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/changjin97z)
 
 # 🤖 Version `0.1.14` is released now!
@@ -27,7 +29,7 @@ To see the current version, enter `girok --version`.
 
 ### Upgrade with `pip install girok --upgrade`
 
-# ⚒️ Currently in Development
+# ⚒️ Currently in Development (Comming soon)
 
 1. `guest mode` so that you don't have to register for an account and synchronize later if you want.
 
@@ -35,7 +37,7 @@ To see the current version, enter `girok --version`.
 
 2. `End-to-end encryption` with private key-pair even for your categories & tasks.
 
-# 💡 Future Updates (coming soon)
+# 💡 Future Updates
 
 1. 💻 📱 **Web** and **app** synchronizing all data with CLI.
 2. 🔨 Task operations in the calendar view
