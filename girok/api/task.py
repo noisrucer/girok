@@ -10,39 +10,64 @@ import girok.utils.general as general_utils
 import girok.utils.task as task_utils
 import girok.constants as constants
 
+import girok.server.src.task.router as task_router
+
 cfg = get_config()
 
 def create_task(task_data: dict):
-    resp = requests.post(
-        cfg.base_url + "/tasks",
-        json=task_data,
-        headers=auth_utils.build_jwt_header(cfg.config_path)
-    )
-    if resp.status_code == 201:
-        task = general_utils.bytes2dict(resp.content)
-        task_id = task['task_id']
-        return task_id
-    elif resp.status_code == 400:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        display_utils.center_print(err_msg, constants.DISPLAY_TERMINAL_COLOR_ERROR)
-    else:
-        display_utils.center_print("Error occurred.", constants.DISPLAY_TERMINAL_COLOR_ERROR)
+    mode = auth_utils.get_mode(cfg.config_path)
+    if mode == "user":
+        resp = requests.post(
+            cfg.base_url + "/tasks",
+            json=task_data,
+            headers=auth_utils.build_jwt_header(cfg.config_path)
+        )
+        if resp.status_code == 201:
+            task = general_utils.bytes2dict(resp.content)
+            task_id = task['task_id']
+            return task_id
+        elif resp.status_code == 400:
+            err_msg = general_utils.bytes2dict(resp.content)['detail']
+            display_utils.center_print(err_msg, constants.DISPLAY_TERMINAL_COLOR_ERROR)
+            exit(0)
+        else:
+            display_utils.center_print("Error occurred.", constants.DISPLAY_TERMINAL_COLOR_ERROR)
+            exit(0)
+    elif mode == "guest":
+        resp = task_router.create_task(task_data)
+        if resp['success']:
+            task = resp['new_task']
+            task_id = task['task_id']
+            return task_id
+        else:
+            display_utils.center_print(resp['detail'], type="error")
+            exit(0)
         
 
 def get_single_task(task_id: int):
-    resp = requests.get(
-        cfg.base_url + f"/tasks/{task_id}",
-        headers=auth_utils.build_jwt_header(cfg.config_path),
-    )
-    if resp.status_code == 200:
-        task = general_utils.bytes2dict(resp.content)
-        return task
-    elif resp.status_code == 400:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        display_utils.center_print(err_msg, constants.DISPLAY_TERMINAL_COLOR_ERROR)
-    else:
-        display_utils.center_print(resp.content, constants.DISPLAY_TERMINAL_COLOR_ERROR)
- 
+    mode = auth_utils.get_mode(cfg.config_path)
+    if mode == "user":
+        resp = requests.get(
+            cfg.base_url + f"/tasks/{task_id}",
+            headers=auth_utils.build_jwt_header(cfg.config_path),
+        )
+        if resp.status_code == 200:
+            task = general_utils.bytes2dict(resp.content)
+            return task
+        elif resp.status_code == 400:
+            err_msg = general_utils.bytes2dict(resp.content)['detail']
+            display_utils.center_print(err_msg, type="error")
+        else:
+            display_utils.center_print(resp.content, type="error")
+    elif mode == "guest":
+        resp = task_router.get_single_task(task_id)
+        if resp['success']:
+            task = resp['task']
+            return task
+        else:
+            display_utils.center_print(resp['detail'], type="error")
+            
+    exit(0)
 
 
 def get_tasks(
@@ -54,6 +79,7 @@ def get_tasks(
     no_priority: bool = False,
     view: str = "category"
 ):
+    mode = auth_utils.get_mode(cfg.config_path)
     query_str_obj = {
         "category": cats,
         "start_date": start_date,
@@ -63,12 +89,21 @@ def get_tasks(
         "no_priority": no_priority,
         "view": view
     }
-    resp = requests.get(
-        cfg.base_url + "/tasks",
-        headers=auth_utils.build_jwt_header(cfg.config_path),
-        params=query_str_obj
-    )
-    return resp
+    if mode == "user":
+        resp = requests.get(
+            cfg.base_url + "/tasks",
+            headers=auth_utils.build_jwt_header(cfg.config_path),
+            params=query_str_obj
+        )
+        return general_utils.bytes2dict(resp.content)['tasks']
+    elif mode == "guest":
+        resp = task_router.get_tasks(query_str_obj)
+        if resp['success']:
+            return resp['tasks']
+        else:
+            display_utils.center_print(resp['detail'], type="error")
+            
+    exit(0)
 
 
 def remove_task(task_id: int):

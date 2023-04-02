@@ -325,8 +325,8 @@ def add_task(
     }
     task_id = task_api.create_task(task_data)
     display_utils.center_print("Task added successfully!", type="success")
-    tasks_resp = task_api.get_tasks(view="category")
-    tasks = general_utils.bytes2dict(tasks_resp.content)['tasks']
+    tasks = task_api.get_tasks(view="category")
+    # tasks = general_utils.bytes2dict(tasks_resp.content)['tasks']
     color_dict = category_api.get_color_dict()
     task_tree = display_utils.display_tasks_by_category(
         tasks,
@@ -471,6 +471,7 @@ def show_task(
 
     if resp.status_code == 200:
         tasks = general_utils.bytes2dict(resp.content)['tasks']
+        print(tasks)
         if category_view:
             color_dict = category_api.get_color_dict()
             task_tree = display_utils.display_tasks_by_category(tasks, color_dict=color_dict)
