@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.sql.sqltypes import TIMESTAMP, Boolean, DateTime
 from typing import Union, List, Dict
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from datetime import datetime, timedelta
 import girok.server.src.task.enums as task_enums
 
@@ -45,24 +45,24 @@ class Task(BaseModel):
 
 class TaskGetIn(BaseModel):
     category: Union[List[str], None] = Field(
-        default_factory=None,
+        default=None,
         title="Category",
         description="Full category path of a category. Ex. ['HKU', 'COMP3230'].",
     ),
     start_date: Union[str, None] = Field(
-        default_factory="2000-01-01 00:00:00",
+        default="2000-01-01 00:00:00",
         title="Start date",
         description="Start date. Ex. '2023-01-23 12:00:00'",
         regex="^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2} [0-9]{2}:[0-9]{2}:[0-9]{2}$"
     ),
     end_date: Union[str, None] = Field(
-        default_factory=(datetime.now() + timedelta(days=365*10)).strftime("%Y-%m-%d 00:00:00"),
+        default=(datetime.now() + timedelta(days=365*10)).strftime("%Y-%m-%d 00:00:00"),
         title="End date",
         description="End date. Ex. '2023-03-23 12:00:00'",
         regex="^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2} [0-9]{2}:[0-9]{2}:[0-9]{2}$"
     ),
     priority: Union[int, None] = Field(
-        default_factory=None,
+        default=None,
         title="Priority",
         ge=1,
         le=5
@@ -76,6 +76,19 @@ class TaskGetIn(BaseModel):
         default_factory=None,
         title="View method for tasks"  
     )
+    
+    @validator("start_date")
+    def set_start_date(cls, v):
+        if v is None:
+            return "2000-01-01 00:00:00"
+        return v
+
+    @validator("end_date")
+    def set_end_date(cls, v):
+        if v is None:
+            return (datetime.now() + timedelta(days=365*10)).strftime("%Y-%m-%d 00:00:00")
+        return v
+    
 
 class GetSingleTaskOut(BaseModel):
     name: str

@@ -119,7 +119,7 @@ def get_last_cat_id(db: Session, cats: list):
     cumul_path = ""
     if not cats:
         return parent_id, cumul_path
-    
+
     for cat_name in cats:
         cat_id = get_category_id_by_name_and_parent_id(db, cat_name, parent_id)
         if not cat_id:

@@ -168,8 +168,8 @@ def display_category_with_tasks(
         # Cache task id
         if not(task['task_id'] == marked_task_id and marked_color == constants.TABLE_TASK_DELETED_COLOR):
             task_ids_cache[len(task_ids_cache) + 1] = task['task_id']
-
-        deadline = datetime.strptime(task['deadline'], "%Y-%m-%dT%H:%M:%S")
+        deadline = calendar_utils.get_date_obj_from_str_separated_by_T(str(task['deadline']))
+        # deadline = datetime.strptime(task['deadline'], "%Y-%m-%dT%H:%M:%S")
         year, month, day = deadline.year, deadline.month, deadline.day
         h, m, s = str(deadline.time()).split(":")
 

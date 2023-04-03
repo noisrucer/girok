@@ -171,52 +171,79 @@ def move_category(cat_str: str, new_parent_cat_str: str):
 
 
 def get_last_cat_id(cats: list):
-    resp = requests.get(
-        cfg.base_url + "/categories/last-cat-id",
-        json={
-            "cats": cats
-        },
-        headers=auth_utils.build_jwt_header(cfg.config_path)
-    )
-    if resp.status_code == 200:
-        return general_utils.bytes2dict(resp.content)['cat_id']
-    elif resp.status_code == 400:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        display_utils.center_print(err_msg, constants.DISPLAY_TERMINAL_COLOR_ERROR)
-        exit(0)
-    else:
-        display_utils.center_print(resp.content, constants.DISPLAY_TERMINAL_COLOR_ERROR)
-        exit(0)
+    mode = auth_utils.get_mode(cfg.config_path)
+    if mode == "user":
+        resp = requests.get(
+            cfg.base_url + "/categories/last-cat-id",
+            json={
+                "cats": cats
+            },
+            headers=auth_utils.build_jwt_header(cfg.config_path)
+        )
+        if resp.status_code == 200:
+            return general_utils.bytes2dict(resp.content)['cat_id']
+        elif resp.status_code == 400:
+            err_msg = general_utils.bytes2dict(resp.content)['detail']
+            display_utils.center_print(err_msg, type="error")
+            exit(0)
+        else:
+            display_utils.center_print(resp.content, type="error")
+            exit(0)
+    elif mode == "guest":
+        resp = category_router.get_last_cat_id({"cats": cats})
+        if resp['success']:
+            return resp['cat_id']
+        else:
+            display_utils.center_print(resp['detail'], type="error")
+    exit(0)
+            
         
         
 def get_category_color(cat_id: int):
-    resp = requests.get(
-        cfg.base_url + f"/categories/{cat_id}/color",
-        headers=auth_utils.build_jwt_header(cfg.config_path)
-    )
-    
-    if resp.status_code == 200:
-        return general_utils.bytes2dict(resp.content)['color']
-    elif resp.status_code == 400:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        display_utils.center_print(err_msg, constants.DISPLAY_TERMINAL_COLOR_ERROR)
-        exit(0)
-    else:
-        display_utils.center_print(resp.content, constants.DISPLAY_TERMINAL_COLOR_ERROR)
-        exit(0)
-    
+    mode = auth_utils.get_mode(cfg.config_path)
+    if mode == "user":
+        resp = requests.get(
+            cfg.base_url + f"/categories/{cat_id}/color",
+            headers=auth_utils.build_jwt_header(cfg.config_path)
+        )
+        
+        if resp.status_code == 200:
+            return general_utils.bytes2dict(resp.content)['color']
+        elif resp.status_code == 400:
+            err_msg = general_utils.bytes2dict(resp.content)['detail']
+            display_utils.center_print(err_msg, type="error")
+            exit(0)
+        else:
+            display_utils.center_print(resp.content, type="error")
+            exit(0)
+    elif mode == "guest":
+        resp = category_router.get_category_color(cat_id)
+        if resp['success']:
+            return resp['color']
+        else:
+            display_utils.center_print(resp.content, type="error")
+    exit(0)
     
 def get_color_dict():
-    resp = requests.get(
-        cfg.base_url + "/categories/color",
-        headers=auth_utils.build_jwt_header(cfg.config_path)
-    )
-    if resp.status_code == 200:
-        color_dict = general_utils.bytes2dict(resp.content)
-        return color_dict
-    elif resp.status_code == 400:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        display_utils.center_print(err_msg, constants.DISPLAY_TERMINAL_COLOR_ERROR)
-    else:
-        display_utils.center_print("Error occurred.", constants.DISPLAY_TERMINAL_COLOR_ERROR)
-    
+    mode = auth_utils.get_mode(cfg.config_path)
+    if mode == "user":
+        resp = requests.get(
+            cfg.base_url + "/categories/color",
+            headers=auth_utils.build_jwt_header(cfg.config_path)
+        )
+        if resp.status_code == 200:
+            color_dict = general_utils.bytes2dict(resp.content)
+            return color_dict
+        elif resp.status_code == 400:
+            err_msg = general_utils.bytes2dict(resp.content)['detail']
+            display_utils.center_print(err_msg, type="error")
+        else:
+            display_utils.center_print("Error occurred.", type="error")
+    elif mode == "guest":
+        resp = category_router.get_category_colors_dict()
+        if resp['success']:
+            return resp['colors']    
+        else:
+            display_utils.center_print("Error occurred.", type="error")
+    exit(0)
+            

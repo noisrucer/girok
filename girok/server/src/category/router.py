@@ -139,19 +139,27 @@ def move_category(category: schemas.CategoryMoveIn):
     
 def get_last_cat_id(cat_data: schemas.LastCategoryIdIn):
     db = next(get_db())
-    cat_data = cat_data.dict()
-    cat_id, _ = service.get_last_cat_id(db, cat_data['cats'])
-    return {"cat_id": cat_id}
+    try:
+        cat_id, _ = service.get_last_cat_id(db, cat_data['cats'])
+        return {"success": True, "cat_id": cat_id}
+    except Exception as e:
+        return {"success": False, "detail": e.detail}
 
 
 def get_category_color(cat_id: int):
     db = next(get_db())
-    color = service.get_category_color_by_id(db, cat_id)
-    return {"color": color}
+    try:
+        color = service.get_category_color_by_id(db, cat_id)
+        return {"success": True, "color": color}
+    except Exception as e:
+        return {"success": False, "detail": e.detail}
 
 
 def get_category_colors_dict():
     db = next(get_db())
-    colors = service.get_all_category_colors(db)
-    colors['No Category'] = "grey"
-    return colors
+    try:
+        colors = service.get_all_category_colors(db)
+        colors['No Category'] = "grey"
+        return {"success": True, "colors": colors}
+    except Exception as e:
+        return {"success": False, "detail": e.detail}

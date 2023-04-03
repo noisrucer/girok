@@ -60,7 +60,9 @@ def convert_coord_to_cell_num(x: int, y: int):
 
 
 def get_date_obj_from_str_separated_by_T(s: str):
-    return datetime.strptime(s, "%Y-%m-%dT%H:%M:%S")
+    s = str(s)
+    delim = "T" if "T" in s else " "
+    return datetime.strptime(s, f"%Y-%m-%d{delim}%H:%M:%S")
 
 
 def remove_left_arrow(cell):

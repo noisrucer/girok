@@ -112,14 +112,8 @@ class TagTree(Tree):
         self.highlighted_node = self.root
         self.selected_node = self.root
         
-        resp = task_api.get_tags()
-        if resp.status_code == 200:
-            self.tags = general_utils.bytes2dict(resp.content)['tags']
-        elif resp.status_code == 400:
-            err_msg = general_utils.bytes2dict(resp.content)['detail']
-            exit(0)
-        else:
-            exit(0)
+        tags = task_api.get_tags()
+        self.tags = tags
         
         self.root.expand()
         

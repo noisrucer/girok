@@ -30,8 +30,8 @@ def create_task(task: schemas.TaskCreateIn):
 #     status_code=status.HTTP_200_OK
 #     # response_model=schemas.TaskOut
 # )
-def get_tasks(data: schemas.TaskGetIn):
-    print("data", data)
+def get_tasks(data):
+    data = schemas.TaskGetIn(**data).dict()
     category = data['category']
     start_date = data['start_date']
     end_date = data['end_date']
@@ -89,7 +89,7 @@ def get_tasks(data: schemas.TaskGetIn):
 #     "/{task_id}",
 #     status_code=status.HTTP_204_NO_CONTENT
 # )
-async def delete_task(
+def delete_task(
     task_id: int
 ):
     db = next(get_db())
@@ -104,7 +104,7 @@ async def delete_task(
 #     '/{task_id}/tag',
 #     status_code=status.HTTP_200_OK,
 # )
-async def change_task_tag(
+def change_task_tag(
     task_id: int,
     tag: schemas.ChangeTaskTagIn
 ):
@@ -121,7 +121,7 @@ async def change_task_tag(
 #     '/{task_id}/priority',
 #     status_code=status.HTTP_200_OK,
 # )
-async def change_task_priority(
+def change_task_priority(
     task_id: int,
     priority: schemas.ChangeTaskPriorityIn
 ):
@@ -138,16 +138,18 @@ async def change_task_priority(
 #     '/{task_id}/date',
 #     status_code=status.HTTP_200_OK
 # )
-async def change_task_date(
+def change_task_date(
     task_id: int,
     data: schemas.ChangeTaskDateIn
 ):
     db = next(get_db())
     try:
         new_date = data['new_date']
+        new_date = datetime.strptime(new_date, "%Y-%m-%d %H:%M:%S")
         updated_task = service.change_task_date(db, task_id, new_date)
         return {"success": True, "updated_task": updated_task}
     except Exception as e:
+        print(e)
         return {"success": False, "detail": e.detail}
 
 
@@ -155,7 +157,7 @@ async def change_task_date(
 #     '/{task_id}/name',
 #     status_code=status.HTTP_200_OK
 # )
-async def change_task_name(
+def change_task_name(
     task_id: int,
     data: schemas.ChangeTaskNameIn
 ):
@@ -173,7 +175,7 @@ async def change_task_name(
 #     status_code=status.HTTP_200_OK,
 #     response_model=schemas.TagOut
 # )
-async def get_tags():
+def get_tags():
     db = next(get_db())
     try:
         tags = service.get_tags(db)
@@ -187,7 +189,7 @@ async def get_tags():
 #     status_code=status.HTTP_200_OK,
 #     response_model=schemas.GetSingleTaskOut
 # )
-async def get_single_task(task_id: int):
+def get_single_task(task_id: int):
     db = next(get_db())
     try:
         task = service.get_single_task(db, task_id)

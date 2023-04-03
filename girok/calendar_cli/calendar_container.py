@@ -217,12 +217,9 @@ class Calendar(Container):
             tag = None
         else:
             tag = self.tag
-            
-        log("CATS", cat_list),
-        log("tag", tag)
 
         start_date, end_date = task_utils.build_time_window_by_year_and_month(self.year, self.month)
-        resp = task_api.get_tasks(
+        tasks = task_api.get_tasks(
             cats=cat_list,
             start_date=start_date,
             end_date=end_date,
@@ -230,45 +227,40 @@ class Calendar(Container):
             view="list"
         )
 
-        if resp.status_code == 200:
-            self.refresh_cell_days()
-            tasks = general_utils.bytes2dict(resp.content)['tasks']
-            self.tasks = tasks
-            first_weekday, last_day = calendar.monthrange(self.year, self.month)
+        self.refresh_cell_days()
+        self.tasks = tasks
+        first_weekday, last_day = calendar.monthrange(self.year, self.month)
 
-            if self.cur_focused_cell:
-                if show_arrow:
-                    calendar_utils.remove_left_arrow(self.cur_focused_cell)
-                self.cur_focused_cell_cord = calendar_utils.convert_cell_num_to_coord(first_weekday)
-                self.cur_focused_cell = self.query_one(f"#cell{first_weekday}") # update
-                if show_arrow:
-                    calendar_utils.add_left_arrow(self.cur_focused_cell)
+        if self.cur_focused_cell:
+            if show_arrow:
+                calendar_utils.remove_left_arrow(self.cur_focused_cell)
+            self.cur_focused_cell_cord = calendar_utils.convert_cell_num_to_coord(first_weekday)
+            self.cur_focused_cell = self.query_one(f"#cell{first_weekday}") # update
+            if show_arrow:
+                calendar_utils.add_left_arrow(self.cur_focused_cell)
 
-            for idx, task in enumerate(tasks):
-                full_date = task['deadline']
-                day = datetime.strptime(full_date, "%Y-%m-%dT%H:%M:%S").day
-                cell_num = calendar_utils.convert_day_to_cell_num(self.year, self.month, day)
-                cell = self.query_one(f"#cell{cell_num}")
-                color = task['color']
-                name = task['name']
-                # if len(name) > 13:
-                #     name = name[:13] + ".."
-                task_item_name = Text()
-                task_item_name.append("●", style=constants.CIRCLE_COLOR[color])
-                task_item_name.append(" " + name)
+        for idx, task in enumerate(tasks):
+            full_date = str(task['deadline'])
+            day = calendar_utils.get_date_obj_from_str_separated_by_T(full_date).day
+            # day = datetime.strptime(full_date, "%Y-%m-%dT%H:%M:%S").day
+            cell_num = calendar_utils.convert_day_to_cell_num(self.year, self.month, day)
+            cell = self.query_one(f"#cell{cell_num}")
+            color = task['color']
+            name = task['name']
+            # if len(name) > 13:
+            #     name = name[:13] + ".."
+            task_item_name = Text()
+            task_item_name.append("●", style=constants.CIRCLE_COLOR[color])
+            task_item_name.append(" " + name)
 
-                task_item = Static(task_item_name, id=f"task-cell{cell_num}-{idx}", classes="task-item")
-                cell.mount(task_item)
+            task_item = Static(task_item_name, id=f"task-cell{cell_num}-{idx}", classes="task-item")
+            cell.mount(task_item)
 
-                task_item = self.query_one(f"#task-cell{cell_num}-{idx}")
-                task_item.styles.overflow_x = "hidden"
-                task_item.styles.overflow_y = "hidden"
+            task_item = self.query_one(f"#task-cell{cell_num}-{idx}")
+            task_item.styles.overflow_x = "hidden"
+            task_item.styles.overflow_y = "hidden"
 
-        elif resp.status_code == 400:
-            err_msg = general_utils.bytes2dict(resp.content)['detail']
-            exit(0)
-        else:
-            exit(0)
+
 
 
 class CalendarContainer(Vertical):
