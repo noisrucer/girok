@@ -48,6 +48,7 @@ If you want to see the server source code, go to [**girokserver**](https://githu
   - [⚙️ 2. Guest mode / User mode](#mode)
     - [2.1 Guest mode](#guestmode)
     - [2.2 User mode](#usermode)
+    - [2.3 `mode` command](#modecommand)
   - [🔒 3. Register](#register)
   - [🔓 4. Login / Logout](#loginandlogout)
   - [📚 5. Category commands](#categorycommands)
@@ -180,6 +181,14 @@ If you only want to guest mode, jump to [category commands](#categorycommands) s
 ## 2.2 User mode <a name="usermode"></a>
 
 In order to activate user mode, you can log in to your account with `girok login`.
+
+## 2.3 `mode` command <a name="modecommand"></a>
+
+To see which mode you're in, enter the following command.
+
+```bash
+girok mode
+```
 
 ## 🔒 3. Register <a name="register"></a>
 
