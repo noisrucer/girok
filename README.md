@@ -154,7 +154,7 @@ then you'll see the following help message
 
 ![](images/girok-command-help.png)
 
-## 2. Guest mode / User mode
+## 2. Guest mode / User mode <a name="mode"></a>
 
 You can use Girok with two options
 
