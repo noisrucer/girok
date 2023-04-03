@@ -42,3 +42,7 @@ urllib3==1.26.14
 watchdog==2.3.1
 yarl==1.8.2
 zipp==3.15.0
+SQLAlchemy-ImageAttach==1.1.0
+SQLAlchemy==1.4.43
+pydantic==1.8.2
+starlette==0.20.4

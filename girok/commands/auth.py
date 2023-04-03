@@ -15,10 +15,35 @@ import girok.utils.auth as auth_utils
 import girok.api.auth as auth_api
 import girok.utils.display as display_utils
 
+import girok.server.src.task.models as task_models
+import girok.server.src.category.models as category_models
+from girok.server.src.database import engine
+
 app = typer.Typer(rich_markup_mode='rich')
 
 cfg = get_config()
 console=Console()
+
+
+@app.command("mode", help="Current mode", rich_help_panel=":lock: [bold yellow1]Authentication Commands[/bold yellow1]")
+def mode():
+    mode = auth_utils.get_mode(cfg.config_path)
+    if mode == "off":
+        print("You're not logged in.")
+    elif mode == "guest":
+        print("[yellow]Guest mode[/yellow]")
+    elif mode == "user":
+        print("[yellow]User mode[/yellow]")
+        
+
+@app.command("guest", help="[yellow]Login as a guest user (using local storage)[/yellow]", rich_help_panel=":lock: [bold yellow1]Authentication Commands[/bold yellow1]")
+def guest():
+    if not os.path.exists(cfg.app_dir + "/database.db"):
+        task_models.Base.metadata.create_all(bind=engine)
+        category_models.Base.metadata.create_all(bind=engine)
+    general_utils.update_json(cfg.config_path, {"mode": "guest"})
+    print("[yellow]You're logged in as a guest![/yellow]")
+    
 
 @app.command("login", help="[yellow]Login[/yellow] with email and password", rich_help_panel=":lock: [bold yellow1]Authentication Commands[/bold yellow1]")
 def login():
@@ -38,8 +63,8 @@ def login():
     resp = auth_api.login(email, password)
     if resp.status_code == 200:
         access_token = general_utils.bytes2dict(resp.content)['access_token']
-        general_utils.update_json(cfg.config_path, {"access_token": access_token, "email": email})
-        print("[yellow]You're logged in![/yellow]")
+        general_utils.update_json(cfg.config_path, {"access_token": access_token, "mode": "user"})
+        print("[yellow]You're logged in as a user![/yellow]")
     elif resp.status_code == 401:
         err_msg = general_utils.bytes2dict(resp.content)['detail']
         display_utils.center_print(err_msg, type="error")
@@ -52,14 +77,15 @@ def login():
 
 @app.command("logout", help="[red]Logout[/red] from the currently logged-in account", rich_help_panel=":lock: [bold yellow1]Authentication Commands[/bold yellow1]")
 def logout():
-    access_token = auth_utils.get_access_token_from_json(cfg.config_path)
-    if not auth_utils.is_logged_in(access_token):
-        print("You're not logged in.")
+    mode = auth_utils.get_mode(cfg.config_path)
+    if mode == "guest":
+        auth_utils.log_out_from_guest(cfg.config_path)
+        print("Successfully logged out from [yellow]guest mode[/yellow].")
+    elif mode == "user":
+        auth_utils.log_out_from_user(cfg.config_path)
+        # auth_utils.remove_access_token(cfg.config_path)
+        print("Successfully logged out from [yellow]user mode[/yellow].")
         exit(0)
-    
-    auth_utils.remove_access_token(cfg.config_path)
-    print("[yellow]Successfully logged out[/yellow]")
-    exit(0)
     
     
 @app.command("register", help="[green]Register[/green] a new account", rich_help_panel=":lock: [bold yellow1]Authentication Commands[/bold yellow1]")

@@ -6,7 +6,12 @@ def config_setup(APP_DIR, CONFIG_PATH):
     if not CONFIG_PATH.is_file():
         if not os.path.isdir(APP_DIR):
             os.makedirs(APP_DIR)
-        write_json(CONFIG_PATH, {})
+        write_json(CONFIG_PATH, {"mode": "off"})
+    else:
+        cfg = read_json(CONFIG_PATH)
+        if 'mode' not in cfg:
+            write_json(CONFIG_PATH, {"mode": "off"})
+
 
 
 def read_json(fpath):

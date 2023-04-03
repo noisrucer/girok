@@ -49,16 +49,7 @@ def add_category(
     cat: str = typer.Argument(..., help="[yellow]Category path - xx/yy/zz..[/yellow]", callback=category_callback),
     color: str = typer.Option(None, "-c", "--color", help="[yellow]Color[/yellow] for category")
 ):
-    resp = category_api.add_category(cat, color)
-    if resp.status_code == 201:
-        display_utils.center_print("Category added successfully!", type="success")
-        cats_dict = category_api.get_categories()
-        display_utils.display_categories(cats_dict, highlight_cat=cat)
-    elif resp.status_code == 400:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        display_utils.center_print(err_msg, type="error")
-    else:
-        print(resp)
+    category_api.add_category(cat, color)
     
     
 @app.command("rmcat", help="[red]Remove[/red] a category", rich_help_panel=":file_folder: [bold yellow1]Category Commands[/bold yellow1]")
@@ -66,17 +57,8 @@ def remove_category(cat: str = typer.Argument(..., help="[yellow]Category path -
     confirm_rm = typer.confirm(f"[WARNING] Are you sure to delete '{cat}'?\nAll the subcategories and tasks will also be deleted.")
     if not confirm_rm:
         exit(0)
-        
-    resp = category_api.remove_category(cat)
-    if resp.status_code == 204:
-        display_utils.center_print(f"Deleted {cat} successfully.", type="success")
-        cats_dict = category_api.get_categories()
-        display_utils.display_categories(cats_dict)
-    elif resp.status_code == 400:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        display_utils.center_print(err_msg, type="error")
-    else:
-        display_utils.center_print(resp.content, type="error")
+    category_api.remove_category(cat)
+    
         
         
 @app.command("rncat", help="[green]Rename[/green] a category", rich_help_panel=":file_folder: [bold yellow1]Category Commands[/bold yellow1]")
@@ -84,17 +66,7 @@ def rename_category(
     cat: str = typer.Argument(..., help="[yellow]Category path - xx/yy/zz..[/yellow]"),
     new_name: str = typer.Argument(..., help="[yellow]New category name[/yellow]")
 ):
-    resp = category_api.rename_category(cat, new_name)
-    if resp.status_code == 204:
-        new_cat = '/'.join(cat.split('/')[:-1] + [new_name])
-        display_utils.center_print(f"Successfully renamed {cat} to {new_cat}.", type="success")
-        cats_dict = category_api.get_categories()
-        display_utils.display_categories(cats_dict, highlight_cat=new_cat)
-    elif resp.status_code == 400:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        display_utils.center_print(err_msg, type="error")
-    else:
-        display_utils.center_print(resp.content, type="error")
+    category_api.rename_category(cat, new_name)
         
         
 @app.command("mvcat", help="[yellow]Move[/yellow] a category to under category", rich_help_panel=":file_folder: [bold yellow1]Category Commands[/bold yellow1]")
@@ -104,15 +76,4 @@ def move_category(
 ):
     if new_parent_cat.endswith('/'):
         new_parent_cat = new_parent_cat[:-1]
-    resp = category_api.move_category(cat, new_parent_cat)
-    if resp.status_code == 200:
-        new_cat = '/'.join(new_parent_cat.split('/') + [cat.split('/')[-1]])
-        display_utils.center_print(f"Successfully moved {cat} to {new_parent_cat}/.", type="success")
-        cats_dict = category_api.get_categories()
-        display_utils.display_categories(cats_dict, highlight_cat=new_cat)
-    elif resp.status_code == 400:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        display_utils.center_print(err_msg, type="error")
-    else:
-        display_utils.center_print(resp.content, type="error")
-    
+    category_api.move_category(cat, new_parent_cat)

@@ -325,8 +325,8 @@ def add_task(
     }
     task_id = task_api.create_task(task_data)
     display_utils.center_print("Task added successfully!", type="success")
-    tasks_resp = task_api.get_tasks(view="category")
-    tasks = general_utils.bytes2dict(tasks_resp.content)['tasks']
+    tasks = task_api.get_tasks(view="category")
+    # tasks = general_utils.bytes2dict(tasks_resp.content)['tasks']
     color_dict = category_api.get_color_dict()
     task_tree = display_utils.display_tasks_by_category(
         tasks,
@@ -449,7 +449,7 @@ def show_task(
         priority = None
 
     if category_view:
-        resp = task_api.get_tasks(
+        tasks = task_api.get_tasks(
             cats=cats,
             start_date=start_date,
             end_date=end_date,
@@ -459,7 +459,7 @@ def show_task(
             view="category"
         )
     elif list_view:
-        resp = task_api.get_tasks(
+        tasks = task_api.get_tasks(
             cats=cats,
             start_date=start_date,
             end_date=end_date,
@@ -469,23 +469,16 @@ def show_task(
             view="list"
         )
 
-    if resp.status_code == 200:
-        tasks = general_utils.bytes2dict(resp.content)['tasks']
-        if category_view:
-            color_dict = category_api.get_color_dict()
-            task_tree = display_utils.display_tasks_by_category(tasks, color_dict=color_dict)
-            current_date = task_utils.build_date_info(datetime.now())
-            display_utils.center_print(current_date, type='title')
-            print(task_tree)
-        elif list_view:
-            current_date = task_utils.build_date_info(datetime.now())
-            display_utils.center_print(current_date, type='title')
-            display_utils.display_tasks_by_list(tasks)
-    elif resp.status_code == 400:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        display_utils.center_print(err_msg, type="error")
-    else:
-        display_utils.center_print("Error occurred.", type="title")
+    if category_view:
+        color_dict = category_api.get_color_dict()
+        task_tree = display_utils.display_tasks_by_category(tasks, color_dict=color_dict)
+        current_date = task_utils.build_date_info(datetime.now())
+        display_utils.center_print(current_date, type='title')
+        print(task_tree)
+    elif list_view:
+        current_date = task_utils.build_date_info(datetime.now())
+        display_utils.center_print(current_date, type='title')
+        display_utils.display_tasks_by_list(tasks)
 
 
 @app.command("done", help="[red]Delete[/red] a task", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
@@ -502,25 +495,17 @@ def remove_task(
     target_task = task_api.get_single_task(target_task_id)
     target_task_name = target_task['name']
     
-    tasks_resp = task_api.get_tasks()
-    tasks = general_utils.bytes2dict(tasks_resp.content)['tasks']
+    tasks = task_api.get_tasks()
     if not force:
         done_confirm = typer.confirm(f"Are you sure to delete task [{target_task_name}]?")
         if not done_confirm:
             exit(0)
-    resp = task_api.remove_task(target_task_id)
-    
-    if resp.status_code == 204:
-        color_dict = category_api.get_color_dict()
-        task_tree = display_utils.display_tasks_by_category(tasks, color_dict=color_dict, marked_task_id=target_task_id)
-        current_date = task_utils.build_date_info(datetime.now())
-        display_utils.center_print(current_date, type="title")
-        print(task_tree)
-    elif resp.status_code == 400:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        display_utils.center_print(err_msg, type="error")
-    else:
-        display_utils.center_print(resp.content, type="error")
+    task_api.remove_task(target_task_id)
+    color_dict = category_api.get_color_dict()
+    task_tree = display_utils.display_tasks_by_category(tasks, color_dict=color_dict, marked_task_id=target_task_id)
+    current_date = task_utils.build_date_info(datetime.now())
+    display_utils.center_print(current_date, type="title")
+    print(task_tree)
         
 
 @app.command("chtag", help="[green]Change[/green] the tag of a task", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
@@ -623,13 +608,6 @@ def change_date(
 
 @app.command("showtag", help="[yellow]Show[/yellow] all tags", rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]")
 def show_tag():
-    resp = task_api.get_tags()
-    if resp.status_code == 200:
-        tags = general_utils.bytes2dict(resp.content)['tags']
-        for tag in tags:
-            print(tag)
-    elif resp.status_code == 400:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        display_utils.center_print(err_msg, type="error")
-    else:
-        print(resp)
+    tags = task_api.get_tags()
+    for tag in tags:
+        print(tag)
