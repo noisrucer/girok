@@ -118,20 +118,20 @@ class Calendar(Container):
         if self.is_pop_up:
             return
         x, y = self.cur_focused_cell_cord
-        if event.key == 'h': # left
+        if event.key == 'h' or event.key == 'left': # left
             next_cell_coord = (x, y - 1)
-        elif event.key == 'j': # down
+        elif event.key == 'j' or event.key == 'down': # down
             next_cell_coord = (x + 1, y)
-        elif event.key == 'k': # up
+        elif event.key == 'k' or event.key == 'up': # up
             next_cell_coord = (x - 1, y)
-        elif event.key == 'l': # right
+        elif event.key == 'l' or event.key == 'right': # right
             next_cell_coord = (x, y + 1)
         elif event.key == 'o':
             pass
         else:
             return
 
-        if event.key in ['h', 'j', 'k', 'l']: # moving on cells
+        if event.key in ['h', 'j', 'k', 'l', 'left', 'down', 'up', 'right']: # moving on cells
             nx, ny = next_cell_coord
             if nx < 0 or ny < 0 or nx >= self.m or ny >= self.n: # Out of matrix
                 return
