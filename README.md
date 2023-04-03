@@ -6,12 +6,20 @@
 
 (p.s. No one said it to me)
 
+# 💥 Introduction
+
 **Girok**, which means "to record" in Korean, is a **powerful terminal-based task manager** which provides a multitude of scheduling operations that can be done in less than 10 seconds. It also supports **beautiful and responsive calendar GUI** in which you can move around with VIM key bindings.
 
-You can use Girok with options
+# 💫 Highlighted Features
 
-1. `Guest mode` - All your data are stored in a local storage.
-2. `User mode` - If you login in a user mode, you can access your data from any deivce in the world!
+- Infinite recursive subcategories
+- Automatically assigned color for each category
+- Add a schedule super fast with many different options
+- Query your schedule with many different filtering options
+- A beautiful calendar GUI
+- Guest / User mode
+
+# 💬 Remarks
 
 Girok works fluently with `MacOS` and `Linux` users. It also works with `Windows` but some features and UIs might break.
 
