@@ -8,11 +8,14 @@
 
 **Girok**, which means "to record" in Korean, is a **powerful terminal-based task manager** which provides a multitude of scheduling operations that can be done in less than 10 seconds. It also supports **beautiful and responsive calendar GUI** in which you can move around with VIM key bindings.
 
-Girok is running on AWS server so you can **login from any device in the world**!
+You can use Girok with options
+
+1. `Guest mode` - All your data are stored in a local storage.
+2. `User mode` - If you login in a user mode, you can access your data from any deivce in the world!
 
 Girok works fluently with `MacOS` and `Linux` users. It also works with `Windows` but some features and UIs might break.
 
-p.s) Since I launched the project a couple days ago, you might feel a little bit of lag for `showtask` and `cal` commands, especially when you have many data. I'm working on optimizing the speed to enhance your experience!
+p.s) Since I launched the project a couple days ago, you might feel a little bit of lag for `showtask` and `cal` commands(for user mode), especially when you have many data. I'm working on optimizing the speed to enhance your experience!
 
 If you find it useful, consider supporting to help the development process! As I'm running the server with my own expense now, your help will make the service much more stable and fast!
 
@@ -20,22 +23,12 @@ If you want to see the server source code, go to [**girokserver**](https://githu
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/changjin97z)
 
-# 🤖 Version `0.1.14` is released now!
+# 🤖 Version `0.1.15` is released now!
 
-1. `-y/--yes` option - don't show confirmation message for `done` command.
-2. Extended deadline options for `chdate` command - fully compatible with `addtask` command.
-
-To see the current version, enter `girok --version`.
+- `Guest mode` - You can choose to log in as `guest mode` to save your data locally.
+- Currently, local data are not synchronized with the server. Synchronization with the server will be added in the upcoming release.
 
 ### Upgrade with `pip install girok --upgrade`
-
-# ⚒️ Currently in Development (Comming soon)
-
-1. `guest mode` so that you don't have to register for an account and synchronize later if you want.
-
-- Many people asked me why there is no `guest mode`. The reason was that my initial motivation was to support **Web** as well as **app** so that you can access your data anywhere in the world. However, since the development for web/app is under process, I'll make `guest mode` feature as soon as possible.
-
-2. `End-to-end encryption` with private key-pair even for your categories & tasks.
 
 # 💡 Future Updates
 
@@ -52,24 +45,29 @@ To see the current version, enter `girok --version`.
   - [🪟 0. Fancier UI](#fancierui)
     - [Contribute your background image!](#contributeimage)
   - [🙏 1. help command](#helpcommand)
-  - [🔒 2. Register](#register)
-  - [🔓 3. Login / Logout](#loginandlogout)
-  - [📚 4. Category commands](#categorycommands)
-    - [4.1. `showcat`](#showcatcommand)
-    - [4.2. `addcat`](#addcatcommand)
-    - [4.3. `mvcat`](#mvcatcommand)
-    - [4.4. `rmcat`](#rmcatcommand)
-    - [4.5. `rncat`](#rncatcommand)
-  - [📕 5. Task Commands](#taskcommands)
-    - [5.1. `addtask`](#addtaskcommand)
-    - [5.2. `showtask`](#showtaskcommand)
-    - [5.3. `done`](#donecommand)
-    - [5.4. `chdate`](#chdatecommand)
-    - [5.5. `chpri`](#chpricommand)
-    - [5.6. `chtag`](#chtagcommand)
-    - [5.8. `chname`](#chnamecommand)
-    - [5.9. `showtag`](#showtagcommand)
-  - [📅 6. Calendar Commands](#calendarcommands)
+  - [⚙️ 2. Guest mode / User mode](#mode)
+    - [2.1 Guest mode](#guestmode)
+    - [2.2 User mode](#usermode)
+  - [🔒 3. Register](#register)
+  - [🔓 4. Login / Logout](#loginandlogout)
+  - [📚 5. Category commands](#categorycommands)
+    - [5.1. `showcat`](#showcatcommand)
+    - [5.2. `addcat`](#addcatcommand)
+    - [5.3. `mvcat`](#mvcatcommand)
+    - [5.4. `rmcat`](#rmcatcommand)
+    - [5.5. `rncat`](#rncatcommand)
+  - [📕 6. Task Commands](#taskcommands)
+    - [6.1. `addtask`](#addtaskcommand)
+    - [6.2. `showtask`](#showtaskcommand)
+    - [6.3. `done`](#donecommand)
+    - [6.4. `chdate`](#chdatecommand)
+    - [6.5. `chpri`](#chpricommand)
+    - [6.6. `chtag`](#chtagcommand)
+    - [6.8. `chname`](#chnamecommand)
+    - [6.9. `showtag`](#showtagcommand)
+  - [📅 7. Calendar Commands](#calendarcommands)
+    - [7.1 Calendar Key Bindings](#movearoundcalendar)
+    - [7.2 Calendar Demonstrations](#calendardemonstration)
 - [🚒 Report Bugs](#-report-bugs)
 - [😭 Uninstall](#-uninstall)
 - [💌 Contributions](#-contributions)
@@ -156,7 +154,30 @@ then you'll see the following help message
 
 ![](images/girok-command-help.png)
 
-## 🔒 2. Register <a name="register"></a>
+## 2. Guest mode / User mode
+
+You can use Girok with two options
+
+1. `Guest mode`
+   - Your data are stored in your local storage.
+2. `User mode`
+   - Your data are stored in a centralized server. It means you can log in to your account to access your schedule anytime, anywhere.
+
+## 2.1 Guest mode <a name="guestmode"></a>
+
+```bash
+girok guest
+```
+
+Once you're in a logged-out state, enter the above command to switch to guest mode.
+
+It's all set! You can now use the exact same commands as user mode.
+
+## 2.2 User mode <a name="usermode"></a>
+
+In order to activate user mode, you can log in to your account with `girok login`.
+
+## 🔒 3. Register <a name="register"></a>
 
 <p align="center"><img src="girok/resources/girok-register-demo.gif"></img></center>
 
@@ -168,9 +189,11 @@ girok register
 
 Enter the email address and password and check your mail inbox to get the **verification code**.
 
+[WARNING] **Girok doesn't require you to enter your email service's password**. You can type any password as input.
+
 Congratulations! Now let's go ahead and login to our account.
 
-## 🔓 3. Login and Logout <a name="loginandlogout"></a>
+## 🔓 4. Login and Logout <a name="loginandlogout"></a>
 
 In order to login with your registered account, enter the following command.
 
@@ -182,7 +205,7 @@ girok login
 
 Now you're ready to use all the features.
 
-## 📚 4. Category Commands <a name="categorycommands"></a>
+## 📚 5. Category Commands <a name="categorycommands"></a>
 
 You can pre-define **categories** such as `School`, `Life` and `Career` with automatically assigned category color.
 
@@ -190,7 +213,7 @@ Girok supports **infinite recursive subcategories**. All the subcategories will 
 
 Later on, you can link tasks to these categories.
 
-### 4.1 `showcat` command <a name="showcatcommand"></a>
+### 5.1 `showcat` command <a name="showcatcommand"></a>
 
 In order to see all the categories you have created, enter the following command.
 
@@ -202,7 +225,7 @@ girok showcat
 
 ![](images/girok-addcat3.png)
 
-### 4.2 `addcat` command <a name="addcatcommand"></a>
+### 5.2 `addcat` command <a name="addcatcommand"></a>
 
 `addtask` command takes a single argument `category full path`.
 
@@ -236,7 +259,7 @@ Then, you'll see `Resume` is created under `Career`.
 
 In this way, you can create as many categories and sub-categories as you want!
 
-### 4.3 `mvcat` command <a name="mvcatcommand"></a>
+### 5.3 `mvcat` command <a name="mvcatcommand"></a>
 
 Now you might want to move a category under another category.
 
@@ -262,7 +285,7 @@ girok mvcat Dev/Network/Career /
 
 ![](images/girok-addcat5.png)
 
-### 4.4 `rmcat` command <a name="rmcatcommand"></a>
+### 5.4 `rmcat` command <a name="rmcatcommand"></a>
 
 Of course, you want to delete a category. In that case, enter the following command.
 
@@ -292,7 +315,7 @@ Then, you'll be asked to confirm the deletion. Enter `y`.
 
 ![](images/girok-rmcat1.png)
 
-### 4.5 `rncat` command <a name="rncatcommand"></a>
+### 5.5 `rncat` command <a name="rncatcommand"></a>
 
 To rename an existing category,
 
@@ -302,11 +325,11 @@ girok rncat <category path> <new name>
 
 Great job! Now let's move on to the task commands.
 
-## 📕 5. Task commands <a name="taskcommands"></a>
+## 📕 6. Task commands <a name="taskcommands"></a>
 
 **Girok** provides powerful task scheduling operations. You can perform different operations that would've taken a long time in other schedulers like Notion and Google Calendar in less than 10 seconds (If you get used to the commands).
 
-### 5.1 `addtask` command <a name="addtaskcommand"></a>
+### 6.1 `addtask` command <a name="addtaskcommand"></a>
 
 ```bash
 girok addtask <task name> [One of deadline date options] [-c | --category <category path>] [-p | --priority <priority>] [-t | --time <deadline time>] [-T | --tag <tag name>]
@@ -314,7 +337,7 @@ girok addtask <task name> [One of deadline date options] [-c | --category <categ
 
 It looks quite complicated but don't worry! Let's go through some rules.
 
-#### 5.1.1 `addtask` rules
+#### 6.1.1 `addtask` rules
 
 1. `<task name>` (Argument / **Required**) - If the task name has no space you can omit double quotes `""`. If it does, enclose the task name by double quotes `""`
 2. `<One of date options>` (Option / **required**) - You must specify a **deadline "date"** of a task. There're many ways to add a deadline. Note that **ONLY ONE DATE OPTION** is allowed.
@@ -361,7 +384,7 @@ girok addtask "Implement tag filtering feature" -c Dev/Girok -a 3 -p 5
 
 It looks quite complicated, but you'll get used to it quickly after playing out little bit.
 
-#### 5.1.2 `addtask` demonstration
+#### 6.1.2 `addtask` demonstration
 
 Now let's play around with `addtask` command.
 
@@ -401,7 +424,7 @@ girok addtask "Hangout with Jason" --tmr
 
 Notice that the newly added task is highlighted with green color.
 
-### 5.2 `showtask` command. <a name="showtaskcommand"></a>
+### 6.2 `showtask` command. <a name="showtaskcommand"></a>
 
 ```bash
 girok showtask [--tree] Deadline date options] [-c | --category <category path>] [-p | --priority <priority>] [-T | --tag <tag name>]
@@ -409,7 +432,7 @@ girok showtask [--tree] Deadline date options] [-c | --category <category path>]
 
 Girok provides powerful commands to effectively query your schedule with many different options. You can filter tasks by category, priority, deadline, and tag.
 
-#### 5.2.1 View options
+#### 6.2.1 View options
 
 You can type `girok showtask` command with no parameter. The default view of the command is **list view**.
 
@@ -431,7 +454,7 @@ girok showtask --tree
 
 ![](images/girok-showtask2.png)
 
-#### 5.2.2 Filter by category
+#### 6.2.2 Filter by category
 
 To query tasks under a specific category, use the following command,
 
@@ -453,7 +476,7 @@ girok showtask -c HKU --tree # tree view
 
 ![](images/girok-showtask5.png)
 
-#### 5.2.3 Filter by date options
+#### 6.2.3 Filter by date options
 
 You can query your tasks filtering by many different date options. Notice that all the options for `showtask` command are **OPTIONAL**.
 
@@ -485,7 +508,7 @@ You can query your tasks filtering by many different date options. Notice that a
 
 - To view urgent tasks that are within `3 days` by default
 
-#### 5.2.4 Filter by priority
+#### 6.2.4 Filter by priority
 
 ```bash
 girok showtask -p <priority (1~5)>
@@ -509,13 +532,13 @@ girok showtask -p 5 --tree
 
 ![](images/girok-showtask4.png)
 
-#### 5.2.5 Filter by tag
+#### 6.2.5 Filter by tag
 
 ```
 girok showtask [-T | --tag <tag name>]
 ```
 
-### 5.3 `done` command <a name="donecommand"></a>
+### 6.3 `done` command <a name="donecommand"></a>
 
 To complete(delete) a task, provide the `done` command followed by the task ID.
 
@@ -541,7 +564,7 @@ girok done 5
 
 Notice that the task is now striked out.
 
-### 5.4 `chdate` command <a name="chdatecommand"></a>
+### 6.4 `chdate` command <a name="chdatecommand"></a>
 
 To change the date of an existing task, enter the following command.
 
@@ -551,7 +574,7 @@ girok chdate <taskID> <Deadline options>
 
 The deadline option group is the same as `addtask` command.
 
-### 5.5 `chpri` command <a name="chpricommand"></a>
+### 6.5 `chpri` command <a name="chpricommand"></a>
 
 To change the priority of an existing task, enter the following command.
 
@@ -559,7 +582,7 @@ To change the priority of an existing task, enter the following command.
 girok chpri <taskID> <priority (1~5)>
 ```
 
-### 5.6 `chtag` command <a name="chtagcommand"></a>
+### 6.6 `chtag` command <a name="chtagcommand"></a>
 
 To change the tag of an existing task, enter the following command.
 
@@ -567,7 +590,7 @@ To change the tag of an existing task, enter the following command.
 girok chtag <taskID> <tag name>
 ```
 
-### 5.7 `chname` command <a name="chnamecommand">
+### 6.7 `chname` command <a name="chnamecommand">
 
 To change the name of an existing task, enter the following command.
 
@@ -575,7 +598,7 @@ To change the name of an existing task, enter the following command.
 girok chname <taskID> <new task name enclosed with "">
 ```
 
-### 5.8 `showtag` command <a name="showtagcommand"></a>
+### 6.8 `showtag` command <a name="showtagcommand"></a>
 
 To view all the tags you have created so far, enter the following command.
 
@@ -583,7 +606,7 @@ To view all the tags you have created so far, enter the following command.
 girok showtag
 ```
 
-## 📅 6. Calendar Commands <a name="calendarcommands"></a>
+## 📅 7. Calendar Commands <a name="calendarcommands"></a>
 
 The beauty of **Girok** is the **beautiful and responsive full calendar GUI**.
 
@@ -601,7 +624,7 @@ Then you'll be prompted to the calendar GUI.
 
 Notice that all the categories and tags we have created so far are linked to the **sidebar**.
 
-### 6.1 Moving around calendar
+### 7.1 Calendar Key Bindings <a name="movearoundcalendar"></a>
 
 ![](images/girok-cal8.png)
 
@@ -638,7 +661,7 @@ Upon `girok cal` command, the starting **"focus"** is the **category tree**.
 - **Close calendar**
   - `q`
 
-### 6.2 Calendar Demonstrations
+### 7.2 Calendar Demonstrations <a name="calendardemonstration"></a>
 
 When you click on a category, then the category title will change accordingly at the left-bottom corner of the calendar. All the tasks belonging to the selected category will be shown.
 
