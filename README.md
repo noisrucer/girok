@@ -175,7 +175,7 @@ Once you're in a logged-out state, enter the above command to switch to guest mo
 
 It's all set! You can now use the exact same commands as user mode.
 
-If you only want to guest mode, jump to [5. Category commands](#categorycommands). section.
+If you only want to guest mode, jump to [category commands](#categorycommands) section.
 
 ## 2.2 User mode <a name="usermode"></a>
 
