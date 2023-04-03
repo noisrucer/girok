@@ -163,6 +163,8 @@ You can use Girok with two options
 2. `User mode`
    - Your data are stored in a centralized server. It means you can log in to your account to access your schedule anytime, anywhere.
 
+Keep in mind that you must log out first to switch to another state.
+
 ## 2.1 Guest mode <a name="guestmode"></a>
 
 ```bash
