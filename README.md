@@ -135,8 +135,6 @@ defaults write com.apple.finder CreateDesktop -bool true; killall Finder
 
 As I just found out about this transparency (and I'm lazy), I'll leave the below demonstrations as before. I'll update later.. :)
 
-p.s) Please upload images great for backgrounds in the issue (make sure to keep the copyrights) so that other people can see!
-
 ### Contribute your favorite background images! <a name="contributeimage"></a>
 
 If you think your background image is awesome, you can contribute by sharing it with other people! Please visit the [detailed guide](https://github.com/noisrucer/girok/tree/develop/background-images/README.md).
