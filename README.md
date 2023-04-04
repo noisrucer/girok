@@ -166,7 +166,7 @@ then you'll see the following help message
 You can use Girok with two options
 
 1. `Guest mode`
-   - Your data are stored in your local storage.
+   - Your data are stored in your local storage (no network required).
 2. `User mode`
    - Your data are stored in a centralized server. It means you can log in to your account to access your schedule anytime, anywhere.
 
