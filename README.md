@@ -354,8 +354,6 @@ Great job! Now let's move on to the task commands.
 girok addtask <task name> [One of deadline date options] [-c | --category <category path>] [-p | --priority <priority>] [-t | --time <deadline time>] [-T | --tag <tag name>]
 ```
 
-It looks quite complicated but don't worry! Let's go through some rules.
-
 #### 6.1.1 `addtask` rules
 
 1. `<task name>` (Argument / **Required**) - If the task name has no space you can omit double quotes `""`. If it does, enclose the task name by double quotes `""`
