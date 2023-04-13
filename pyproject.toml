@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "girok"
-version = "0.1.15"
-description = "Deadline options for chdate command. --yes option for done command"
+version = "0.1.16"
+description = "Moved resources directory from girok directory to root directory"
 authors = ["Jason Lee <changjin9792@gmail.com>"]
 readme = "README.md"
 

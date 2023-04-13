@@ -31,7 +31,7 @@ If you want to see the server source code, go to [**girokserver**](https://githu
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/changjin97z)
 
-# 🤖 Version `0.1.15` is released now!
+# 🤖 Version `0.1.16` is released now!
 
 - `Guest mode` - You can choose to log in as `guest mode` to save your data locally.
 - Currently, local data are not synchronized with the server. Synchronization with the server will be added in the upcoming release.
