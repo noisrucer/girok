@@ -2,7 +2,7 @@
 
 <h3 align="center"> Who said you cannot have a beautiful UI on terminal?</h4>
 
-<p align="center"><img src="girok/resources/girok-demo-transparent.gif"></img></center>
+<p align="center"><img src="/resources/girok-demo-transparent.gif"></img></center>
 
 (p.s. No one said it to me)
 
