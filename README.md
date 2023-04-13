@@ -161,12 +161,12 @@ then you'll see the following help message
 
 ![](images/girok-command-help.png)
 
-## 2. Guest mode / User mode <a name="mode"></a>
+## ⚙️ 2. Guest mode / User mode <a name="mode"></a>
 
 You can use Girok with two options
 
 1. `Guest mode`
-   - Your data are stored in your local storage.
+   - Your data are stored in your local storage (no network required).
 2. `User mode`
    - Your data are stored in a centralized server. It means you can log in to your account to access your schedule anytime, anywhere.
 
@@ -353,8 +353,6 @@ Great job! Now let's move on to the task commands.
 ```bash
 girok addtask <task name> [One of deadline date options] [-c | --category <category path>] [-p | --priority <priority>] [-t | --time <deadline time>] [-T | --tag <tag name>]
 ```
-
-It looks quite complicated but don't worry! Let's go through some rules.
 
 #### 6.1.1 `addtask` rules
 
