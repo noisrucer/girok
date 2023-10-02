@@ -1,5 +1,7 @@
 <h1 align="center">✏️ Girok - The most powerful CLI task manager</h1>
 
+[![Downloads](https://static.pepy.tech/badge/girok)](https://pepy.tech/project/girok)
+
 <h3 align="center"> Who said you cannot have a beautiful UI on terminal?</h4>
 
 <p align="center"><img src="/resources/girok-demo-transparent.gif"></img></center>
