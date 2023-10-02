@@ -30,11 +30,11 @@ class Entry(App):
     is_pop_up = False
     BINDINGS = [
         ("q", "quit", "Quit Nuro"),
-        ("u", "show_previous_month", "Show prev month"),
-        ("i", "show_next_month", "Show next month"),
-        ("y", "show_current_month", "Show current month"),
-        ("e", "focus_on_calendar", "Move to calendar"),
-        ("w", "focus_on_sidebar", "Move to sidebar"),
+        ("u,ctrl+up", "show_previous_month", "Show prev month"),
+        ("i,ctrl+down", "show_next_month", "Show next month"),
+        ("y,ctrl+u", "show_current_month", "Show current month"),
+        ("e,ctrl+right", "focus_on_calendar", "Move to calendar"),
+        ("w,ctrl+left", "focus_on_sidebar", "Move to sidebar"),
         ("ctrl+j", "move_down_to_tag_tree", "Move down to tag tree"),
         ("ctrl+k", "move_up_to_category_tree", "Move up to category tree"),
         ("o", 'close_pop_up', "Close pop up box"),
