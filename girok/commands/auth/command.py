@@ -10,7 +10,7 @@ from rich.style import Style
 from rich.text import Text
 
 import girok.api.auth as auth_api
-from girok.auth_handler import AuthHandler
+from girok.config.auth_handler import AuthHandler
 from girok.constants import DisplayBoxType
 from girok.utils.display import center_print
 
@@ -44,13 +44,9 @@ def register():
     )
     retry_count = 3
     while retry_count > 0:
-        verification_code = typer.prompt(
-            f"> Enter verification code [{retry_count} tries left]"
-        )
+        verification_code = typer.prompt(f"> Enter verification code [{retry_count} tries left]")
         retry_count -= 1
-        resp = auth_api.verify_verification_code(
-            email=email, verification_code=verification_code
-        )
+        resp = auth_api.verify_verification_code(email=email, verification_code=verification_code)
 
         if resp.is_success:
             break
@@ -76,9 +72,7 @@ def register():
         )
         raise typer.Exit()
 
-    resp = auth_api.register(
-        email=email, verification_code=verification_code, password=password
-    )
+    resp = auth_api.register(email=email, verification_code=verification_code, password=password)
     if not resp.is_success:
         center_print(resp.error_message, DisplayBoxType.ERROR)
         raise typer.Exit()
@@ -241,7 +235,6 @@ def register_welcome():
 
     print("\n" * 1)
     console.print(
-        " " * ((70 * screen_width) // 109 + 20)
-        + "Enter [green]girok login[/green] to log-in to your account."
+        " " * ((70 * screen_width) // 109 + 20) + "Enter [green]girok login[/green] to log-in to your account."
     )
     print("\n" * 10)

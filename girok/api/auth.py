@@ -16,9 +16,7 @@ def verify_access_token(access_token: str) -> bool:
 
 
 def send_verification_code(email: str) -> APIResponse:
-    resp = requests.post(
-        url=urljoin(BASE_URL, "auth/verification-code"), json={"email": email}
-    )
+    resp = requests.post(url=urljoin(BASE_URL, "auth/verification-code"), json={"email": email})
 
     try:
         resp.raise_for_status()
@@ -68,9 +66,7 @@ def register(email: str, verification_code: str, password: str) -> APIResponse:
 
 
 def login(email: str, password: str) -> APIResponse:
-    resp = requests.post(
-        url=urljoin(BASE_URL, "login"), json={"email": email, "password": password}
-    )
+    resp = requests.post(url=urljoin(BASE_URL, "login"), json={"email": email, "password": password})
 
     try:
         resp.raise_for_status()

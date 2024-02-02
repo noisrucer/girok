@@ -5,7 +5,7 @@ from rich import print
 
 import girok.commands.auth.command as auth_command
 import girok.commands.category.command as category_command
-from girok.auth_handler import AuthHandler
+from girok.config.auth_handler import AuthHandler
 from girok.constants import VERSION, CommandName
 
 app = typer.Typer(
@@ -48,9 +48,7 @@ def pre_command_callback(ctx: typer.Context):
     # Login required commands
     else:
         if not is_logged_in:
-            print(
-                "[red]You're not logged in. Please login with [/red][yellow]girok login[/yellow]."
-            )
+            print("[red]You're not logged in. Please login with [/red][yellow]girok login[/yellow].")
             raise typer.Exit()
 
 

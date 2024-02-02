@@ -36,18 +36,23 @@ class DisplayBoxType(Enum):
         self.bg_color_hex = bg_color_hex
 
 
+class DisplayArrowType(Enum):
+    INFO = "yellow"
+    ERROR = "bright_red"
+
+
 # Emojis
 class Emoji:
     LEFT_ARROW = "⬅"
     CIRCLE = "●"
 
 
-# Color Pallete
-COLOR_PALETTE = {
+# Color Palette
+CATEGORY_COLOR_PALETTE = {
     "GREYISH_YELLOW": "#F1DB76",
     "LIME": "#E7F8CC",
     "BEIGE": "#E7F8CC",
-    "LIGHT_PINK": "#8C0CB",
+    "LIGHT_PINK": "#E8C0CB",
     "GREYISH_GREEN": "#97C1A9",
     "GREYISH_BLUE": "#B0C1D5",
     "CLOUDY": "#94C7CB",
@@ -60,4 +65,23 @@ COLOR_PALETTE = {
     "THOMAS": "#B19C89",
 }
 
-DEFAULT_ITEM_COLOR = "#D7C8B7"
+# Automatic category color assignment order
+CATEGORY_COLOR_AUTO_ASSIGNMENT_ORDER = [
+    "GREYISH_YELLOW",
+    "ROLLER_RINK",
+    "GREYISH_BLUE",
+    "GREYISH_GREEN",
+    "LAVENDER",
+    "LIME",
+    "LIGHT_CHOCO",
+    "NEON",
+    "THOMAS",
+    "MINT",
+    "BEIGE",
+    "CLOUDY",
+    "CORN",
+    "LIGHT_PINK"
+]
+
+DEFAULT_CATEGORY_TEXT_COLOR = "#D7C8B7"
+HIGHLIGHT_CATEGORY_TEXT_COLOR = "#B9D66A"
