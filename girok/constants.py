@@ -1,53 +1,63 @@
-DISPLAY_TERMINAL_COLOR_TITLE_TEXT = "#000000"
-DISPLAY_TERMINAL_COLOR_TITLE_BACKGROUND = "#F6DA75"
-DISPLAY_TERMINAL_COLOR_SUCCESS_TEXT = "#000000"
-DISPLAY_TERMINAL_COLOR_SUCCESS_BACKGROUND = "#B0D78F"
-DISPLAY_TERMINAL_COLOR_ERROR_TEXT = "#000000"
-DISPLAY_TERMINAL_COLOR_ERROR_BACKGROUND = "#FFAFB0"
-DISPLAY_TERMINAL_COLOR_WARNING_TEXT = "#000000"
-DISPLAY_TERMINAL_COLOR_WARNING_BACKGROUND = "#F2CFA5"
+import os
+from enum import Enum
 
-DISPLAY_TERMINAL_COLOR_TITLE = "cyan on purple3"
-DISPLAY_TERMINAL_COLOR_SUCCESS = "black on green"
-DISPLAY_TERMINAL_COLOR_ERROR = "black on red"
-DISPLAY_TERMINAL_COLOR_WARNING = "black on bright_red"
+import typer
 
-DEFAULT_TASK_COLOR = "grey"
-
-BORDER_COLOR = ""
-DEFAULT_BACKGROUND_COLOR = "#171921"
-DEFAULT_FONT_COLOR = "#8f929b"
-TASK_COLOR = ""
-CALENDAR_DATE_COLOR = "red"
-CATEGORY_COLOR = ""
-
-# Calendar date
-CALENDAR_HEADER_DATE_COLOR = "#F6E2B2"
-CALENDAR_WEEKDAY_NAME_COLOR = "#E6E0DB"
-CALENDAR_TODAY_COLOR = "#FADD70"
+# App Config
+# BASE_URL = "http://girok-server-balancer-1565927748.ap-northeast-1.elb.amazonaws.com:8080/"
+BASE_URL = "http://localhost:8080/api/v1/"
+APP_NAME = "girok"
+APP_DIR = typer.get_app_dir(APP_NAME)
+CONFIG_PATH = os.path.join(APP_DIR, "config.json")
+VERSION = "0.2.0"
 
 
-# Pop up box
-TABLE_TASK_NAME_COLOR = "#FAC7C1"
-TABLE_TEXT_COLOR = "#D7C8B7"
-TABLE_HEADER_COLOR = "#D7E1C9"
-TABLE_HEADER_DATE_COLOR = "#E8E5DA"
-TABLE_DEADLINE_COLOR = "#A8CCDC"
-TABLE_TASK_HIGHLIGHT_COLOR = "#B1EEC9"
-TABLE_TASK_DELETED_COLOR = "#808080"
+# Commands
+class CommandName:
 
-# EMOJI
-LEFT_ARROW_EMOJI = "⬅"
-CIRCLE_EMOJI = "●"
+    # Utility Commands
+    VERSION = "version"
+
+    # Auth Commands
+    REGISTER = "register"
+    LOGIN = "login"
+    LOGOUT = "logout"
 
 
-CIRCLE_COLOR = {
-    "yellow": "#f9e316",
-    "green": "#29f429",
-    "orange": "#EF5D0C",
-    "white": "#E4DCCE",
-    "brown": "#8F4802",
-    "blue": "#6893F8",
-    "grey": "#808080"
+# Terminal display color
+class DisplayBoxType(Enum):
+    TITLE = ("#000000", "#F6DA75")
+    SUCCESS = ("#000000", "#B0D78F")
+    ERROR = ("#000000", "#FFAFB0")
+    WARNING = ("#000000", "#F2CFA5")
+
+    def __init__(self, text_color_hex: str, bg_color_hex: str):
+        self.text_color_hex = text_color_hex
+        self.bg_color_hex = bg_color_hex
+
+
+# Emojis
+class Emoji:
+    LEFT_ARROW = "⬅"
+    CIRCLE = "●"
+
+
+# Color Pallete
+COLOR_PALETTE = {
+    "GREYISH_YELLOW": "#F1DB76",
+    "LIME": "#E7F8CC",
+    "BEIGE": "#E7F8CC",
+    "LIGHT_PINK": "#8C0CB",
+    "GREYISH_GREEN": "#97C1A9",
+    "GREYISH_BLUE": "#B0C1D5",
+    "CLOUDY": "#94C7CB",
+    "LAVENDER": "#C6C1EA",
+    "CORN": "#FFD3B6",
+    "MINT": "#B0E7EC",
+    "NEON": "#E1E85E",
+    "ROLLER_RINK": "#FF9B7B",
+    "LIGHT_CHOCO": "#CD9677",
+    "THOMAS": "#B19C89",
 }
 
+DEFAULT_ITEM_COLOR = "#D7C8B7"
