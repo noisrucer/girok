@@ -6,7 +6,7 @@ from girok.utils.json_utils import read_json, update_json, write_json
 
 
 class AuthHandler:
-    
+
     @classmethod
     def init(cls) -> None:
         # Ensure application directory exists

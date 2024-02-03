@@ -31,7 +31,7 @@ def pre_command_callback(ctx: typer.Context):
     AuthHandler.init()
 
     # Utility commands
-    if cmd in [CommandName.VERSION]:
+    if cmd in [CommandName.VERSION, CommandName.COLORS]:
         return
 
     """

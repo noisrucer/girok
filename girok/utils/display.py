@@ -6,7 +6,7 @@ from rich.console import Console
 from rich.style import Style
 from rich.text import Text
 
-from girok.constants import DisplayBoxType, DisplayArrowType
+from girok.constants import DisplayArrowType, DisplayBoxType
 
 console = Console()
 

@@ -7,13 +7,14 @@ from rich.text import Text
 from rich.tree import Tree
 
 from girok.constants import (
+    CATEGORY_COLOR_AUTO_ASSIGNMENT_ORDER,
     CATEGORY_COLOR_PALETTE,
+    CONFIG_PATH,
     DEFAULT_CATEGORY_TEXT_COLOR,
     HIGHLIGHT_CATEGORY_TEXT_COLOR,
     DisplayBoxType,
     Emoji,
 )
-from girok.constants import CONFIG_PATH, CATEGORY_COLOR_AUTO_ASSIGNMENT_ORDER
 from girok.utils.json_utils import read_json, update_json
 
 console = Console()
@@ -80,6 +81,16 @@ def display_category_subtree(
         )
 
 
+def display_category_color_palette() -> None:
+    tree = Tree("Supported category colors")
+    for color_name, hex in CATEGORY_COLOR_PALETTE.items():
+        circle_text = Text(text=Emoji.CIRCLE, style=Style(color=CATEGORY_COLOR_PALETTE[color_name]))
+        category_name_text = Text(text=f"{color_name} ({hex})", style=Style(color=DEFAULT_CATEGORY_TEXT_COLOR))
+        item_text = Text.assemble(circle_text, " ", category_name_text)
+        tree.add(item_text)
+    console.print(tree)
+
+
 def get_next_category_color() -> str:
     cfg = read_json(CONFIG_PATH)
 
@@ -87,7 +98,7 @@ def get_next_category_color() -> str:
         next_category_color_idx = cfg["next_category_color_idx"]
     else:
         next_category_color_idx = 0
-    
+
     next_category_color = CATEGORY_COLOR_AUTO_ASSIGNMENT_ORDER[next_category_color_idx]
     next_category_color_idx = (next_category_color_idx + 1) % len(CATEGORY_COLOR_AUTO_ASSIGNMENT_ORDER)
     update_json(CONFIG_PATH, {"next_category_color_idx": next_category_color_idx})

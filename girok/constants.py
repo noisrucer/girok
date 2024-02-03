@@ -23,6 +23,9 @@ class CommandName:
     LOGIN = "login"
     LOGOUT = "logout"
 
+    # Category Commands
+    COLORS = "colors"
+
 
 # Terminal display color
 class DisplayBoxType(Enum):
@@ -80,7 +83,7 @@ CATEGORY_COLOR_AUTO_ASSIGNMENT_ORDER = [
     "BEIGE",
     "CLOUDY",
     "CORN",
-    "LIGHT_PINK"
+    "LIGHT_PINK",
 ]
 
 DEFAULT_CATEGORY_TEXT_COLOR = "#D7C8B7"
