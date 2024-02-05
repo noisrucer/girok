@@ -66,6 +66,7 @@ def get_all_tasks(
     category_id: Optional[int] = None,
     priority: Optional[str] = None,
     tags: Optional[List[str]] = None,
+    fetch_children: bool = False
 ):
     params = {
         "startDate": start_date,
@@ -73,6 +74,7 @@ def get_all_tasks(
         "categoryId": category_id,
         "priority": priority,
         "tags": tags,
+        "fetchCategoryChildren": fetch_children
     }
 
     access_token = AuthHandler.get_access_token()
@@ -108,5 +110,25 @@ def remove_event(event_id: int):
             error_message = error_body["message"]
         except:
             error_message = "Failed to retrieve tasks"
+
+        return APIResponse(is_success=False, error_message=error_message)
+
+
+def get_all_tags():
+    access_token = AuthHandler.get_access_token()
+    resp = requests.get(
+        url=urljoin(BASE_URL, "tags"),
+        headers={"Authorization": "Bearer " + access_token}
+    )
+
+    try:
+        resp.raise_for_status()
+        return APIResponse(is_success=True, body=resp.json())
+    except HTTPError:
+        try:
+            error_body = resp.json()
+            error_message = error_body["message"]
+        except:
+            error_message = "Failed to retrieve tags"
 
         return APIResponse(is_success=False, error_message=error_message)

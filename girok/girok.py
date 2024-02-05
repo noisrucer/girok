@@ -6,6 +6,7 @@ from rich import print
 import girok.commands.auth.command as auth_command
 import girok.commands.category.command as category_command
 import girok.commands.task.command as task_command
+import girok.commands.calendar.command as calendar_command
 from girok.config.auth_handler import AuthHandler
 from girok.constants import VERSION, CommandName
 
@@ -17,6 +18,7 @@ app = typer.Typer(
 app.registered_commands.extend(auth_command.app.registered_commands)
 app.registered_commands.extend(category_command.app.registered_commands)
 app.registered_commands.extend(task_command.app.registered_commands)
+app.registered_commands.extend(calendar_command.app.registered_commands)
 
 
 @app.command("version")

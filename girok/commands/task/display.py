@@ -193,6 +193,7 @@ def display_events_by_list(
 
     cache_event_ids(event_ids_cache)
     print(Align(table, align="center"))
+    return table
 
 
 def display_events_by_tree(

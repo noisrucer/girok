@@ -29,3 +29,16 @@ def build_date_info(dt: datetime):
     month_name = calendar.month_name[month]
     weekday_name = calendar.day_name[dt.weekday()]
     return f"{weekday_name}, {month_name} {day}, {year}"
+
+
+def get_year_and_month_by_month_offset(month_offset: int, year=None, month=None):
+    if year is None and month is None:
+        now = datetime.now()
+        year, month = now.year, now.month
+    new_months = year * 12 + month + month_offset
+    new_year = new_months // 12
+    new_month = new_months % 12
+    if new_month == 0:  # (1 - 1) % 12 = 0.
+        new_year -= 1
+        new_month = 12
+    return new_year, new_month
