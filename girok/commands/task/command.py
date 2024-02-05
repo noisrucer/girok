@@ -470,3 +470,172 @@ def map_to_event_entities(events: List[dict]) -> List[Event]:
     event_entities.sort(key=sort_key)
     return event_entities
 
+
+@app.command(
+    "uptask",
+    help="[yellow]Update[/yellow] a new task",
+    rich_help_panel=":fire: [bold yellow1]Task Commands[/bold yellow1]",
+)
+def update_task(
+    event_id: Annotated[
+        int,
+        typer.Argument(
+            help="[yellow]Task ID[/yellow]"
+        )
+    ],
+    name: Annotated[
+        Optional[str],
+        typer.Option(
+            '-n', '--name',
+            help="Task name"
+        )
+    ] = None,
+    start_datetime: Annotated[
+        Optional[str],
+        typer.Option("-d", "--date", help="[yellow]Task start datetime[/yellow]", callback=datetime_callback)
+    ] = None,
+    end_datetime: Annotated[
+        Optional[str],
+        typer.Option("-e", "--end", help="[yellow]Task end datetime[/yellow]", callback=datetime_callback),
+    ] = None,
+    repetition: Annotated[
+        Optional[str],
+        typer.Option(
+            "-r",
+            "--repetition",
+            help="[yellow]Task repetition type. One of 'daily', 'weekly', 'monthly', 'yearly'[/yellow]",
+        ),
+    ] = None,
+    category_path: Annotated[
+        Optional[str],
+        typer.Option(
+            "-c",
+            "--category",
+            help="[yellow]Category path - xx/yy/zz..[/yellow]",
+            callback=allow_empty_category_callback,
+        ),
+    ] = None,
+    tags: Annotated[
+        Optional[str],
+        typer.Option(
+            "-t",
+            "--tag",
+            help="[yellow]Tags[/yellow]. Multiple tags must be provided in 'A,B,C' format.",
+            callback=tags_callback,
+        ),
+    ] = None,
+    priority: Annotated[
+        Optional[str], typer.Option("-p", "--priority", help="[yellow]Priority[/yellow]", callback=priority_callback)
+    ] = None,
+    memo: Annotated[Optional[str], typer.Option("-m", "--memo", help="[yellow]Memo[/yellow]")] = None,
+):
+    try:
+        cache = read_json(EVENT_IDS_CACHE_PATH)
+    except:
+        center_print("First type 'showtask' command to retrieve task ids", DisplayBoxType.ERROR)
+        raise typer.Exit()
+
+    if str(event_id) not in cache:
+        center_print(f"Task id {event_id} is not found. Please enter 'showtask' command to view task ids.", DisplayBoxType.ERROR)
+        raise typer.Exit()
+    cached_event = cache[str(event_id)]
+
+    target_event_id = cached_event["id"]
+
+    """
+    Validate time combination. The possible combinations are:
+    1. start_date
+    2. start_date, start_time
+    3. start_date, end_date
+    4. start_date, start_time, end_date, end_time
+    """
+    start_date, start_time = None, None
+    if start_datetime:
+        start_date, start_time = start_datetime
+
+    end_date, end_time = None, None
+    if end_datetime:
+        end_date, end_time = end_datetime
+    
+    if start_date or start_time or end_date or end_time:
+        valid, err_msg = validate_start_end_window(start_date, start_time, end_date, end_time)
+        if not valid:
+            raise typer.BadParameter(err_msg)
+
+    # Convert tags to list
+    if tags:
+        tags = tags.split(",")
+
+    # Validate repetition
+    repetition_type = None
+    repetition_end_date = None
+    if repetition:
+        # Repetition is only allowed for single-day event
+        if (start_date and end_date) and (start_date != end_date):
+            raise typer.BadParameter("Repetition is only allowed for single-day event")
+
+        if "@" not in repetition:  # daily
+            if repetition not in REPETITION_TYPE:
+                raise typer.BadParameter("Repetition type must be one of 'daily', 'weekly', 'monthly', 'yearly'")
+            repetition_type = repetition
+        else:  # daily@5/14
+            repetition_items = repetition.split("@")
+            if len(repetition_items) != 2:
+                raise typer.BadParameter("Invalid repetition input format")
+
+            repetition_type, repetition_end_date_str = repetition_items
+            if repetition_type not in REPETITION_TYPE:
+                raise typer.BadParameter("Repetition type must be one of 'daily', 'weekly', 'monthly', 'yearly'")
+
+            valid, iso_date_str = decode_date_format(repetition_end_date_str)
+            if not valid:
+                raise typer.BadParameter("Invalid repetition end date format")
+
+            repetition_end_date = iso_date_str
+
+            # Repetition end date must be greater than start_date
+            repetition_end_date_obj = datetime.strptime(repetition_end_date, "%Y-%m-%d").date()
+            start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
+            if repetition_end_date_obj <= start_date_obj:
+                raise typer.BadParameter("Repetition end date must be greater than start date")
+
+        repetition_type = REPETITION_TYPE[repetition_type]
+
+    
+    # Get the target event
+    resp = task_api.get_single_event(target_event_id)
+    if not resp.is_success:
+        center_print(resp.error_message, DisplayBoxType.ERROR)
+        raise typer.Exit()
+    event = resp.body
+
+    if category_path is None:
+        category_path = '/'.join([c['categoryName'] for c in event['categoryPath']])    
+
+    resp = task_api.update_task(
+        event_id=target_event_id,
+        name=name if name else event['name'],
+        start_date=start_date if start_date else event['eventDate']['startDate'],
+        start_time=start_time if start_time else event['eventDate']['startTime'],
+        end_date=end_date if end_date else event['eventDate']['endDate'],
+        end_time=end_time if end_time else event['eventDate']['endTime'],
+        repetition_type=repetition_type if repetition_type else event['repetition']['repetitionType'],
+        repetition_end_date=repetition_end_date if repetition_end_date else event['repetition']['repetitionEndDate'],
+        category_path=category_path,
+        tags=tags if tags else event['tags'],
+        priority=priority if priority else event['priority'],
+        memo=memo if memo else event['memo'],
+    )
+    if not resp.is_success:
+        center_print(resp.error_message, DisplayBoxType.ERROR)
+        raise typer.Exit()
+
+    # Display Tasks
+    resp = task_api.get_all_tasks()
+    if not resp.is_success:
+        center_print(resp.error_message, DisplayBoxType.ERROR)
+        raise typer.Exit()
+
+    events = resp.body["events"]
+    event_entities = map_to_event_entities(events)
+    display_events_by_list(event_entities, highlight_event_id=target_event_id, highlight_action="highlight")
