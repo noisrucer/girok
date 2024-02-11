@@ -1,291 +1,213 @@
-from typing import Union
-from textual import log
-from datetime import datetime
+from typing import List, Optional
+from urllib.parse import urljoin
+
 import requests
+from requests import HTTPError
 
-from girok.config import get_config
-import girok.utils.auth as auth_utils
-import girok.utils.display as display_utils
-import girok.utils.general as general_utils
-import girok.utils.task as task_utils
-import girok.constants as constants
-
-import girok.server.src.task.router as task_router
-
-cfg = get_config()
-
-def create_task(task_data: dict):
-    mode = auth_utils.get_mode(cfg.config_path)
-    if mode == "user":
-        resp = requests.post(
-            cfg.base_url + "/tasks",
-            json=task_data,
-            headers=auth_utils.build_jwt_header(cfg.config_path)
-        )
-        if resp.status_code == 201:
-            task = general_utils.bytes2dict(resp.content)
-            task_id = task['task_id']
-            return task_id
-        elif resp.status_code == 400:
-            err_msg = general_utils.bytes2dict(resp.content)['detail']
-            display_utils.center_print(err_msg, constants.DISPLAY_TERMINAL_COLOR_ERROR)
-            exit(0)
-        else:
-            display_utils.center_print("Error occurred.", constants.DISPLAY_TERMINAL_COLOR_ERROR)
-            exit(0)
-    elif mode == "guest":
-        resp = task_router.create_task(task_data)
-        if resp['success']:
-            task = resp['new_task']
-            task_id = task['task_id']
-            return task_id
-        else:
-            display_utils.center_print(resp['detail'], type="error")
-            exit(0)
-    exit(0) 
+from girok.api.category import get_category_id_by_path
+from girok.api.entity import APIResponse
+from girok.config.auth_handler import AuthHandler
+from girok.constants import BASE_URL
 
 
-def get_single_task(task_id: int):
-    mode = auth_utils.get_mode(cfg.config_path)
-    if mode == "user":
-        resp = requests.get(
-            cfg.base_url + f"/tasks/{task_id}",
-            headers=auth_utils.build_jwt_header(cfg.config_path),
-        )
-        if resp.status_code == 200:
-            task = general_utils.bytes2dict(resp.content)
-            return task
-        elif resp.status_code == 400:
-            err_msg = general_utils.bytes2dict(resp.content)['detail']
-            display_utils.center_print(err_msg, type="error")
-        else:
-            display_utils.center_print(resp.content, type="error")
-    elif mode == "guest":
-        resp = task_router.get_single_task(task_id)
-        if resp['success']:
-            task = resp['task']
-            return task
-        else:
-            display_utils.center_print(resp['detail'], type="error")
-    exit(0)
+def create_task(
+    name: str,
+    start_date: str,
+    start_time: Optional[str],
+    end_date: Optional[str],
+    end_time: Optional[str],
+    repetition_type: Optional[str],
+    repetition_end_date: Optional[str],
+    category_path: Optional[str],
+    tags: Optional[List[str]],
+    priority: Optional[str],
+    memo: Optional[str],
+) -> APIResponse:
+    access_token = AuthHandler.get_access_token()
 
-
-def get_tasks(
-    cats: Union[list, None] = None,
-    start_date: Union[str, None] = None,
-    end_date: Union[str, None] = None,
-    tag: Union[str, None] = None,
-    priority: Union[int, None] = None,
-    no_priority: bool = False,
-    view: str = "category"
-):
-    mode = auth_utils.get_mode(cfg.config_path)
-    query_str_obj = {
-        "category": cats,
-        "start_date": start_date,
-        "end_date": end_date,
-        "tag": tag,
+    # Resolve target category id
+    category_id = None
+    if category_path is not None:
+        category_path_list = category_path.split("/")
+        if category_path == '':
+            category_path_list = []
+        resp = get_category_id_by_path(category_path_list)
+        if not resp.is_success:
+            return resp
+        category_id = resp.body["categoryId"]
+    request_body = {
+        "categoryId": category_id,
+        "name": name,
+        "eventDate": {"startDate": start_date, "startTime": start_time, "endDate": end_date, "endTime": end_time},
+        "repetition": {"repetitionType": repetition_type, "repetitionEndDate": repetition_end_date},
+        "tags": tags,
         "priority": priority,
-        "no_priority": no_priority,
-        "view": view
+        "memo": memo,
     }
-    if mode == "user":
-        resp = requests.get(
-            cfg.base_url + "/tasks",
-            headers=auth_utils.build_jwt_header(cfg.config_path),
-            params=query_str_obj
-        )
-        if resp.status_code == 200:
-            return general_utils.bytes2dict(resp.content)['tasks']
-        if resp.status_code == 400:
-            err_msg = general_utils.bytes2dict(resp.content)['detail']
-            display_utils.center_print(err_msg, type="error")
-            exit(0)
-        elif resp.status_code:
-            display_utils.center_print("Error occurred.", type="title")
-            exit(0)
-    elif mode == "guest":
-        resp = task_router.get_tasks(query_str_obj)
-        if resp['success']:
-            return resp['tasks']
-        else:
-            display_utils.center_print(resp['detail'], type="error")
-            
-    exit(0)
+
+    resp = requests.post(
+        url=urljoin(BASE_URL, "events"), headers={"Authorization": "Bearer " + access_token}, json=request_body
+    )
+
+    try:
+        resp.raise_for_status()
+        return APIResponse(is_success=True, body=resp.json())
+    except HTTPError:
+        try:
+            error_body = resp.json()
+            error_message = error_body["message"]
+        except:
+            error_message = "Failed to create a new task"
+
+        return APIResponse(is_success=False, error_message=error_message)
 
 
-def remove_task(task_id: int):
-    mode = auth_utils.get_mode(cfg.config_path)
-    if mode == "user":
-        resp = requests.delete(
-            cfg.base_url + f"/tasks/{task_id}",
-            headers=auth_utils.build_jwt_header(cfg.config_path),
-        )
-        if resp.status_code == 204:
-            return True
-        elif resp.status_code == 400:
-            err_msg = general_utils.bytes2dict(resp.content)['detail']
-            display_utils.center_print(err_msg, type="error")
-        else:
-            display_utils.center_print(resp.content, type="error")
-    elif mode == "guest":
-        resp = task_router.delete_task(task_id)
-        if resp['success']:
-            return True
-        else:
-            display_utils.center_print(resp['detail'], type="error") 
-    exit(0)
+def update_task(
+    event_id: int,
+    name: str,
+    start_date: str,
+    start_time: Optional[str],
+    end_date: Optional[str],
+    end_time: Optional[str],
+    repetition_type: Optional[str],
+    repetition_end_date: Optional[str],
+    category_path: Optional[str],
+    tags: Optional[List[str]],
+    priority: Optional[str],
+    memo: Optional[str],
+) -> APIResponse:
+    access_token = AuthHandler.get_access_token()
 
-def get_tags():
-    mode = auth_utils.get_mode(cfg.config_path)
-    if mode == "user":
-        resp = requests.get(
-            cfg.base_url + "/tasks/tags",
-            headers=auth_utils.build_jwt_header(cfg.config_path)
-        )
-        if resp.status_code == 200:
-            return general_utils.bytes2dict(resp.content)['tags']
-        elif resp.status_code == 400:
-            err_msg = general_utils.bytes2dict(resp.content)['detail']
-            display_utils.center_print(err_msg, type="error")
-            exit(0)
-        else:
-            exit(0)
-    elif mode == "guest":
-        resp = task_router.get_tags()
-        if resp['success']:
-            return resp['tags']
-        else:
-            display_utils.center_print(resp['detail'], type="error")
-    exit(0)
-            
-    
-def change_task_tag(task_id: int, new_tag_name: str):
-    mode = auth_utils.get_mode(cfg.config_path)
-    if mode == "user":
-        resp = requests.patch(
-            cfg.base_url + f"/tasks/{task_id}/tag",
-            headers=auth_utils.build_jwt_header(cfg.config_path),
-            json={
-                "new_tag_name": new_tag_name
-            }
-        )
-        
-        if resp.status_code == 200:
-            task = general_utils.bytes2dict(resp.content)
-            task_name = task['name']
-            display_utils.center_print(f"Successfully changed [{task_name}]'s tag to {new_tag_name}.", type="success")
-            return
-        elif resp.status_code == 400:
-            err_msg = general_utils.bytes2dict(resp.content)['detail']
-            display_utils.center_print(err_msg, type="error")
-        else:
-            display_utils.center_print(resp.content, type="error")
-    elif mode == "guest":
-        resp = task_router.change_task_tag(task_id, {"new_tag_name": new_tag_name})
-        if resp['success']:
-            task = resp['updated_task']
-            task_name = task['name']
-            display_utils.center_print(f"Successfully changed [{task_name}]'s tag to {new_tag_name}.", type="success")
-            return
-        else:
-            display_utils.center_print(resp['detail'], constants.DISPLAY_TERMINAL_COLOR_ERROR)
-    exit(0)
-        
-        
-def change_task_priority(task_id: int, new_priority: int):
-    mode = auth_utils.get_mode(cfg.config_path)
-    if mode == "user":
-        resp = requests.patch(
-            cfg.base_url + f"/tasks/{task_id}/priority",
-            headers=auth_utils.build_jwt_header(cfg.config_path),
-            json={
-                "new_priority": new_priority
-            }
-        )
-        
-        if resp.status_code == 200:
-            task = general_utils.bytes2dict(resp.content)
-            task_name = task['name']
-            display_utils.center_print(f"Successfully changed [{task_name}]'s priority to {new_priority}.", type="success")
-            return
-        elif resp.status_code == 400:
-            err_msg = general_utils.bytes2dict(resp.content)['detail']
-            display_utils.center_print(err_msg, type="error")
-        else:
-            display_utils.center_print(resp.content, type="error")
-    elif mode == "guest":
-        resp = task_router.change_task_priority(task_id, {"new_priority": new_priority})
-        if resp['success']:
-            task = resp['updated_task']
-            task_name = task['name']
-            display_utils.center_print(f"Successfully changed [{task_name}]'s priority to {new_priority}.", type="success")
-            return
-        else:
-            display_utils.center_print(resp['detail'], type="error")
-    exit(0)
-            
+    # Resolve target category id
+    category_id = None
+    if category_path is not None:
+        category_path_list = category_path.split("/")
+        if category_path == '':
+            category_path_list = []
+        resp = get_category_id_by_path(category_path_list)
+        if not resp.is_success:
+            return resp
+        category_id = resp.body["categoryId"]
 
-        
-def change_task_name(task_id: int, new_name: str):
-    mode = auth_utils.get_mode(cfg.config_path)
-    if mode == "user":
-        resp = requests.patch(
-            cfg.base_url + f"/tasks/{task_id}/name",
-            headers=auth_utils.build_jwt_header(cfg.config_path),
-            json={
-                "new_name": new_name
-            }
-        )
-        
-        if resp.status_code == 200:
-            task = general_utils.bytes2dict(resp.content)
-            task_name = task['name']
-            display_utils.center_print(f"Successfully changed [{task_name}]'s name to {new_name}.", type="success")
-            return
-        elif resp.status_code == 400:
-            err_msg = general_utils.bytes2dict(resp.content)['detail']
-            display_utils.center_print(err_msg, constants.DISPLAY_TERMINAL_COLOR_ERROR)
-        else:
-            display_utils.center_print(resp.content, constants.DISPLAY_TERMINAL_COLOR_ERROR)
-    elif mode == "guest":
-        resp = task_router.change_task_name(task_id, {"new_name": new_name})
-        if resp['success']:
-            task = resp['updated_task']
-            task_name = task['name']
-            display_utils.center_print(f"Successfully changed [{task_name}]'s name to {new_name}.", type="success")
-            return
-        else:
-            display_utils.center_print(resp['detail'], constants.DISPLAY_TERMINAL_COLOR_ERROR)
-    exit(0)
-        
+    request_body = {
+        "categoryId": category_id,
+        "name": name,
+        "eventDate": {"startDate": start_date, "startTime": start_time, "endDate": end_date, "endTime": end_time},
+        "repetition": {"repetitionType": repetition_type, "repetitionEndDate": repetition_end_date},
+        "tags": tags,
+        "priority": priority,
+        "memo": memo,
+    }
 
-def change_task_date(task_id: int, new_date: str):
-    mode = auth_utils.get_mode(cfg.config_path)
-    if mode == "user":
-        resp = requests.patch(
-            cfg.base_url + f"/tasks/{task_id}/date",
-            headers=auth_utils.build_jwt_header(cfg.config_path),
-            json={
-                "new_date": new_date
-            }
-        )
-        
-        if resp.status_code == 200:
-            task = general_utils.bytes2dict(resp.content)
-            task_name = task['name']
-            display_utils.center_print(f"Successfully changed [{task_name}]'s date to {new_date.split()[0]}.", type="success")
-        elif resp.status_code == 400:
-            err_msg = general_utils.bytes2dict(resp.content)['detail']
-            display_utils.center_print(err_msg, type="error")
-        else:
-            display_utils.center_print(resp.content, type="error")
-    elif mode == "guest":
-        resp = task_router.change_task_date(task_id, {"new_date": new_date})
-        if resp['success']:
-            task = resp['updated_task']
-            task_name = task['name']
-            display_utils.center_print(f"Successfully changed [{task_name}]'s date to {new_date.split()[0]}.", type="success")
-        else:
-            display_utils.center_print(resp['detail'], type="error")
-    exit(0)
+    resp = requests.put(
+        url=urljoin(BASE_URL, f"events/{event_id}"),
+        headers={"Authorization": "Bearer " + access_token},
+        json=request_body
+    )
+
+    try:
+        resp.raise_for_status()
+        return APIResponse(is_success=True)
+    except HTTPError:
+        try:
+            error_body = resp.json()
+            error_message = error_body["message"]
+        except:
+            error_message = "Failed to create a new task"
+
+        return APIResponse(is_success=False, error_message=error_message)
+
+
+
+def get_single_event(event_id: int) -> APIResponse:
+    access_token = AuthHandler.get_access_token()
+    resp = requests.get(
+        url=urljoin(BASE_URL, f"events/{event_id}"),
+        headers={"Authorization": "Bearer " + access_token}
+    )
+
+    try:
+        resp.raise_for_status()
+        return APIResponse(is_success=True, body=resp.json())
+    except HTTPError:
+        try:
+            error_body = resp.json()
+            error_message = error_body["message"]
+        except:
+            error_message = "Failed to retrieve a task"
+
+        return APIResponse(is_success=False, error_message=error_message)
+
+
+def get_all_tasks(
+    start_date: Optional[str] = "2000-01-01",
+    end_date: Optional[str] = "2050-01-01",
+    category_id: Optional[int] = None,
+    priority: Optional[str] = None,
+    tags: Optional[List[str]] = None,
+    fetch_children: bool = False
+):
+    params = {
+        "startDate": start_date,
+        "endDate": end_date,
+        "categoryId": category_id,
+        "priority": priority,
+        "tags": tags,
+        "fetchCategoryChildren": fetch_children
+    }
+
+    access_token = AuthHandler.get_access_token()
+    resp = requests.get(
+        url=urljoin(BASE_URL, "events"), headers={"Authorization": "Bearer " + access_token}, params=params
+    )
+
+    try:
+        resp.raise_for_status()
+        return APIResponse(is_success=True, body=resp.json())
+    except HTTPError:
+        try:
+            error_body = resp.json()
+            error_message = error_body["message"]
+        except:
+            error_message = "Failed to retrieve tasks"
+
+        return APIResponse(is_success=False, error_message=error_message)
+
+
+def remove_event(event_id: int):
+    access_token = AuthHandler.get_access_token()
+    resp = requests.delete(
+        url=urljoin(BASE_URL, f"events/{event_id}"), headers={"Authorization": "Bearer " + access_token}
+    )
+
+    try:
+        resp.raise_for_status()
+        return APIResponse(is_success=True)
+    except HTTPError:
+        try:
+            error_body = resp.json()
+            error_message = error_body["message"]
+        except:
+            error_message = "Failed to retrieve tasks"
+
+        return APIResponse(is_success=False, error_message=error_message)
+
+
+def get_all_tags():
+    access_token = AuthHandler.get_access_token()
+    resp = requests.get(
+        url=urljoin(BASE_URL, "tags"),
+        headers={"Authorization": "Bearer " + access_token}
+    )
+
+    try:
+        resp.raise_for_status()
+        return APIResponse(is_success=True, body=resp.json())
+    except HTTPError:
+        try:
+            error_body = resp.json()
+            error_message = error_body["message"]
+        except:
+            error_message = "Failed to retrieve tags"
+
+        return APIResponse(is_success=False, error_message=error_message)

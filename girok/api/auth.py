@@ -1,54 +1,81 @@
+from urllib.parse import urljoin
+
 import requests
-from girok.config import get_config
-import girok.utils.general as general_utils
-import girok.utils.display as display_utils
+from requests import HTTPError
 
-cfg = get_config()
-
-base_url = cfg.base_url 
-
-def register(email, password):
-    resp = requests.post(base_url + "/register", json={
-        "email": email,
-        "password": password
-    })
-    return resp
-
-def verify_verification_code(email, verification_code):
-    resp = requests.post(base_url + "/register/verification_code", json={
-        "email": email,
-        "verification_code": verification_code
-    })
-    if resp.status_code == 200:
-        return True
-    elif resp.status_code == 401:
-        err_msg = general_utils.bytes2dict(resp.content)['detail']
-        # display_utils.center_print(err_msg, type="error")
-        return False
-    else:
-        err_msg = general_utils.bytes2dict(resp.content)['detail'][0]['msg']
-        # print(err_msg)
-        # display_utils.center_print(str(err_msg), type="error") 
-        return False
-    
-
-def login(email, password):
-    files = { 
-        "username": (None, email),
-        "password": (None, password)
-    }
-    
-    resp = requests.post(base_url + "/login", files=files)
-    return resp
+from girok.api.entity import APIResponse
+from girok.constants import BASE_URL
 
 
-def validate_access_token(access_token):
-    options = {
-        "headers": {
-        "Authorization": "Bearer " + access_token,
-        }
-    }
-    
+def verify_access_token(access_token: str) -> bool:
+    resp = requests.get(
+        url=urljoin(BASE_URL, "auth/verify/access-token"),
+        headers={"Authorization": "Bearer " + access_token},
+    )
+    return resp.status_code == 200
 
-    resp = requests.get(base_url + "/validate-access-token", headers=options['headers'])
-    return resp
+
+def send_verification_code(email: str) -> APIResponse:
+    resp = requests.post(url=urljoin(BASE_URL, "auth/verification-code"), json={"email": email})
+
+    try:
+        resp.raise_for_status()
+        return APIResponse(is_success=True)
+    except HTTPError as e:
+        error_body = resp.json()
+        error_message = error_body["message"]
+        return APIResponse(is_success=False, error_message=error_message)
+
+
+def verify_verification_code(email: str, verification_code: str) -> APIResponse:
+    resp = requests.post(
+        url=urljoin(BASE_URL, "auth/verification-code/check"),
+        json={"email": email, "verificationCode": verification_code},
+    )
+
+    try:
+        resp.raise_for_status()
+        return APIResponse(is_success=True)
+    except HTTPError as e:
+        error_body = resp.json()
+        error_message = error_body["message"]
+        return APIResponse(is_success=False, error_message=error_message)
+
+
+def register(email: str, verification_code: str, password: str) -> APIResponse:
+    resp = requests.post(
+        url=urljoin(BASE_URL, "sign-up"),
+        json={
+            "email": email,
+            "verificationCode": verification_code,
+            "password": password,
+        },
+    )
+
+    try:
+        resp.raise_for_status()
+        return APIResponse(is_success=True)
+    except HTTPError as e:
+        try:
+            error_body = resp.json()
+            error_message = error_body["message"]
+        except:
+            error_message = "Registration failed"
+
+        return APIResponse(is_success=False, error_message=error_message)
+
+
+def login(email: str, password: str) -> APIResponse:
+    resp = requests.post(url=urljoin(BASE_URL, "login"), json={"email": email, "password": password})
+
+    try:
+        resp.raise_for_status()
+        return APIResponse(is_success=True, body=resp.json())
+    except HTTPError as e:
+        try:
+            error_body = resp.json()
+            error_message = error_body["message"]
+        except:
+            error_message = "Login failed"
+
+        return APIResponse(is_success=False, error_message=error_message)

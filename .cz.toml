@@ -1,0 +1,46 @@
+# ref: https://github.com/commitizen-tools/commitizen/blob/master/docs/customization.md
+
+[tool.commitizen]
+name = "cz_customize"
+
+[tool.commitizen.customize]
+message_template = "{{change_type}}: {{message}}"
+example = "📝 docs: create README.md"
+schema = "<type>: <body>"
+# schema_pattern = "(feature|bug fix):(\\s.*)"
+# schema_pattern = "^(?P<change_type>):\\s(?P<message>.*)?"
+bump_pattern = "^(break|new|fix|hotfix)"
+bump_map = {"break" = "MAJOR", "new" = "MINOR", "fix" = "PATCH", "hotfix" = "PATCH"}
+change_type_order = ["BREAKING CHANGE", "Feat", "Fix", "Refactor", "Perf"]
+# commit_parser = "^(?P<change_type>feature|bug fix):\\s(?P<message>.*)?"
+# changelog_pattern = "^(✨ feat|🔧 fix)?(!)?"
+# change_type_map = {"✨ feat" = "Feat", "🔧 fix" = "Fix"}
+
+[[tool.commitizen.customize.questions]]
+type = "list"
+name = "change_type"
+choices = [
+    {value = "✨ feat", name = "✨ feat: Work on feature-related tasks."},
+    {value = "🔧 fix", name = "🔧 fix: Fix a bug."},
+    {value = "📝 docs", name = "📝 docs: Add or update documentation."},
+    {value = "♻️ refact", name = "♻️ refact: Refactor code."},
+    {value = "🎨 style", name = "🎨 style: Improve structure / format of the code or apply linter."},
+    {value = "✅ test", name = "✅ test: Add, update, or pass tests."},
+    {value = "🧹 chore", name = "🧹 chore: Do other grunt works."},
+    {value = "⚙️ setting", name = "⚙️ setting: Add or update setting related tasks such as modifying dependencies, writing util scripts, etc."},
+    {value = "🏷️ bump", name = "🏷️ bump: Add a release / version tag."},
+    {value = "🎉 init", name = "🎉 init: Create a new project."},
+]
+message = "Select the type of change you are committing"
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "message"
+message = "Write a commit message:"
+
+[[tool.commitizen.customize.questions]]
+# type = "confirm"
+# message = "Do you want to confirm this commit?"
+type = "press_any_key_to_continue"
+name = "confirm_commit"
+message = "Press any key to confirm this commit, or ctrl+c key to cancel this commit."
