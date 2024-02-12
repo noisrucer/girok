@@ -14,18 +14,13 @@
 
 # 💫 Highlighted Features
 
-- Infinite recursive subcategories
-- Automatically assigned color for each category
-- Add a schedule super fast with many different options
-- Query your schedule with many different filtering options
-- A beautiful calendar GUI
-- Guest / User mode
+- Infinite recursive sub-categories with automatic assigned colors
+- A beautiful and responsive calendar TUI(Termina User Interface)
+- Add/Query a task super fast with a variety of date options
 
 # 💬 Remarks
 
 Girok works fluently with `MacOS` and `Linux` users. It also works with `Windows` but some features and UIs might break.
-
-p.s) Since I launched the project a couple days ago, you might feel a little bit of lag for `showtask` and `cal` commands(for user mode), especially when you have many data. I'm working on optimizing the speed to enhance your experience!
 
 If you find it useful, consider supporting to help the development process! As I'm running the server with my own expense now, your help will make the service much more stable and fast!
 
@@ -33,20 +28,9 @@ If you want to see the server source code, go to [**girokserver**](https://githu
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/changjin97z)
 
-# 🤖 Version `0.1.16` is released now!
-
-- `Guest mode` - You can choose to log in as `guest mode` to save your data locally.
-- Currently, local data are not synchronized with the server. Synchronization with the server will be added in the upcoming release.
+# 🤖 Version `0.2.5` is released now!
 
 ### Upgrade with `pip install girok --upgrade`
-
-# 💡 Future Updates
-
-1. 💻 📱 **Web** and **app** synchronizing all data with CLI.
-2. 🔨 Task operations in the calendar view
-3. ⏰ **Girok Slack Bot** notification feature for tasks - set an alarm in 5
-   seconds!
-4. 👪 **Team workspace** where users and create group and invite other people for collaboration
 
 # 📖 Table of Contents
 
@@ -55,30 +39,23 @@ If you want to see the server source code, go to [**girokserver**](https://githu
   - [🪟 0. Fancier UI](#fancierui)
     - [Contribute your background image!](#contributeimage)
   - [🙏 1. help command](#helpcommand)
-  - [⚙️ 2. Guest mode / User mode](#mode)
-    - [2.1 Guest mode](#guestmode)
-    - [2.2 User mode](#usermode)
-    - [2.3 `mode` command](#modecommand)
-  - [🔒 3. Register](#register)
-  - [🔓 4. Login / Logout](#loginandlogout)
-  - [📚 5. Category commands](#categorycommands)
-    - [5.1. `showcat`](#showcatcommand)
-    - [5.2. `addcat`](#addcatcommand)
-    - [5.3. `mvcat`](#mvcatcommand)
-    - [5.4. `rmcat`](#rmcatcommand)
-    - [5.5. `rncat`](#rncatcommand)
-  - [📕 6. Task Commands](#taskcommands)
-    - [6.1. `addtask`](#addtaskcommand)
-    - [6.2. `showtask`](#showtaskcommand)
-    - [6.3. `done`](#donecommand)
-    - [6.4. `chdate`](#chdatecommand)
-    - [6.5. `chpri`](#chpricommand)
-    - [6.6. `chtag`](#chtagcommand)
-    - [6.8. `chname`](#chnamecommand)
-    - [6.9. `showtag`](#showtagcommand)
-  - [📅 7. Calendar Commands](#calendarcommands)
-    - [7.1 Calendar Key Bindings](#movearoundcalendar)
-    - [7.2 Calendar Demonstrations](#calendardemonstration)
+  - [🔒 2. Registration](#register)
+  - [🔓 3. Login / Logout](#loginandlogout)
+  - [📚 4. Category commands](#categorycommands)
+    - [4.1. `colors`](#colorscommand)
+    - [4.2. `showcat`](#showcatcommand)
+    - [4.3. `addcat`](#addcatcommand)
+    - [4.4. `mvcat`](#mvcatcommand)
+    - [4.5. `rmcat`](#rmcatcommand)
+    - [4.6. `rncat`](#rncatcommand)
+  - [📕 5. Task Commands](#taskcommands)
+    - [5.1. `addtask`](#addtaskcommand)
+    - [5.2. `showtask`](#showtaskcommand)
+    - [5.3. `done`](#donecommand)
+    - [5.4. `uptask`](#uptaskcommand)
+  - [📅 6. Calendar Commands](#calendarcommands)
+    - [6.1 Calendar Key Bindings](#movearoundcalendar)
+    - [6.2 Calendar Demonstrations](#calendardemonstration)
 - [🚒 Report Bugs](#-report-bugs)
 - [😭 Uninstall](#-uninstall)
 - [💌 Contributions](#-contributions)
@@ -91,8 +68,9 @@ However, it works well on Unix-based shells such as `bash`, `zsh`, `fish`, `wsl`
 
 Some shells like `powershell` might break some UIs.
 
-1. Make sure you have Python `>3.9` version installed.
-2. Enter the following in your terminal
+Make sure you have Python `>=3.9` version installed.
+
+To install,
 
 ```bash
 pip install girok
@@ -110,7 +88,7 @@ Now, let's dive into Girok!
 
 ## 🪟 0. Fancier UI <a name="fancierui"></a>
 
-If you're a mac user (or other device supporting terminal transparency), **dramatically enhance your UI by setting up a (dark theme) background for your mac desktop** and **make it transparent!**
+If you're a mac user (or other device supporting terminal transparency), **enhance your UI by setting up a (dark theme) background for your mac desktop** and **make it transparent!**
 
 My settings are
 
@@ -145,7 +123,7 @@ If you think your background image is awesome, you can contribute by sharing it 
 
 In order to see **all the commands** of **Girok**, enter `girok --help` in your terminal.
 
-![](images/girok-help.png)
+![alt text](images/girok2-help.png)
 
 In order to see the details of each command, enter the following in your terminal.
 
@@ -161,46 +139,10 @@ girok addtask --help
 
 then you'll see the following help message
 
-![](images/girok-command-help.png)
+![](images/girok2-command-help.png)
 
-## ⚙️ 2. Guest mode / User mode <a name="mode"></a>
 
-You can use Girok with two options
-
-1. `Guest mode`
-   - Your data are stored in your local storage (no network required).
-2. `User mode`
-   - Your data are stored in a centralized server. It means you can log in to your account to access your schedule anytime, anywhere.
-
-Keep in mind that you must log out first to switch to another state.
-
-## 2.1 Guest mode <a name="guestmode"></a>
-
-```bash
-girok guest
-```
-
-Once you're in a logged-out state, enter the above command to switch to guest mode.
-
-It's all set! You can now use the exact same commands as user mode.
-
-If you only want to guest mode, jump to [category commands](#categorycommands) section.
-
-## 2.2 User mode <a name="usermode"></a>
-
-In order to activate user mode, you can log in to your account with `girok login`.
-
-## 2.3 `mode` command <a name="modecommand"></a>
-
-To see which mode you're in, enter the following command.
-
-```bash
-girok mode
-```
-
-## 🔒 3. Register <a name="register"></a>
-
-<p align="center"><img src="girok/resources/girok-register-demo.gif"></img></center>
+## 🔒 2. Registration <a name="register"></a>
 
 To register a new account enter the following in your terminal.
 
@@ -208,25 +150,28 @@ To register a new account enter the following in your terminal.
 girok register
 ```
 
-Enter the email address and password and check your mail inbox to get the **verification code**.
+![alt text](images/girok2-register.png)
+
+1. Enter your email address to receive the verificaiton code
+2. Check your email inbox and enter the verification code. If you can't find it, check junk email.
+3. Finally enter your password to register. Note that password must be at least **7 characters** long and contain at least one **lowercase**, one **uppercase**, and one **special character** (`@`, `#`, `$`, `%`, `*`, `!`)
+
 
 [WARNING] **Girok doesn't require you to enter your email service's password**. You can type any password as input.
 
 Congratulations! Now let's go ahead and login to our account.
 
-## 🔓 4. Login and Logout <a name="loginandlogout"></a>
+## 🔓 3. Login and Logout <a name="loginandlogout"></a>
 
-In order to login with your registered account, enter the following command.
+In order to login, 
 
 ```bash
 girok login
 ```
 
-![](images/girok-login.png)
+Now you're ready to use all the features!
 
-Now you're ready to use all the features.
-
-## 📚 5. Category Commands <a name="categorycommands"></a>
+## 📚 4. Category Commands <a name="categorycommands"></a>
 
 You can pre-define **categories** such as `School`, `Life` and `Career` with automatically assigned category color.
 
@@ -234,19 +179,29 @@ Girok supports **infinite recursive subcategories**. All the subcategories will 
 
 Later on, you can link tasks to these categories.
 
-### 5.1 `showcat` command <a name="showcatcommand"></a>
+### 4.1 `colors` command <a name="colorscommand"></a>
+
+You can check out all the category colors with,
+
+```bash
+girok colors
+```
+
+![alt text](images/girok2-colors.png)
+
+You can manually assign or update category color with the pre-defined color names.
+
+### 4.2 `showcat` command <a name="showcatcommand"></a>
 
 In order to see all the categories you have created, enter the following command.
-
-By default, `No Category` category is set (later for tasks which have no category).
 
 ```bash
 girok showcat
 ```
 
-![](images/girok-addcat3.png)
+![alt text](images/girok2-showcat.png)
 
-### 5.2 `addcat` command <a name="addcatcommand"></a>
+### 4.3 `addcat` command <a name="addcatcommand"></a>
 
 `addtask` command takes a single argument `category full path`.
 
@@ -264,7 +219,7 @@ girok addcat Career
 
 Then, you'll see the category tree with the newly created category being highlighted.
 
-![](images/girok-addcat1.png)
+![alt text](images/girok2-addcat1.png)
 
 In order to nest a sub-category under a previously defined category, pass the **FULL PATH** starting from the topmost category delimited by `/`, ending with the new category name.
 
@@ -276,11 +231,11 @@ girok addcat Career/Resume
 
 Then, you'll see `Resume` is created under `Career`.
 
-![](images/girok-addcat2.png)
+![alt text](images/girok2-addcat2.png)
 
 In this way, you can create as many categories and sub-categories as you want!
 
-### 5.3 `mvcat` command <a name="mvcatcommand"></a>
+### 4.4 `mvcat` command <a name="mvcatcommand"></a>
 
 Now you might want to move a category under another category.
 
@@ -296,7 +251,7 @@ For example, if you want to move the whole `Career` category under `Dev/Network`
 girok mvcat Career Dev/Network
 ```
 
-![](images/girok-addcat4.png)
+![alt text](images/girok2-addcat4.png)
 
 If you want to move a category to the `root category`, then pass `/` as the second argument. Let's move `Dev/Network/Career` back to the topmost category.
 
@@ -304,9 +259,9 @@ If you want to move a category to the `root category`, then pass `/` as the seco
 girok mvcat Dev/Network/Career /
 ```
 
-![](images/girok-addcat5.png)
+![alt text](images/girok2-addcat5.png)
 
-### 5.4 `rmcat` command <a name="rmcatcommand"></a>
+### 4.5 `rmcat` command <a name="rmcatcommand"></a>
 
 Of course, you want to delete a category. In that case, enter the following command.
 
@@ -322,7 +277,7 @@ As you already know, enter
 girok addcat Career/Dummy
 ```
 
-![](images/girok-addcat6.png)
+![](images/girok2-addcat6.png)
 
 Now, let's delete it with the following command.
 
@@ -334,116 +289,140 @@ girok rmcat Career/Dummy
 
 Then, you'll be asked to confirm the deletion. Enter `y`.
 
-![](images/girok-rmcat1.png)
+![](images/girok2-rmcat1.png)
 
-### 5.5 `rncat` command <a name="rncatcommand"></a>
+### 4.6 `upcat` command <a name="upcatcommand"></a>
 
-To rename an existing category,
+You can update category information by
 
 ```bash
-girok rncat <category path> <new name>
+girok upcat -c <color> -n <name>
 ```
+
+Note that the color must be one of the pre-defined colors from `girok colors` command.
 
 Great job! Now let's move on to the task commands.
 
-## 📕 6. Task commands <a name="taskcommands"></a>
+## 📕 5. Task commands <a name="taskcommands"></a>
 
-**Girok** provides powerful task scheduling operations. You can perform different operations that would've taken a long time in other schedulers like Notion and Google Calendar in less than 10 seconds (If you get used to the commands).
+**Girok** provides powerful task scheduling operations. You can perform different operations that would've taken a long time in other schedulers like Notion and Google Calendar in less than 10 seconds.
 
-### 6.1 `addtask` command <a name="addtaskcommand"></a>
+### 5.1 `addtask` command <a name="addtaskcommand"></a>
 
 ```bash
 girok addtask <task name> [One of deadline date options] [-c | --category <category path>] [-p | --priority <priority>] [-t | --time <deadline time>] [-T | --tag <tag name>]
+
+girok addtask <task name> -d <start date option>
 ```
 
-#### 6.1.1 `addtask` rules
+#### 5.1.1 `addtask` rules
 
-1. `<task name>` (Argument / **Required**) - If the task name has no space you can omit double quotes `""`. If it does, enclose the task name by double quotes `""`
-2. `<One of date options>` (Option / **required**) - You must specify a **deadline "date"** of a task. There're many ways to add a deadline. Note that **ONLY ONE DATE OPTION** is allowed.
-   - `-d <yyyy/mm/dd | mm/dd>`
-     - Specify an exact date delimited by `/`. You can enter the full date in the form of `yyyy/mm/dd`. Or, you can omit the year like `mm/dd` then the deadline year will be set to the current year.
-     - You don't have to enter the exact form filled with `0`s. If the month is May, then just enter `5/23` or `05/23`.
-   - `-t1 ~ -t7 | --thismon ~ --thissun`
-     - Sometimes, you're not aware of the exact date. If the date is some weekday of this week, you can just pass `-t{1-7}` referrting to this monday to this sunday (monday indexed as `1`).
-     - For example, if the deadline is this friday, enter `girok addtask "dummy" -t5`
-   - `-n1 ~ -n7 | --nextmon ~ --nextsun`
-     - Similar to the above but referring to **next week**.
-   - `-a <# days>`
-     - Sometimes, you process the deadline in your mind like "it's due 5 days later".
-     - In this case, pass the number of days a task is due after.
-     - For example, if the deadline is 5 days later, enter `girok addtask "dummy" -a 5`
-   - `--tdy`
-     - Set the deadline to today.
-   - `--tmr`
-     - Set the deadline to tomorrow.
-3. `-t | --time <hh:mm>` (Option, **Optional**) - You can also set the specific deadline time.
-   - You must provide the full time format in **24 hour scale** such as `07:23` or `21:59`.
-4. `-c | --category <category full path>` (Option / **Optional**) - Your tasks might belong to a specific category you have previously defined.
+1. `<task name>` (Argument / **Required**)
+   - If the task name has no space you can omit double quotes `""`. If it does, enclose it double quotes `""`
+2. `-d | --date <date>@<time>` (Option / **Required**)
+   - Start date and time (or deadline if end date is not present)
+   - ex) `-d 5/18@17:50`, `-d 2025/8/15`, `-d tmr@17:30`, ...
+   - The datetime value consists of `<date>` and `<time>`, concatenated by `@`. The `time` portion can be ommitted.
+   - Allowed `<date>` values
+      1. Explicit date: `-d 2024/5/19`
+          - Specify an exact date delimited by `/`. You can enter the full date in the form of `yyyy/mm/dd`. Or, you can omit the year like `mm/dd` then the deadline year will be set to the current year.
+          - You don't have to enter the exact form filled with `0`s. If the month is May, then just enter `5/23` or `05/23`.
+      2. This week: `-d t1`
+          - Sometimes, you're not aware of the exact date. If the date is some weekday of this week, you can just pass `t{1-7}` referrting to this monday to this sunday (monday indexed as `1`).
+          - For example, if the deadline is this friday, enter `girok addtask "dummy" -d t5`
+      3. Next week: `-d n1`
+          - Similar to the above but referring to **next week**.
+      4. After `N` days: `-d a10`
+          - Sometimes, you process the deadline in your mind like "it's due 5 days later".
+          - In this case, pass the number of days a task is due after.
+          - For example, if the deadline is 5 days later, enter `girok addtask "dummy" -d a5`
+      5. Today: `-d tdy|today`
+      6. Tomorrow: `-d tmr|tomorrow`
+    - Allowed `<time>` format
+      - ex) `07:50`, `23:59`
+      - You can also set the specific deadline time.
+      - You must provide the full time format in **24 hour scale** such as `07:23` or `21:59`.
+    - In summary, if you want to specify the full date as well as the time, you can do so by `girok addtask "Submit assignment" -d tmr@23:59`
+3. `-e | --end <date>@<time>` (Option, **Optional**)
+    - If your task is spanning on multiple days, you can also specify the end date
+    - The format is the same as `-d` option.
+4. `-r | --repetition <daily | weekly | monthly | yearly>
+    - You can also specify a recurring task using `-r` option.
+    - The repetition type must be one of `daily`, `weekly`, `monthly`, `yearly`.
+    - **Only single-day task** can be recurring. Recall that we have two datetime options: `-d`, `-e` and each consists of "date" and "time". Let's define them `start date`, `start time`, `end date`, `end time`. Then, only the following combinations(single-day task) are allowed for repetition.
+        1. `start date` only
+        2. `start date`, `start time` only
+        3. `start date`, `start time`, `end date`, `end time` only, and `start date == end date`
+    - The start day of the recurring event is automatically set to the `start date` you specified with `-d` option.
+4. `-c | --category <category full path>` (Option / **Optional**)
+   - Your tasks might belong to a specific category you have previously defined.
    - Provide the **full category path**.
-   - For example, if your task belongs to `Career/Resume`, then enter `girok addtask "dummy task 1" --tmr -c Career/Resume`.
+   - For example, if your task belongs to `Career/Resume`, then enter `girok addtask "dummy task 1" -d tmr -c Career/Resume`.
    - If you specify a category, then the task color will be automatically linked to that category's color.
    - If no category is provided, the task will belong to `No Category` category.
-5. `-p | --priority <priority (1~5)>` (Option, **Optional**) - You can set the priority of a task so that you can filter out by priority when you query your tasks.
-   - For example, to set the priority of a task as `5`, enter `girok addtask "dummy task 1" -c Career/Resume -p 5`.
-6. `-T | --tag <tag name>` (Option, **Optional**) - You can set the **tag**(or type) of a task such as `assignment` and `meeting`. With tags, you can more efficiently query your tasks with different types.
+5. `-p | --priority <low | medium | high>` (Option, **Optional**)
+   - You can set the priority of a task so that you can filter out by priority when you query your tasks.
+   - For example, to set the priority of a task as `low`, enter `girok addtask "dummy task 1" -d tmr -p low`.
+6. `-t | --tag <tag name>` (Option, **Optional**)
+   - You can set the **tag** of a task such as `assignment` and `meeting`. With tags, you can more efficiently query your tasks with different types.
    - Unlike category, tag doesn't allow nested tags and you don't have to pre-define them.
-   - For example, if you want to set the tag of a task as `assignment`, enter `girok addtask "assignment 4" -c HKU/COMP3234 -d 4/24 --tag assignment`
+   - For example, if you want to set the tag of a task as `assignment`, enter `girok addtask "assignment 4" -d 4/24 -t assignment`
+7. `-m | --memo <memo>`
+   - You can also add a memo for your task with `-m `option
+   - ex) `girok addtask "Meeting with Jason" -d tmr -m "don't forget to prepare the documents"`
 
 In summary, keep the following rules in mind.
 
-1. Always provide **task name** and **one of date options**.
-2. Although not required, I think it's better to provide **category** to manage your tasks more effectively.
-3. Other options are up to you!
+1. Always provide **task name** and `-d` option.
+2. Although not required, it's better to provide **category** to manage your tasks more effectively.
+3. Other options are up to you.
 
 For example, the following command is a typical command that I use on everyday basis.
 
 ```bash
-girok addtask "Implement tag filtering feature" -c Dev/Girok -a 3 -p 5
+girok addtask "Implement tag filtering feature" -c Dev/Girok -d n3 -p high
 ```
 
-It looks quite complicated, but you'll get used to it quickly after playing out little bit.
+It looks quite complicated, but you'll get used to it quickly after playing out a little bit.
 
-#### 6.1.2 `addtask` demonstration
+#### 5.1.2 `addtask` demonstration
 
 Now let's play around with `addtask` command.
 
-Recall our category list is
+Suppose our category list is
 
-![](images/girok-addtask1.png)
+![alt text](images/girok2-addtask-demon1.png)
 
 In the demonstration, I will add several tasks and show how it works.
 
-Let's add a task named `go over resume again` whose category is `Career/Resume` and I will do it by `next thursday`. This is a quite important task, so I will assign the `priority` of `5`.
+Let's add a task named `go over resume again` whose category is `Career/Resume` and I will do it by `next thursday`. This is a quite important task, so I will assign the `priority` high.
 
 ```bash
-girok addtask "go over resume again" -c Career/Resume -n4 -p 5
+girok addtask "go over resume again" -c Career/Resume -d n4 -p high
 ```
 
-![](images/girok-addtask2.png)
+![alt text](images/girok2-addtask-demon2.png)
 
-When adding it, you will see the same category tree with tasks attached to the belonged category. (Priority is now shown by default. You can see the priority with `girok showtask` command we'll talk about very soon).
 
-Now I'll add another task named `Midterm exam` with the category `HKU/COMP3234` and the deadline is `4/18 09:30`. Hmm.. I think I have plenty of time so I will not provide the priority. However, I will assign the tag `exam`.
+Now I'll add another task named `Midterm exam` with the category `HKU/COMP3234` and it's a 3-day exam from `4/18 09:30 AM` to `4/20 10:00`. Let's also add `exam` tag and memo.
 
 ```bash
-girok addtask "Midterm exam" -c HKU/COMP3234 -d 4/18 -t 09:30 --tag exam
+girok addtask "Midterm exam" -c HKU/COMP3234 -d 4/18@09:30 -e 4/20@10:00 -t exam -m "Do not forget to bring cheatsheet"
 ```
 
-![](images/girok-addtask3.png)
+![alt text](images/girok2-addtask-demon3.png)
 
-In the tree view, priority and tag are not shown to avoid complexity. Don't worry! You can view all the information when we go into `girok showtask` command.
 
-Lastly, I'll add a task named `Hangout with Jason` and the appointment date is `tomorrow`. This time, I will not provide any option.
+Lastly, I'll add a task named `Gym day` and I will go every day at 7 AM in the morning.
 
 ```bash
-girok addtask "Hangout with Jason" --tmr
+girok addtask "Gym day" -d tmr@07:00 -r daily
 ```
 
-![](images/girok-addtask4.png)
+![alt text](images/girok2-addtask-demon4.png)
 
-Notice that the newly added task is highlighted with green color.
 
-### 6.2 `showtask` command. <a name="showtaskcommand"></a>
+### 5.2 `showtask` command. <a name="showtaskcommand"></a>
 
 ```bash
 girok showtask [--tree] Deadline date options] [-c | --category <category path>] [-p | --priority <priority>] [-T | --tag <tag name>]
@@ -451,9 +430,9 @@ girok showtask [--tree] Deadline date options] [-c | --category <category path>]
 
 Girok provides powerful commands to effectively query your schedule with many different options. You can filter tasks by category, priority, deadline, and tag.
 
-#### 6.2.1 View options
+#### 5.2.1 Table view vs Tree view
 
-You can type `girok showtask` command with no parameter. The default view of the command is **list view**.
+You can type `girok showtask` command with no parameter. The default view of the command is **table view**.
 
 Note that I've added some more tasks to make the visualization rich.
 
@@ -461,45 +440,23 @@ Note that I've added some more tasks to make the visualization rich.
 girok showtask
 ```
 
-![](images/girok-showtask1.png)
+![](images/girok2-showtask1.png)
 
 By default, all tasks will be shown in a nice table format.
 
-If you want to view your tasks in a categorized manner, then provide `--tree` flag.
+If you want to view your tasks in a tree view, then provide `--tree` flag.
 
 ```bash
 girok showtask --tree
 ```
 
-![](images/girok-showtask2.png)
+![](images/girok2-showtask2.png)
 
-#### 6.2.2 Filter by category
+#### 5.2.2 Filter by date options
 
-To query tasks under a specific category, use the following command,
+You can query your tasks filtering by many different date options. Notice that all the options for `showtask` command are optional.
 
-```bash
-girok showtask -c <category path>
-```
-
-For example, to query tasks only for the `HKU` category. Enter the following command.
-
-```bash
-girok showtask -c HKU
-```
-
-or
-
-```bash
-girok showtask -c HKU --tree # tree view
-```
-
-![](images/girok-showtask5.png)
-
-#### 6.2.3 Filter by date options
-
-You can query your tasks filtering by many different date options. Notice that all the options for `showtask` command are **OPTIONAL**.
-
-1. `-e | --exact <yyyy/mm/dd | mm/dd>`
+1. `-e | --exact <date format from addtask -d option>`
    - To view tasks due to a specific day, provide the exact date after the flag
 2. `-d | --day <# days>`
    - To view tasks due **within `n` days**, provide the number of days `n` after the flag
@@ -515,22 +472,36 @@ You can query your tasks filtering by many different date options. Notice that a
    - To view tasks due within this week and next week, respectively
 8. `--tm`, `--nm`
    - To view tasks due within this month and next month, respectively
-9. `-t1 ~ -t7 | --thismon ~ --thissun`
-   - To view tasks due **exactly** the weekday of this week
-   - Monday is indexed as `1`
-10. `-n1 ~ -n7 | --nextmon ~ --nextsun`
+9. `-u | --urgent`
+   - To view urgent tasks that are within `3 days` by default
 
-- To view tasks due **exactly** the weekday of next week
-- Monday is indexed as `1`
+#### 5.2.3 Filter by category
 
-11. `-u | --urgent`
-
-- To view urgent tasks that are within `3 days` by default
-
-#### 6.2.4 Filter by priority
+To query tasks under a specific category, use the following command,
 
 ```bash
-girok showtask -p <priority (1~5)>
+girok showtask [-c | --category] <category path>
+```
+
+For example, to query tasks only for the `HKU` category. Enter the following command.
+
+```bash
+girok showtask -c HKU
+```
+
+or
+
+```bash
+girok showtask -c HKU --tree # tree view
+```
+
+![](images/girok2-showtask3.png)
+
+
+#### 5.2.4 Filter by priority
+
+```bash
+girok showtask [-p | --priority] <low | medium | high>
 ```
 
 To view tasks with a specific priority, provide `-p` option followed by the priority number between `1` and `5`.
@@ -541,23 +512,13 @@ For example, to view tasks with priority 5, enter the following command
 girok showtask -p 5
 ```
 
-![](images/girok-showtask3.png)
-
-To view tasks with priority 5, but with **tree view**, enter the following command.
-
-```bash
-girok showtask -p 5 --tree
-```
-
-![](images/girok-showtask4.png)
-
-#### 6.2.5 Filter by tag
+#### 5.2.5 Filter by tag
 
 ```
-girok showtask [-T | --tag <tag name>]
+girok showtask [-t | --tag] <tag name>
 ```
 
-### 6.3 `done` command <a name="donecommand"></a>
+### 5.3 `done` command <a name="donecommand"></a>
 
 To complete(delete) a task, provide the `done` command followed by the task ID.
 
@@ -571,61 +532,25 @@ girok done <task ID> [-y | --yes]
 
 For example, suppose you enter `girok showtask` command.
 
-![](images/girok-donetask1.png)
+![alt text](images/girok2-done1.png)
 
-If you completed the task `Migrate DB to RDS` under `Dev/Girok` category, provide the task ID at the leftmost column.
-
-```bash
-girok done 5
-```
-
-![](images/girok-donetask2.png)
-
-Notice that the task is now striked out.
-
-### 6.4 `chdate` command <a name="chdatecommand"></a>
-
-To change the date of an existing task, enter the following command.
+If you completed the task `Hangout with Jason`, provide the task ID at the leftmost column.
 
 ```bash
-girok chdate <taskID> <Deadline options>
+girok done 3
 ```
 
-The deadline option group is the same as `addtask` command.
+### 5.4 `uptask` command <a name="uptaskcommand"></a>
 
-### 6.5 `chpri` command <a name="chpricommand"></a>
-
-To change the priority of an existing task, enter the following command.
+You can update task information with `giork uptask` command.
 
 ```bash
-girok chpri <taskID> <priority (1~5)>
+girok chdate <taskID> -n <name> -d <start datetime> -e <end datetime> -r <repetition type> -c <category> -t <tag> -p <priority> -m <memo>
 ```
 
-### 6.6 `chtag` command <a name="chtagcommand"></a>
+Note that the start and end datetime format are the same as the one from `-d` option of `addtask` command.
 
-To change the tag of an existing task, enter the following command.
-
-```bash
-girok chtag <taskID> <tag name>
-```
-
-### 6.7 `chname` command <a name="chnamecommand">
-
-To change the name of an existing task, enter the following command.
-
-```bash
-girok chname <taskID> <new task name enclosed with "">
-```
-
-### 6.8 `showtag` command <a name="showtagcommand"></a>
-
-To view all the tags you have created so far, enter the following command.
-
-```bash
-girok showtag
-```
-
-## 📅 7. Calendar Commands <a name="calendarcommands"></a>
+## 📅 6. Calendar Commands <a name="calendarcommands"></a>
 
 The beauty of **Girok** is the **beautiful and responsive full calendar GUI**.
 
@@ -643,7 +568,7 @@ Then you'll be prompted to the calendar GUI.
 
 Notice that all the categories and tags we have created so far are linked to the **sidebar**.
 
-### 7.1 Calendar Key Bindings <a name="movearoundcalendar"></a>
+### 6.1 Calendar Key Bindings <a name="movearoundcalendar"></a>
 
 ![](images/girok-cal8.png)
 
@@ -680,7 +605,7 @@ Upon `girok cal` command, the starting **"focus"** is the **category tree**.
 - **Close calendar**
   - `q`
 
-### 7.2 Calendar Demonstrations <a name="calendardemonstration"></a>
+### 6.2 Calendar Demonstrations <a name="calendardemonstration"></a>
 
 When you click on a category, then the category title will change accordingly at the left-bottom corner of the calendar. All the tasks belonging to the selected category will be shown.
 
@@ -723,5 +648,3 @@ Just kidding. Enter `pip uninstall girok` in your terminal. Bye..😢
 - If you have any new features that would make your life easier, please don't hesitate to raise issues.
 
 - If you wish to contribute to the project as a programmer, please first **open an issue** with the `feature` tag (title prefixed with `[Feat] description`) describing your suggested features. After getting approval from the maintainer, you can drop pull requests and I will review each of them carefully.
-
-- p.s) I'm currently looking for team members to join me to build a web/app version of Girok. Also, if you're a strong Python programmer, you can join me scale it up to build a more robust "Girok"! Drop me an email to changjin9792@gmail.com if you're interested.

@@ -364,7 +364,7 @@ def showtask(
         tags = tags.split("/")
 
     resp = task_api.get_all_tasks(
-        start_date=start_date, end_date=end_date, category_id=category_id, priority=priority, tags=tags
+        start_date=start_date, end_date=end_date, category_id=category_id, priority=priority, tags=tags, fetch_children=True
     )
     if not resp.is_success:
         center_print(resp.error_message, DisplayBoxType.ERROR)

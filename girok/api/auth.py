@@ -9,8 +9,8 @@ from girok.constants import BASE_URL
 
 def verify_access_token(access_token: str) -> bool:
     resp = requests.get(
-        url=urljoin(BASE_URL, "auth/verify/access-token"),
-        headers={"Authorization": "Bearer " + access_token},
+        url=urljoin(BASE_URL, "tags"),
+        headers={"Authorization": "Bearer " + access_token}
     )
     return resp.status_code == 200
 
@@ -22,6 +22,7 @@ def send_verification_code(email: str) -> APIResponse:
         resp.raise_for_status()
         return APIResponse(is_success=True)
     except HTTPError as e:
+        print(e)
         error_body = resp.json()
         error_message = error_body["message"]
         return APIResponse(is_success=False, error_message=error_message)

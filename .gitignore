@@ -8,6 +8,7 @@
 /.pnp
 .pnp.js
 **debug_**
+dist/
 
 **/__pycache__
 **/.env

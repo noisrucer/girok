@@ -4,13 +4,13 @@ from enum import Enum
 import typer
 
 # App Config
-# BASE_URL = "http://girok-server-balancer-1565927748.ap-northeast-1.elb.amazonaws.com:8080/"
-BASE_URL = "http://localhost:8080/api/v1/"
+BASE_URL = "http://girok-server-balancer-1565927748.ap-northeast-1.elb.amazonaws.com:8181/api/v1/"
+# BASE_URL = "http://girok-server-balancer-1565927748.ap-northeast-1.elb.amazonaws.com:8080/api/v1/"
 APP_NAME = "girok"
 APP_DIR = typer.get_app_dir(APP_NAME)
 CONFIG_PATH = os.path.join(APP_DIR, "config.json")
 EVENT_IDS_CACHE_PATH = os.path.join(APP_DIR, "event_ids_cache.json")
-VERSION = "0.2.0"
+VERSION = "0.2.5"
 
 
 # Commands

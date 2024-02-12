@@ -92,6 +92,10 @@ def add_category(
         # If color is not passed and top-level category, automatically assign the color from the palette
         if len(category_path.split("/")) == 1:
             color = get_next_category_color()
+        else:
+            # Match the parent category color
+            # TODO
+            pass
 
     # Create a new category
     resp = category_api.create_category(category_path, color)

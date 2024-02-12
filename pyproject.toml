@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "girok"
-version = "0.1.16"
+version = "0.2.5"
 description = "Moved resources directory from girok directory to root directory"
 authors = ["Jason Lee <changjin9792@gmail.com>"]
 readme = "README.md"
