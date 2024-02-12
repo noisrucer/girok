@@ -346,7 +346,7 @@ girok addtask <task name> -d <start date option>
 3. `-e | --end <date>@<time>` (Option, **Optional**)
     - If your task is spanning on multiple days, you can also specify the end date
     - The format is the same as `-d` option.
-4. `-r | --repetition <daily | weekly | monthly | yearly>
+4. `-r | --repetition <daily | weekly | monthly | yearly>` (Option / **Optional**)
     - You can also specify a recurring task using `-r` option.
     - The repetition type must be one of `daily`, `weekly`, `monthly`, `yearly`.
     - **Only single-day task** can be recurring. Recall that we have two datetime options: `-d`, `-e` and each consists of "date" and "time". Let's define them `start date`, `start time`, `end date`, `end time`. Then, only the following combinations(single-day task) are allowed for repetition.
