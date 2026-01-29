@@ -26,8 +26,6 @@ If you find it useful, consider supporting to help the development process! As I
 
 If you want to see the server source code, go to [**girokserver**](https://github.com/noisrucer/girokserver).
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/changjin97z)
-
 # 🤖 Version `0.2.5` is released now!
 
 ### Upgrade with `pip install girok --upgrade`
