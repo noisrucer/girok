@@ -24,9 +24,7 @@ Girok works fluently with `MacOS` and `Linux` users. It also works with `Windows
 
 If you find it useful, consider supporting to help the development process! As I'm running the server with my own expense now, your help will make the service much more stable and fast!
 
-If you want to see the server source code, go to [**girokserver**](https://github.com/noisrucer/girokserver).
-
-# 🤖 Version `0.2.5` is released now!
+# 🤖 Version `0.3.1` is released now!
 
 ### Upgrade with `pip install girok --upgrade`
 
@@ -37,23 +35,21 @@ If you want to see the server source code, go to [**girokserver**](https://githu
   - [🪟 0. Fancier UI](#fancierui)
     - [Contribute your background image!](#contributeimage)
   - [🙏 1. help command](#helpcommand)
-  - [🔒 2. Registration](#register)
-  - [🔓 3. Login / Logout](#loginandlogout)
-  - [📚 4. Category commands](#categorycommands)
-    - [4.1. `colors`](#colorscommand)
-    - [4.2. `showcat`](#showcatcommand)
-    - [4.3. `addcat`](#addcatcommand)
-    - [4.4. `mvcat`](#mvcatcommand)
-    - [4.5. `rmcat`](#rmcatcommand)
-    - [4.6. `rncat`](#rncatcommand)
-  - [📕 5. Task Commands](#taskcommands)
-    - [5.1. `addtask`](#addtaskcommand)
-    - [5.2. `showtask`](#showtaskcommand)
-    - [5.3. `done`](#donecommand)
-    - [5.4. `uptask`](#uptaskcommand)
-  - [📅 6. Calendar Commands](#calendarcommands)
-    - [6.1 Calendar Key Bindings](#movearoundcalendar)
-    - [6.2 Calendar Demonstrations](#calendardemonstration)
+  - [📚 2. Category commands](#categorycommands)
+    - [2.1. `colors`](#colorscommand)
+    - [2.2. `showcat`](#showcatcommand)
+    - [2.3. `addcat`](#addcatcommand)
+    - [2.4. `mvcat`](#mvcatcommand)
+    - [2.5. `rmcat`](#rmcatcommand)
+    - [2.6. `upcat`](#upcatcommand)
+  - [📕 3. Task Commands](#taskcommands)
+    - [3.1. `addtask`](#addtaskcommand)
+    - [3.2. `showtask`](#showtaskcommand)
+    - [3.3. `done`](#donecommand)
+    - [3.4. `uptask`](#uptaskcommand)
+  - [📅 4. Calendar Commands](#calendarcommands)
+    - [4.1 Calendar Key Bindings](#movearoundcalendar)
+    - [4.2 Calendar Demonstrations](#calendardemonstration)
 - [🚒 Report Bugs](#-report-bugs)
 - [😭 Uninstall](#-uninstall)
 - [💌 Contributions](#-contributions)
@@ -140,36 +136,7 @@ then you'll see the following help message
 ![](images/girok2-command-help.png)
 
 
-## 🔒 2. Registration <a name="register"></a>
-
-To register a new account enter the following in your terminal.
-
-```bash
-girok register
-```
-
-![alt text](images/girok2-register.png)
-
-1. Enter your email address to receive the verificaiton code
-2. Check your email inbox and enter the verification code. If you can't find it, check junk email.
-3. Finally enter your password to register. Note that password must be at least **7 characters** long and contain at least one **lowercase**, one **uppercase**, and one **special character** (`@`, `#`, `$`, `%`, `*`, `!`)
-
-
-[WARNING] **Girok doesn't require you to enter your email service's password**. You can type any password as input.
-
-Congratulations! Now let's go ahead and login to our account.
-
-## 🔓 3. Login and Logout <a name="loginandlogout"></a>
-
-In order to login, 
-
-```bash
-girok login
-```
-
-Now you're ready to use all the features!
-
-## 📚 4. Category Commands <a name="categorycommands"></a>
+## � 2. Category Commands <a name="categorycommands"></a>
 
 You can pre-define **categories** such as `School`, `Life` and `Career` with automatically assigned category color.
 
@@ -177,7 +144,7 @@ Girok supports **infinite recursive subcategories**. All the subcategories will 
 
 Later on, you can link tasks to these categories.
 
-### 4.1 `colors` command <a name="colorscommand"></a>
+### 2.1 `colors` command <a name="colorscommand"></a>
 
 You can check out all the category colors with,
 

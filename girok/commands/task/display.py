@@ -238,15 +238,19 @@ def display_events_by_tree(
     print(tree_obj)
 
 
-def build_category_tree(category_tree: dict, category: dict):
+def build_category_tree(category_tree: dict, category: dict, inherited_color: Optional[str] = None):
+    # Determine color
+    color = category.get('color') or inherited_color # Use inherited color if None
+    display_color = color if color else "GREY"
+
     category_tree[category['name']] = {
         "subcategories": {},
         "events": [],
-        "color": CATEGORY_COLOR_PALETTE[category['color']]
+        "color": CATEGORY_COLOR_PALETTE.get(display_color, CATEGORY_COLOR_PALETTE["GREY"])
     }
 
     for child in category['children']:
-        build_category_tree(category_tree[category['name']]['subcategories'], child)
+        build_category_tree(category_tree[category['name']]['subcategories'], child, inherited_color=display_color)
 
 
 
