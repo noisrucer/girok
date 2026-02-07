@@ -102,7 +102,7 @@ def decode_after_date_format(date_str: str) -> Tuple[bool, str]:
     """
     date_str: a1, a10, a50, ...
     """
-    is_matched = bool(re.match("^a[1-9]\d*$", date_str))
+    is_matched = bool(re.match(r"^a[1-9]\d*$", date_str))
     if not is_matched:
         return False, None
     delta = int(date_str[1:])

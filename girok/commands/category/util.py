@@ -43,6 +43,7 @@ def display_category_subtree(
     category: dict,
     highlight_category_path: Optional[str] = None,
     parent_cumul_path: str = "",
+    inherited_color: Optional[str] = None,
 ):
     """Display the subtree of a single tree node.
 
@@ -51,13 +52,20 @@ def display_category_subtree(
         category (dict): A single category. It's a dictionary with keys 'id', 'name', 'color', 'children'
         highlight_category_path (Optional[str], optional): Category path name to be highlighted. Must be in 'A/B/C' format. Defaults to None.
         parent_cumul_path (str, optional): The cumulative category path string of the current node's parent. Defaults to "".
+        inherited_color (Optional[str], optional): The color inherited from parent. Defaults to None.
     """
     category_name = category["name"]
-    category_color = category["color"]
+    category_color = category["color"] or inherited_color # Use inherited color if None
+    
+    # If still None (top level with no color?), default to GREY
+    # But usually top level has color. 
+    # If category_color is None at top level, maybe fallback to DEFAULT.
+    display_color = category_color if category_color else "GREY"
+
     category_children = category["children"]
     current_category_path = f"{parent_cumul_path}/{category_name}".lstrip("/")  # A/B/C
 
-    circle_text = Text(text=Emoji.CIRCLE, style=Style(color=CATEGORY_COLOR_PALETTE[category_color]))
+    circle_text = Text(text=Emoji.CIRCLE, style=Style(color=CATEGORY_COLOR_PALETTE.get(display_color, CATEGORY_COLOR_PALETTE["GREY"])))
 
     category_name_text = Text(
         text=f"{category_name}",
@@ -78,6 +86,7 @@ def display_category_subtree(
             category=child,
             highlight_category_path=highlight_category_path,
             parent_cumul_path=current_category_path,
+            inherited_color=display_color,
         )
 
 

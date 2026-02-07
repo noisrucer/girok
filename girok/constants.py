@@ -2,32 +2,41 @@ import os
 from enum import Enum
 
 import typer
+from importlib.metadata import version
 
 # App Config
-BASE_URL = "http://girok-server-prod-alb-1994273380.ap-northeast-1.elb.amazonaws.com/api/v1/"
 APP_NAME = "girok"
-APP_DIR = typer.get_app_dir(APP_NAME)
+APP_DIR = os.path.join(os.path.expanduser("~"), ".girok")
 CONFIG_PATH = os.path.join(APP_DIR, "config.json")
+DB_PATH = os.path.join(APP_DIR, "girok.db")
 EVENT_IDS_CACHE_PATH = os.path.join(APP_DIR, "event_ids_cache.json")
-VERSION = "0.2.5"
+
+try:
+    VERSION = version("girok")
+except Exception:
+    VERSION = "0.3.1"
 
 
 # Commands
-class CommandName:
+class CommandName(str, Enum):
+    # Category
+    SHOW_CATEGORY = "showcat"
+    ADD_CATEGORY = "addcat"
+    REMOVE_CATEGORY = "rmcat"
+    UPDATE_CATEGORY = "upcat"
+    MOVE_CATEGORY = "mvcat"
 
     # Utility Commands
     VERSION = "version"
-
-    # Auth Commands
-    REGISTER = "register"
-    LOGIN = "login"
-    LOGOUT = "logout"
-
-    # Category Commands
     COLORS = "colors"
 
-    # Task Commands
+    # Task
     ADD_TASK = "addtask"
+    SHOW_TASK = "showtask"
+    UPDATE_TASK = "uptask"
+
+    # Calendar
+    CALENDAR = "cal"
 
 
 # Terminal display color
