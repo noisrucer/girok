@@ -35,8 +35,8 @@ def category_callback(ctx: typer.Context, param: typer.CallbackParam, value: str
     if ctx.command.name == "mvcat" and param.name == "new_parent_path" and value == "/":
         return value.rstrip("/")
 
-    if not re.match("^([a-zA-Z0-9]+/)*[a-zA-Z0-9]+/?$", value):
-        raise typer.BadParameter("[Invalid category path] Category path must be in 'xx/yy/zz format.'")
+    if not re.match(r"^([\w\s\-]+/)*[\w\s\-]+/?$", value):
+        raise typer.BadParameter("[Invalid category path] Category path must be in 'xx/yy/zz format.' and contain only letters, numbers, spaces, underscores, or hyphens.")
 
     if value.endswith("/"):
         value = value[:-1]

@@ -14,7 +14,7 @@ EVENT_IDS_CACHE_PATH = os.path.join(APP_DIR, "event_ids_cache.json")
 try:
     VERSION = version("girok")
 except Exception:
-    VERSION = "0.3.2"
+    VERSION = "0.3.3"
 
 
 # Commands

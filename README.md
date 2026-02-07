@@ -24,7 +24,7 @@ Girok works fluently with `MacOS` and `Linux` users. It also works with `Windows
 
 If you find it useful, consider supporting to help the development process! As I'm running the server with my own expense now, your help will make the service much more stable and fast!
 
-# 🤖 Version `0.3.2` is released now!
+# 🤖 Version `0.3.3` is released now!
 
 ### Upgrade with `pip install girok --upgrade`
 

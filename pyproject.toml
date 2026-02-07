@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "girok"
-version = "0.3.2"
+version = "0.3.3"
 description = "The most powerful CLI task manager with beautiful calendar TUI"
 authors = ["Jason Lee <changjin9792@gmail.com>"]
 readme = "README.md"
