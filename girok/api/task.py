@@ -207,7 +207,38 @@ def get_all_tasks(
         
         cursor.execute(query, params)
         rows = cursor.fetchall()
-        
+
+        # Build a map of category_id -> inherited_color
+        # 1. Fetch all categories
+        cursor.execute("SELECT id, parent_id, color, name FROM categories WHERE user_id = ?", (user_id,))
+        all_cats = cursor.fetchall()
+        cat_map = {c["id"]: dict(c) for c in all_cats}
+
+        # 2. Helper to resolve color recursively
+        def get_category_color(cat_id):
+            if not cat_id or cat_id not in cat_map:
+                return None
+            
+            # If color exists, return it
+             # Use explicit check because color string could be empty but not None in some DBs, 
+            # though here we assume NULL/None means inherit.
+            if cat_map[cat_id]["color"]: 
+                return cat_map[cat_id]["color"]
+            
+            # Recursively check parent
+            parent_id = cat_map[cat_id]["parent_id"]
+            if parent_id:
+                return get_category_color(parent_id)
+            
+            return None
+
+        # 3. Pre-calculate colors for performance
+        category_colors = {}
+        for cat_id in cat_map:
+            color = get_category_color(cat_id)
+            if color:
+                category_colors[cat_id] = color
+
         events = []
         for row in rows:
             event = dict(row)
@@ -222,6 +253,10 @@ def get_all_tasks(
                 if not any(t in event_tags for t in tags):
                     continue
             
+            # Override category_color with inherited color if necessary
+            if event["category_id"] in category_colors:
+                event["category_color"] = category_colors[event["category_id"]]
+
             events.append(_format_event_response(event))
         
         return APIResponse(is_success=True, body={"events": events})
