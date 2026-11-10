@@ -148,7 +148,7 @@ def decode_tomorrow_date_format(date_str: str) -> Tuple[bool, str]:
 
 
 def decode_time_format(time_str: str) -> Tuple[bool, str]:
-    is_matched = bool(re.match("^[01][0-9]|2[0-3]:[0-5][0-9]$", time_str))
+    is_matched = bool(re.match("^([01][0-9]|2[0-3]):[0-5][0-9]$", time_str))
     if not is_matched:
         return False, None
 
